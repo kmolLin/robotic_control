@@ -7,10 +7,10 @@ setup(
         Extension(
             "geomConstraintSolver",
             sources=[
-                "..core\kinematic\Invers_kinematic.cpp",
+                "core\kinematic\Invers_kinematic\robotinverse.cpp",
             ],
         ),
         compiler_directives={'boundscheck':True}
     ),
-    include_dirs=["..core\kinematic\Invers_kinematic", "v_repMath"]
+   # include_dirs=["core\kinematic\Invers_kinematic", "v_repMath"]
 )
