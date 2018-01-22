@@ -34,11 +34,10 @@ offset = 10
 class armrobot():
     
     def Forward_Kinematic(self, DEG):
-        RAD = [6]
-        d6h = d6#+offset
+        RAD = []
+        d6h = d6+170.0
         for i in range(AXIS1,TOTAL_AXES ):
             RAD.append( DEG[i] * DEG2RAD)
-        
         C1 = cos(RAD[AXIS1])
         C2 = cos(RAD[AXIS2])
         C3 = cos(RAD[AXIS3])
@@ -83,20 +82,25 @@ class armrobot():
         Z = d1 - S23 * (d6h * C5 + d4) + a2 * C2 + C23 * (a3 + d6h * C4 * S5)
         TCP = [X, Y, Z]
         print(TCP)
+        print("*"*8)
         print(self.R2Eul(UVW))
+        print("*"*10)
         return self.R2Eul(UVW)
         
     
     
     def Inverse_Kinematic(self, TCP, TOV):
+        
         RAD = np.zeros((1, 6))
         THETA =  np.zeros((4, 6))
         dT = np.zeros((4, 6))
         U=[]
         V=[]
         W=[]
-        dif = [4]
+        Joint_Deg = []
+        dif = np.zeros((1, 4))
         UVM =  self.Eul2R(TOV)
+        d6h = 170
         
         for i in range(0, 3):
             U.append(UVM[i][0])  #appen
@@ -104,9 +108,9 @@ class armrobot():
             W.append(UVM[i][2]) 
             
             
-        Px = TCP[0]
-        Py = TCP[1]
-        Pz = TCP[2]
+        Px = TCP[0]-d6h*W[0]
+        Py = TCP[1]-d6h*W[1]
+        Pz = TCP[2]-d6h*W[2]
         cnt = 0
         passkey = 1
         while(passkey):
@@ -122,7 +126,8 @@ class armrobot():
             k1 = 2.0 * a2 * d4
             k2 = 2.0 * a2 * a3
             k3 = Px2 + Py2 + Pz2 - 2.0 * a1 * (Px * C1 + Py * S1) + pow(a1, 2) - pow(a3, 2) - pow(d4, 2) - pow(a2, 2)
-            kcnt = k1*k1 + k2*k2 - k3*k3
+            kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)
+            print(k1)
             theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))
             theta3_2 = 2.0 * atan((k1 - sqrt(kcnt)) / (k2 + k3))
            
@@ -186,19 +191,19 @@ class armrobot():
         for i in range(0, cnt):
             for j in range(AXIS1, TOTAL_AXES):
                 dT[i][j] = THETA[i][j]*RAD2DEG  # TODO : not sure  - act_joint[j]
-                #print(dT[i][j])
-                dif[i] = dif[i] + pow(dT[i][j], 2)
-            dif[i] = sqrt(dif[i])
+                print(dT[i][j])
+                dif[0, i] = dif[0, i] + pow(dT[i][j], 2)
+            dif[0, i] = sqrt(dif[0, i])
             
-        dif_min = dif[0]
+        dif_min = dif[0, 0]
         min = 0
         for i in range(1, 4):
-            if dif_min>dif[i]:
-                dif_min = dif[i]
+            if dif_min>dif[0, i]:
+                dif_min = dif[0, i]
                 min = i
         for i in range(AXIS1, TOTAL_AXES):
-            Joint_Deg[i] = THETA[min][i] * RAD2DEG
-            act_joint[i] = THETA[min][i] * RAD2DEG
+            Joint_Deg.append(THETA[min][i] * RAD2DEG)
+            #act_joint[0, i] = THETA[min][i] * RAD2DEG
         
         print(Joint_Deg)
         return Joint_Deg
@@ -247,11 +252,12 @@ class armrobot():
         
 if __name__=='__main__':
     a = armrobot()
-    TCP = [150.2666498607823, -43.72852546813191, 377.0]
-    TOV = [90.0, 71.56505117707799, 0.0]
-    DEG = [0, -90, 180, -90, 90, 90]
-    #a.Forward_Kinematic(DEG)
-    a.Inverse_Kinematic(TCP, TOV)
+    TCP = [-10.0, 0.0, 1200.5]
+    TOV = [180.0, 0.0, 0.0]
+    TOV = [180.0, 0.0, 0.0]
+    DEG = [0, 0, 90, 0, 0, 0]
+    a.Forward_Kinematic(DEG)
+    #a.Inverse_Kinematic(TCP, TOV)
     
     
     
