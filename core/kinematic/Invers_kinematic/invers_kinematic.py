@@ -101,19 +101,20 @@ class armrobot():
         Joint_Deg = []
         dif = np.zeros((1, 4))
         UVM =  self.Eul2R(TOV)
+        #print(UVM)
         d6h = 170
         
         for i in range(0, 3):
             U.append(UVM[i][0])  #appen
             V.append(UVM[i][1]) 
             W.append(UVM[i][2]) 
-            
-            
+
         Px = TCP[0]-d6h*W[0]
         Py = TCP[1]-d6h*W[1]
         Pz = TCP[2]-d6h*W[2]
         cnt = 0
         passkey = 1
+        
         while(passkey):
             # Theta1
             RAD[0, 0] = atan2(Py, Px)
@@ -128,20 +129,17 @@ class armrobot():
             k2 = 2.0 * a2 * a3
             k3 = Px2 + Py2 + Pz2 - 2.0 * a1 * (Px * C1 + Py * S1) + pow(a1, 2) - pow(a3, 2) - pow(d4, 2) - pow(a2, 2)
             kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)
-            #print(k1)
             theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))
             theta3_2 = 2.0 * atan((k1 - sqrt(kcnt)) / (k2 + k3))
-           
-            RAD[0, 4] = 20.0
-            #print(theta3_1)
-            #print(RAD[0, 0])
+            
             if cnt <=1:
                 RAD[0, AXIS3] = theta3_1
             else:
                 RAD[0, AXIS3] = theta3_2
-                
+
             C3 = cos(RAD[0, AXIS3])
             S3 = sin(RAD[0, AXIS3])
+            
             # Theta2
             mu1 = -a3 * S3 + d4 *C3
             mu2 = a3 * C3 + d4 * S3 + a2
@@ -149,26 +147,32 @@ class armrobot():
             v2 = a3 * S3 - d4 * C3
             gama1 = Px * C1 + Py * S1 - a1
             gama2 = Pz - d1
+            
             RAD[0, AXIS2] = atan(((mu1 * gama2) - (gama1 * mu2)) / ((gama1 * v2) - (v1 * gama2)))
+            
             C2 = cos(RAD[0, AXIS2])
             S2 = sin(RAD[0, AXIS2])
             C23 = cos(RAD[0, AXIS2] - RAD[0, AXIS3])
             S23 = sin(RAD[0, AXIS2] - RAD[0, AXIS3])
+            
             # Theta5
             r21 = -U[0] * C1 * C23 - U[1] * S1 * C23 + U[2] * S23
             r22 = -V[0] * C1 * C23 - V[1] * S1 * C23 + V[2] * S23
             r23 = -W[0] * C1 * C23 - W[1] * S1 * C23 + W[2] * S23
             theta5_1 = atan2(sqrt(pow(r21, 2) + pow(r22, 2)), -r23)
             theta5_2 = atan2(-sqrt(pow(r21, 2) + pow(r22, 2)), -r23)
+            
             if cnt ==0 or cnt == 2:
                 RAD[0, AXIS5] = theta5_1
             else:
                 RAD[0, AXIS5] = theta5_2
+                
             C5 = cos(RAD[0, AXIS5])
             S5 = sin(RAD[0, AXIS5])
             # Theta4
             r13 = W[0] * C1 * S23 + W[1] * S1 * S23 + W[2] * C23
             r33 = W[0] * S1 - W[1] * C1
+            
             if S5> ERRC:
                 RAD[0, AXIS4] = atan2(-r33, r13)
             elif S5 < ERRC:
@@ -176,6 +180,7 @@ class armrobot():
             
             C4 = cos(RAD[0, AXIS4])
             S4 = sin(RAD[0, AXIS4])
+            
             #theta 6
             if S5 > ERRC:
                 RAD[0, AXIS6] = atan2(-r22, r21)
@@ -188,14 +193,14 @@ class armrobot():
             if cnt==3:
                 passkey = 0
             cnt = cnt+1
-        #print(THETA)
+        print(THETA)
         for i in range(0, cnt):
             for j in range(AXIS1, TOTAL_AXES):
                 dT[i][j] = THETA[i][j]*RAD2DEG  # TODO : not sure  - act_joint[j]
                 #print(dT[i][j])
                 dif[0, i] = dif[0, i] + pow(dT[i][j], 2)
             dif[0, i] = sqrt(dif[0, i])
-            
+        print()
         dif_min = dif[0, 0]
         min = 0
         for i in range(1, 4):
@@ -229,13 +234,10 @@ class armrobot():
         V = []
         W = []
         EUL = []
-        print(R)
         for i in range(0, 3):
             U.append(R[i][0])
             V.append(R[i][1])
             W.append(R[i][2])
-        print('*'*8)
-        print(U, V, W)
         
         RAD[BETA] = atan2(sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
         if (fabs(sin(RAD[BETA])) <= ERRC):
@@ -256,11 +258,11 @@ class armrobot():
 if __name__=='__main__':
     a = armrobot()
     TCP = [-10.0, 0.0, 1200.5]
-    TOV = [180.0, 0.0, 0.0]
-    TOV = [180.0, 0.0, 0.0]
+    #TOV = [180.0, 0.0, 0.0]
+    TOV = [-90, 0.0, -90.0]
     DEG = [0, 0, 90, 0, 0, 0]
-    a.Forward_Kinematic(DEG)
-    #a.Inverse_Kinematic(TCP, TOV)
+    #a.Forward_Kinematic(DEG)
+    a.Inverse_Kinematic(TCP, TOV)
     
     
     
