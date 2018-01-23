@@ -82,9 +82,10 @@ class armrobot():
         Z = d1 - S23 * (d6h * C5 + d4) + a2 * C2 + C23 * (a3 + d6h * C4 * S5)
         TCP = [X, Y, Z]
         print(TCP)
-        print("*"*8)
-        print(self.R2Eul(UVW))
-        print("*"*10)
+        #print("*"*8)
+        #print(self.R2Eul(UVW))
+        #print("*"*10)
+        print(UVW)
         return self.R2Eul(UVW)
         
     
@@ -127,12 +128,12 @@ class armrobot():
             k2 = 2.0 * a2 * a3
             k3 = Px2 + Py2 + Pz2 - 2.0 * a1 * (Px * C1 + Py * S1) + pow(a1, 2) - pow(a3, 2) - pow(d4, 2) - pow(a2, 2)
             kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)
-            print(k1)
+            #print(k1)
             theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))
             theta3_2 = 2.0 * atan((k1 - sqrt(kcnt)) / (k2 + k3))
            
             RAD[0, 4] = 20.0
-            print(theta3_1)
+            #print(theta3_1)
             #print(RAD[0, 0])
             if cnt <=1:
                 RAD[0, AXIS3] = theta3_1
@@ -191,7 +192,7 @@ class armrobot():
         for i in range(0, cnt):
             for j in range(AXIS1, TOTAL_AXES):
                 dT[i][j] = THETA[i][j]*RAD2DEG  # TODO : not sure  - act_joint[j]
-                print(dT[i][j])
+                #print(dT[i][j])
                 dif[0, i] = dif[0, i] + pow(dT[i][j], 2)
             dif[0, i] = sqrt(dif[0, i])
             
@@ -205,7 +206,7 @@ class armrobot():
             Joint_Deg.append(THETA[min][i] * RAD2DEG)
             #act_joint[0, i] = THETA[min][i] * RAD2DEG
         
-        print(Joint_Deg)
+        #print(Joint_Deg)
         return Joint_Deg
         
     def Eul2R(self, EUL):
@@ -224,15 +225,17 @@ class armrobot():
     
     def R2Eul(self, R):
         RAD = [0.0, 0.0, 0.0]
-        U = [3]
-        V = [3]
-        W = [3]
+        U = []
+        V = []
+        W = []
         EUL = []
-        for i in range(0, 2):
+        print(R)
+        for i in range(0, 3):
             U.append(R[i][0])
             V.append(R[i][1])
             W.append(R[i][2])
-        #print(U, V, W)
+        print('*'*8)
+        print(U, V, W)
         
         RAD[BETA] = atan2(sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
         if (fabs(sin(RAD[BETA])) <= ERRC):
@@ -244,7 +247,7 @@ class armrobot():
         if fabs(RAD[AFA]) + fabs(RAD[GAMA]) >= pi:
             RAD[BETA] = atan2(-sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
             RAD[AFA] = atan2(-W[0], W[1])
-            RAD[GAMA] = atan2(-U[3], -V[3])
+            RAD[GAMA] = atan2(-U[2], -V[2])
         for i in range(AFA, TOTAL_TOV):
             EUL.append( RAD[i] * RAD2DEG)
         return EUL
