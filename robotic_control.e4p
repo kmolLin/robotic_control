@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project robotic_control -->
-<!-- Saved: 2018-01-22, 21:40:33 -->
+<!-- Saved: 2018-01-23, 13:49:17 -->
 <!-- Copyright (C) 2018 ,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -14,8 +14,17 @@
   <Eol index="0"/>
   <Sources>
     <Source>Ui_mainwindow.py</Source>
-    <Source>__init__.py</Source>
     <Source>core/kinematic/Invers_kinematic/invers_kinematic.py</Source>
+    <Source>core/vrepper/__init__.py</Source>
+    <Source>core/vrepper/complexCommandTest.py</Source>
+    <Source>core/vrepper/pathPlanningTest.py</Source>
+    <Source>core/vrepper/simpleSynchronousTest.py</Source>
+    <Source>core/vrepper/simpleTest.py</Source>
+    <Source>core/vrepper/test.py</Source>
+    <Source>core/vrepper/version.py</Source>
+    <Source>core/vrepper/vrep.py</Source>
+    <Source>core/vrepper/vrepConst.py</Source>
+    <Source>core/vrepper/vrepper.py</Source>
     <Source>launch.py</Source>
     <Source>mainwindow.py</Source>
     <Source>openglw.py</Source>
@@ -28,7 +37,6 @@
   <Interfaces/>
   <Others>
     <Other>README.md</Other>
-    <Other>compile/ik.pyx</Other>
   </Others>
   <MainScript>launch.py</MainScript>
   <Vcs>
