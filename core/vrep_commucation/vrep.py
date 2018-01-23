@@ -1,55 +1,48 @@
 # This file is part of the REMOTE API
-#
-# Copyright 2006-2017 Coppelia Robotics GmbH. All rights reserved.
+# 
+# Copyright 2006-2016 Coppelia Robotics GmbH. All rights reserved. 
 # marc@coppeliarobotics.com
 # www.coppeliarobotics.com
-#
+# 
 # The REMOTE API is licensed under the terms of GNU GPL:
-#
+# 
 # -------------------------------------------------------------------
 # The REMOTE API is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-#
+# 
 # THE REMOTE API IS DISTRIBUTED "AS IS", WITHOUT ANY EXPRESS OR IMPLIED
 # WARRANTY. THE USER WILL USE IT AT HIS/HER OWN RISK. THE ORIGINAL
 # AUTHORS AND COPPELIA ROBOTICS GMBH WILL NOT BE LIABLE FOR DATA LOSS,
 # DAMAGES, LOSS OF PROFITS OR ANY OTHER KIND OF LOSS WHILE USING OR
 # MISUSING THIS SOFTWARE.
-#
+# 
 # See the GNU General Public License for more details.
-#
+# 
 # You should have received a copy of the GNU General Public License
 # along with the REMOTE API.  If not, see <http://www.gnu.org/licenses/>.
 # -------------------------------------------------------------------
 #
-# This file was automatically created for V-REP release V3.4.0 rev. 1 on April 5th 2017
+# This file was automatically created for V-REP release V3.3.1 Rev1 on May 17th 2016
 
 import platform
 import struct
 import sys
-import os
 import ctypes as ct
-from .vrepConst import *
-
-#from version import VERSION, ARCH
+from vrepConst import *
 
 #load library
 libsimx = None
 try:
-    file_extension = '.so'
     if platform.system() =='cli':
-        file_extension = '.dll'
+        libsimx = ct.CDLL("./remoteApi.dll")
     elif platform.system() =='Windows':
-        file_extension = '.dll'
+        libsimx = ct.CDLL("./remoteApi.dll") 
     elif platform.system() == 'Darwin':
-        file_extension = '.dylib'
+        libsimx = ct.CDLL("./remoteApi.dylib")
     else:
-        file_extension = '.so'
-  #  libfullpath = os.path.join(os.path.dirname(__file__), 'remoteApi-{}-{}{}'.format(VERSION, ARCH, file_extension))
-    #libsimx = ct.CDLL(libfullpath)
-    libsimx = None
+        libsimx = ct.CDLL("./remoteApi.so")
 except:
     print ('----------------------------------------------------')
     print ('The remoteApi library could not be loaded. Make sure')
@@ -58,7 +51,7 @@ except:
     print ('----------------------------------------------------')
     print ('')
 
-#ctypes wrapper prototypes
+#ctypes wrapper prototypes 
 c_GetJointPosition          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxGetJointPosition", libsimx))
 c_SetJointPosition          = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.c_float, ct.c_int32)(("simxSetJointPosition", libsimx))
 c_GetJointMatrix            = ct.CFUNCTYPE(ct.c_int32,ct.c_int32, ct.c_int32, ct.POINTER(ct.c_float), ct.c_int32)(("simxGetJointMatrix", libsimx))
@@ -251,7 +244,7 @@ def simxReadForceSensor(clientID, forceSensorHandle, operationMode):
     #    state=state.value
     #else:
     #    state=ord(state.value)
-    return ret, state.value, arr1, arr2
+    return ret, state.value, arr1, arr2 
 
 def simxBreakForceSensor(clientID, forceSensorHandle, operationMode):
     '''
@@ -268,7 +261,7 @@ def simxReadVisionSensor(clientID, sensorHandle, operationMode):
     auxValues      = ct.POINTER(ct.c_float)()
     auxValuesCount = ct.POINTER(ct.c_int)()
     ret = c_ReadVisionSensor(clientID, sensorHandle, ct.byref(detectionState), ct.byref(auxValues), ct.byref(auxValuesCount), operationMode)
-
+    
     auxValues2 = []
     if ret == 0:
         s = 0
@@ -280,7 +273,7 @@ def simxReadVisionSensor(clientID, sensorHandle, operationMode):
         c_ReleaseBuffer(auxValues)
         c_ReleaseBuffer(auxValuesCount)
 
-    return ret, bool(detectionState.value!=0), auxValues2
+    return ret, bool(detectionState.value!=0), auxValues2 
 
 def simxGetObjectHandle(clientID, objectName, operationMode):
     '''
@@ -390,7 +383,7 @@ def simxLoadUI(clientID, uiPathAndName, options, operationMode):
     if (sys.version_info[0] == 3) and (type(uiPathAndName) is str):
         uiPathAndName=uiPathAndName.encode('utf-8')
     ret = c_LoadUI(clientID, uiPathAndName, options, ct.byref(count), ct.byref(uiHandles), operationMode)
-
+    
     handles = []
     if ret == 0:
         for i in range(count.value):
@@ -480,7 +473,7 @@ def simxSetUIButtonProperty(clientID, uiHandle, uiButtonID, prop, operationMode)
     '''
     Please have a look at the function description/documentation in the V-REP user manual
     '''
-
+    
     return c_SetUIButtonProperty(clientID, uiHandle, uiButtonID, prop, operationMode)
 
 def simxAddStatusbarMessage(clientID, message, operationMode):
@@ -694,7 +687,7 @@ def simxGetStringParameter(clientID, paramIdentifier, operationMode):
     '''
     paramValue = ct.POINTER(ct.c_char)()
     ret = c_GetStringParameter(clientID, paramIdentifier, ct.byref(paramValue), operationMode)
-
+    
     a = bytearray()
     if ret == 0:
         i = 0
@@ -837,7 +830,7 @@ def simxGetDialogInput(clientID, dialogHandle, operationMode):
     '''
     inputText = ct.POINTER(ct.c_char)()
     ret = c_GetDialogInput(clientID, dialogHandle, ct.byref(inputText), operationMode)
-
+    
     a = bytearray()
     if ret == 0:
         i = 0
@@ -1103,9 +1096,9 @@ def simxGetObjectFloatParameter(clientID, objectHandle, parameterID, operationMo
     '''
     Please have a look at the function description/documentation in the V-REP user manual
     '''
-
+    
     parameterValue = ct.c_float()
-    return c_GetObjectFloatParameter(clientID, objectHandle, parameterID, ct.byref(parameterValue), operationMode), parameterValue.value
+    return c_GetObjectFloatParameter(clientID, objectHandle, parameterID, ct.byref(parameterValue), operationMode), parameterValue.value 
 
 def simxSetObjectFloatParameter(clientID, objectHandle, parameterID, parameterValue, operationMode):
     '''
@@ -1119,7 +1112,7 @@ def simxGetObjectIntParameter(clientID, objectHandle, parameterID, operationMode
     Please have a look at the function description/documentation in the V-REP user manual
     '''
 
-    parameterValue = ct.c_int()
+    parameterValue = ct.c_int() 
     return c_GetObjectIntParameter(clientID, objectHandle, parameterID, ct.byref(parameterValue), operationMode), parameterValue.value
 
 def simxSetObjectIntParameter(clientID, objectHandle, parameterID, parameterValue, operationMode):
@@ -1315,7 +1308,7 @@ def simxGetObjectGroupData(clientID, objectType, dataType, operationMode):
     stringDataC = ct.c_int()
     stringDataP = ct.POINTER(ct.c_char)()
     ret = c_GetObjectGroupData(clientID, objectType, dataType, ct.byref(handlesC), ct.byref(handlesP), ct.byref(intDataC), ct.byref(intDataP), ct.byref(floatDataC), ct.byref(floatDataP), ct.byref(stringDataC), ct.byref(stringDataP), operationMode)
-
+    
     if ret == 0:
         for i in range(handlesC.value):
             handles.append(handlesP[i])
@@ -1338,7 +1331,7 @@ def simxGetObjectGroupData(clientID, objectType, dataType, operationMode):
             else:
                 a=str(a)
             stringData.append(a)
-
+ 
     return ret, handles, intData, floatData, stringData
 
 def simxCallScriptFunction(clientID, scriptDescription, options, functionName, inputInts, inputFloats, inputStrings, inputBuffer, operationMode):
@@ -1435,13 +1428,13 @@ def simxGetObjectVelocity(clientID, objectHandle, operationMode):
     arr2 = []
     for i in range(3):
         arr2.append(angularVel[i])
-    return ret, arr1, arr2
+    return ret, arr1, arr2 
 
 def simxPackInts(intList):
     '''
     Please have a look at the function description/documentation in the V-REP user manual
     '''
-
+    
     if sys.version_info[0] == 3:
         s=bytes()
         for i in range(len(intList)):

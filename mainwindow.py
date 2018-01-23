@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import QMainWindow
 
 from Ui_mainwindow import Ui_MainWindow
 from openglw import GLWidget
+from core.vrep_commucation.vrepper import vrepper
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     """
@@ -28,9 +29,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         self.verticalLayout.addWidget(self.view1)
         
+        venv = vrepper.vrepper(headless=True)
+        venv.start()
+        
 
     
     
     @pyqtSlot()
     def on_radioButtonSimple_clicked(self):
         print('a')
+    
+    @pyqtSlot()
+    def on_radioButtonTarget_clicked(self):
+        """
+        Slot documentation goes here.
+        """
+        # TODO: not implemented yet
+        raise NotImplementedError

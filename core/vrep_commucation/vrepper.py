@@ -1,8 +1,3 @@
-# V-REP as tethered robotics simulation environment
-# Python Wrapper
-# Qin Yongliang 20170410
-
-# import the vrep library
 try:
     print('trying to import vrep...')
     from . import vrep
@@ -16,7 +11,8 @@ except:
     print ('or appropriately adjust the file "vrep.py"')
     print ('--------------------------------------------------------------')
     print ('')
-    raise
+    raise NotImplementedError
+
 
 import functools
 import subprocess as sp
@@ -48,8 +44,8 @@ def deprecated(msg=''):
             warnings.warn_explicit(
                 "Call to deprecated function {}. {}".format(func.__name__, msg),
                 category=DeprecationWarning,
-                filename=func.func_code.co_filename,
-                lineno=func.func_code.co_firstlineno + 1
+                filename=func.__code__.co_filename,
+                lineno=func.__code__.co_firstlineno + 1
             )
             return func(*args, **kwargs)
 
@@ -69,7 +65,7 @@ class instance():
         try:
             self.inst = sp.Popen(self.args)
         except EnvironmentError:
-            print('(instance) Error: cannot find executable at', self.args[0])
+            print(('(instance) Error: cannot find executable at', self.args[0]))
             raise
 
         return self
@@ -84,7 +80,7 @@ class instance():
             retcode = self.inst.wait()
         else:
             retcode = self.inst.returncode
-        print('(instance) retcode:', retcode)
+        print(('(instance) retcode:', retcode))
         return self
 
 
@@ -111,7 +107,7 @@ class vrepper():
                 path_vrep = dsp.find_executable('vrep')
         else:
             path_vrep = dir_vrep + 'vrep'
-        print('(vrepper) path to your V-REP executable is:', path_vrep)
+        print(('(vrepper) path to your V-REP executable is:', path_vrep))
 
         # start V-REP in a sub process
         # vrep.exe -gREMOTEAPISERVERSERVICE_PORT_DEBUG_PREENABLESYNC
@@ -164,7 +160,7 @@ class vrepper():
         # try to connect to V-REP instance via socket
         retries = 0
         while True:
-            print ('(vrepper)trying to connect to server on port', self.port_num, 'retry:', retries)
+            print(('(vrepper)trying to connect to server on port', self.port_num, 'retry:', retries))
             # vrep.simxFinish(-1) # just in case, close all opened connections
             self.cid = self.simxStart(
                 '127.0.0.1', self.port_num,
@@ -187,7 +183,7 @@ class vrepper():
             vrep.sim_handle_all,
             blocking))
 
-        print ('(vrepper)Number of objects in the scene: ', len(objs))
+        print(('(vrepper)Number of objects in the scene: ', len(objs)))
 
         # Now send some data to V-REP in a non-blocking fashion:
         self.simxAddStatusbarMessage(
@@ -217,7 +213,7 @@ class vrepper():
         return self
 
     def load_scene(self, fullpathname):
-        print('(vrepper) loading scene from', fullpathname)
+        print(('(vrepper) loading scene from', fullpathname))
         try:
             check_ret(self.simxLoadScene(fullpathname,
                                          0,  # assume file is at server side
