@@ -89,7 +89,7 @@ class armrobot():
         #print(self.R2Eul(UVW))
         #print("*"*10)
         print(self.R2Eul(UVW))
-        return self.R2Eul(UVW)
+        return TCP, self.R2Eul(UVW)
         
     
     
@@ -196,7 +196,7 @@ class armrobot():
             if cnt==3:
                 passkey = 0
             cnt = cnt+1
-        #print(THETA)
+        print(THETA)
         for i in range(0, cnt):
             for j in range(AXIS1, TOTAL_AXES):
                 dT[i][j] = THETA[i][j]*RAD2DEG - acr_joint[j] # TODO : not sure  - act_joint[j]
@@ -210,7 +210,7 @@ class armrobot():
                 dif_min = dif[0, i]
                 min = i
         for i in range(AXIS1, TOTAL_AXES):
-            Joint_Deg.append(THETA[min][i] * RAD2DEG)
+            Joint_Deg.append(THETA[min][i] )#* RAD2DEG
             acr_joint[i] = THETA[min][i] * RAD2DEG
         
         print(Joint_Deg)
@@ -258,18 +258,21 @@ class armrobot():
         
         
 if __name__=='__main__':
-    from vrepper import vrepper
+    import sys
     a = armrobot()
-    TCP = [-10.0, 0.0, 1200.5]
+    #TCP = [0.0, 368.0, 500]
+    TCP = [300.229, -50.919, 600.0]
     #TOV = [180.0, 0.0, 0.0]
-    TOV = [-90, 0.0, -90.0]
+    TOV = [-90.0, 0.0, 90.0]
     DEG = [0, 0, 90, 0, 0, 0]
     GG = [180.0, 13.700509349103092, 114.13038634373724, -180.0, 10.429876994634144, -0.0]
-    #a.Forward_Kinematic(DEG)
-    a.Inverse_Kinematic(TCP, TOV)
-    a.Forward_Kinematic(GG)
+    a.Forward_Kinematic(DEG)
+    c =  a.Inverse_Kinematic(TCP, TOV)
+    d, e = a.Forward_Kinematic(GG)
+    #print(d)
+    #print(e)
     
-    
+    #239.229, 569.919
     vrep.simxFinish(-1)
     clientID = vrep.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
     if clientID!= -1:
@@ -294,16 +297,17 @@ if __name__=='__main__':
         sys.exit()            
     if errorCode3 == -1:
         print('Can not find joint3')
-        sys.exit()            
+        sys.exit()           
 
 
 
-    errorCode1=vrep.simxSetJointTargetPosition(clientID,A_joint,0.0, vrep.simx_opmode_oneshot)
-    errorCode2=vrep.simxSetJointTargetPosition(clientID,B_joint,0.0, vrep.simx_opmode_oneshot)
-    errorCode3=vrep.simxSetJointTargetPosition(clientID,C_joint,90.0, vrep.simx_opmode_oneshot)
-    errorCode3=vrep.simxSetJointTargetPosition(clientID,D_joint,0.0, vrep.simx_opmode_oneshot)
-    errorCode3=vrep.simxSetJointTargetPosition(clientID,E_joint,0.0, vrep.simx_opmode_oneshot)
-    errorCode3=vrep.simxSetJointTargetPosition(clientID,F_joint,0.0, vrep.simx_opmode_oneshot)
+
+    errorCode1=vrep.simxSetJointTargetPosition(clientID,A_joint,c[0], vrep.simx_opmode_oneshot)
+    errorCode2=vrep.simxSetJointTargetPosition(clientID,B_joint,c[1], vrep.simx_opmode_oneshot)
+    errorCode3=vrep.simxSetJointTargetPosition(clientID,C_joint,c[2], vrep.simx_opmode_oneshot)
+    errorCode3=vrep.simxSetJointTargetPosition(clientID,D_joint,c[3], vrep.simx_opmode_oneshot)
+    errorCode3=vrep.simxSetJointTargetPosition(clientID,E_joint,c[4], vrep.simx_opmode_oneshot)
+    errorCode3=vrep.simxSetJointTargetPosition(clientID,F_joint,c[5], vrep.simx_opmode_oneshot)
     
     
     
