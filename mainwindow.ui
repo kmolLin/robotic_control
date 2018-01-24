@@ -484,13 +484,25 @@
      <string>V</string>
     </property>
    </widget>
+   <zorder>axis1</zorder>
+   <zorder>axis2</zorder>
+   <zorder>label_16</zorder>
+   <zorder>axis3</zorder>
+   <zorder>label_17</zorder>
+   <zorder>label_20</zorder>
+   <zorder>axis4</zorder>
+   <zorder>axis5</zorder>
+   <zorder>label_18</zorder>
+   <zorder>label_19</zorder>
+   <zorder>axis6</zorder>
+   <zorder>horizontalSlider</zorder>
+   <zorder>label</zorder>
    <zorder>horizontalSliderYaw</zorder>
    <zorder>verticalSliderPitch</zorder>
    <zorder>groupBoxTarget</zorder>
    <zorder>groupBox_3</zorder>
    <zorder>verticalLayoutWidget</zorder>
-   <zorder>verticalLayoutWidget_2</zorder>
-   <zorder></zorder>
+   <zorder>label_10</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

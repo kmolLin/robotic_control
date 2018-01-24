@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import QMainWindow
 from Ui_mainwindow import Ui_MainWindow
 from openglw import GLWidget
 from core.vrep_commucation.vrepper import vrepper
+import os
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     """
@@ -29,8 +30,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         self.verticalLayout.addWidget(self.view1)
         
-        venv = vrepper.vrepper(headless=True)
-        venv.start()
+        venv = vrepper(headless=False)
+        #venv.start()
         
 
     
@@ -41,6 +42,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     @pyqtSlot()
     def on_radioButtonTarget_clicked(self):
+        
+        venv = vrepper.vrepper(headless=False)
+        venv.start()
+        # load scene
+        venv.load_scene(os.getcwd() + '/scenes/body_joint_wheel.ttt')
+    
+    @pyqtSlot()
+    def on_commandLinkButtonGo_clicked(self):
         """
         Slot documentation goes here.
         """

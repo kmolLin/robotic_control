@@ -1,6 +1,7 @@
+'''
 try:
     print('trying to import vrep...')
-    from . import vrep
+    import vrep
 
     print('vrep imported.')
 except:
@@ -12,8 +13,8 @@ except:
     print ('--------------------------------------------------------------')
     print ('')
     raise NotImplementedError
-
-
+'''
+from . import vrep
 import functools
 import subprocess as sp
 import warnings
@@ -98,7 +99,8 @@ class vrepper():
             port_num = int(random.random() * 1000 + 19999)
 
         self.port_num = port_num
-
+        
+        # "C:\Program Files\V-REP3\V-REP_PRO_EDU\vrep.exe"
         if dir_vrep == '':
             print('(vrepper) trying to find V-REP executable in your PATH')
             import distutils.spawn as dsp
@@ -109,6 +111,7 @@ class vrepper():
             path_vrep = dir_vrep + 'vrep'
         print(('(vrepper) path to your V-REP executable is:', path_vrep))
 
+        # setting vrep locate   "C:\Program Files\V-REP3\V-REP_PRO_EDU\vrep.exe"
         # start V-REP in a sub process
         # vrep.exe -gREMOTEAPISERVERSERVICE_PORT_DEBUG_PREENABLESYNC
         # where PORT -> 19997, DEBUG -> FALSE, PREENABLESYNC -> TRUE
