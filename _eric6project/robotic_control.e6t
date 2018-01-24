@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-6.0.dtd">
 <!-- eric6 tasks file for project robotic_control -->
-<!-- Saved: 2018-01-24, 15:31:36 -->
+<!-- Saved: 2018-01-24, 16:35:09 -->
 <Tasks version="6.0">
   <ProjectScanFilter></ProjectScanFilter>
-  <Task priority="1" completed="False" type="1" uid="{0a7d9b66-be21-47ee-8868-4a3de3bcb281}">
-    <Summary>TODO: not implemented yet</Summary>
-    <Description></Description>
-    <Created>2018-01-24, 15:31:33</Created>
-    <Resource>
-      <Filename>mainwindow.py</Filename>
-      <Linenumber>56</Linenumber>
-    </Resource>
-  </Task>
 </Tasks>

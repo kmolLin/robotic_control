@@ -1,6 +1,5 @@
 from math import *
 import numpy as np
-import vrep
 
 AFA = 0
 BETA = 1
@@ -35,6 +34,8 @@ acr_joint = [0.0, 368.0, 498.42, -3.125, 180.0, -93.0]
 offset = 10
 
 class armrobot():
+    def __init__(self):
+        pass
     
     def Forward_Kinematic(self, DEG):
         RAD = []
@@ -256,7 +257,7 @@ class armrobot():
             EUL.append( RAD[i] * RAD2DEG)
         return EUL
         
-        
+"""
 if __name__=='__main__':
     import sys
     a = armrobot()
@@ -308,7 +309,7 @@ if __name__=='__main__':
     errorCode3=vrep.simxSetJointTargetPosition(clientID,D_joint,c[3], vrep.simx_opmode_oneshot)
     errorCode3=vrep.simxSetJointTargetPosition(clientID,E_joint,c[4], vrep.simx_opmode_oneshot)
     errorCode3=vrep.simxSetJointTargetPosition(clientID,F_joint,c[5], vrep.simx_opmode_oneshot)
-    
+"""    
     
     
     
