@@ -211,7 +211,7 @@ class armrobot():
                 dif_min = dif[0, i]
                 min = i
         for i in range(AXIS1, TOTAL_AXES):
-            Joint_Deg.append(THETA[min][i] )#* RAD2DEG
+            Joint_Deg.append(THETA[min][i]* RAD2DEG)
             acr_joint[i] = THETA[min][i] * RAD2DEG
         
         print(Joint_Deg)

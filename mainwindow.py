@@ -38,8 +38,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.arm = armrobot()
         #venv.start()
         
-
+    def dowork(self, venv):
+        self.work = Worker(venv, self)
+        self.work.update_axis1_signal.connect(self.update_text)
+        self.work.update_axis2_signal.connect(self.update_text1)
+        self.work.update_axis3_signal.connect(self.update_text2)
+        self.work.update_axis4_signal.connect(self.update_text3)
+        self.work.update_axis5_signal.connect(self.update_text4)
+        self.work.update_axis6_signal.connect(self.update_text5)
+        self.work.start()
     
+    def update_text(self, text):
+        self.axis1.insert(text)
+    def update_text1(self, text):   
+        self.axis2.insert(text)
+    def update_text2(self, text):  
+        self.axis3.insert(text)
+    def update_text3(self, text):  
+        self.axis4.insert(text)
+    def update_text4(self, text):  
+        self.axis5.insert(text)
+    def update_text5(self, text):  
+        self.axis6.insert(text)
     
     @pyqtSlot()
     def on_radioButtonSimple_clicked(self):
@@ -49,7 +69,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def on_radioButtonTarget_clicked(self):
         a = []
         
-        self.venv = vrepper(headless=True)
+        self.venv = vrepper(headless=False)
         self.venv.start()
         # load scene
         self.venv.load_scene(os.getcwd() + '/ra605robot.ttt')
@@ -61,29 +81,34 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.Ejoint = self.venv.get_object_by_name('E_joint')
         self.Fjoint = self.venv.get_object_by_name('F_joint')
         
-        self.work = Worker(self.venv, self)
-        self.work.start()
         
+        self.dowork(self.venv)
         
         print(self.Ajoint.handle, self.Bjoint.handle, self.Cjoint.handle, self.Djoint.handle, self.Ejoint.handle, self.Fjoint.handle)
         
         self.venv.start_blocking_simulation()
-        for i in range(20):
-            print('simulation step',i)
-            print('body position',self.Ajoint.get_joint_angle())
+        #for i in range(20):
+            #print('simulation step',i)
+            #print('body position',self.Ajoint.get_joint_angle())
             #a.append([self.Ajoint.get_joint_angle(), self.Bjoint.get_joint_angle(), self.Cjoint.get_joint_angle(), self.Djoint.get_joint_angle(), self.Ejoint.get_joint_angle(), self.Fjoint.get_joint_angle()])
 
-            self.Ajoint.set_position_target(i*20)
+            #self.Ajoint.set_position_target(i*20)
             # you should see things moving back and forth
 
-            self.venv.step_blocking_simulation() # forward 1 timestep
-            time.sleep(2)
+            #self.venv.step_blocking_simulation() # forward 1 timestep
         # stop the simulation and reset the scene:
-        self.venv.stop_blocking_simulation()
-        print(a)
+        #self.venv.stop_blocking_simulation()
+        #print(a)
     
     @pyqtSlot()
     def on_commandLinkButtonGo_clicked(self):
-        TCP = [self.lineEditTx.value(), self.lineEditTy.value(), self.lineEditTz.value()]
+        TCP = [float(self.lineEditTx.text()), float(self.lineEditTy.text()), float(self.lineEditTz.text())]
         TOV = [-90.0, 0.0, 90.0]
-        self.arm.Inverse_Kinematic(TCP, TOV)
+        Joint_Deg = self.arm.Inverse_Kinematic(TCP, TOV)
+        
+        self.Ajoint.set_position_target(Joint_Deg[0])
+        self.Bjoint.set_position_target(Joint_Deg[1])
+        self.Cjoint.set_position_target(Joint_Deg[2])
+        self.Djoint.set_position_target(Joint_Deg[3])
+        self.Ejoint.set_position_target(Joint_Deg[4])
+        self.Fjoint.set_position_target(Joint_Deg[5])
