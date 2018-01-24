@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'D:\kmol\robotic_control\mainwindow.ui'
+# Form implementation generated from reading ui file 'Y:\eric6_workspace\robotic_control\mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.9
+# Created by: PyQt5 UI code generator 5.7
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -135,9 +135,11 @@ class Ui_MainWindow(object):
         self.label_10.setObjectName("label_10")
         self.axis1 = QtWidgets.QLineEdit(self.centralWidget)
         self.axis1.setGeometry(QtCore.QRect(88, 340, 129, 20))
+        self.axis1.setMaxLength(8)
         self.axis1.setObjectName("axis1")
         self.axis2 = QtWidgets.QLineEdit(self.centralWidget)
         self.axis2.setGeometry(QtCore.QRect(88, 368, 129, 20))
+        self.axis2.setMaxLength(8)
         self.axis2.setObjectName("axis2")
         self.label_16 = QtWidgets.QLabel(self.centralWidget)
         self.label_16.setGeometry(QtCore.QRect(40, 368, 42, 16))
@@ -149,6 +151,7 @@ class Ui_MainWindow(object):
         self.label_16.setObjectName("label_16")
         self.axis3 = QtWidgets.QLineEdit(self.centralWidget)
         self.axis3.setGeometry(QtCore.QRect(88, 396, 129, 20))
+        self.axis3.setMaxLength(8)
         self.axis3.setObjectName("axis3")
         self.label_17 = QtWidgets.QLabel(self.centralWidget)
         self.label_17.setGeometry(QtCore.QRect(40, 396, 42, 16))
@@ -168,9 +171,11 @@ class Ui_MainWindow(object):
         self.label_20.setObjectName("label_20")
         self.axis4 = QtWidgets.QLineEdit(self.centralWidget)
         self.axis4.setGeometry(QtCore.QRect(88, 424, 129, 20))
+        self.axis4.setMaxLength(8)
         self.axis4.setObjectName("axis4")
         self.axis5 = QtWidgets.QLineEdit(self.centralWidget)
         self.axis5.setGeometry(QtCore.QRect(88, 452, 129, 20))
+        self.axis5.setMaxLength(8)
         self.axis5.setObjectName("axis5")
         self.label_18 = QtWidgets.QLabel(self.centralWidget)
         self.label_18.setGeometry(QtCore.QRect(40, 452, 42, 16))
@@ -190,6 +195,7 @@ class Ui_MainWindow(object):
         self.label_19.setObjectName("label_19")
         self.axis6 = QtWidgets.QLineEdit(self.centralWidget)
         self.axis6.setGeometry(QtCore.QRect(88, 480, 129, 20))
+        self.axis6.setMaxLength(8)
         self.axis6.setObjectName("axis6")
         self.horizontalSlider = QtWidgets.QSlider(self.centralWidget)
         self.horizontalSlider.setGeometry(QtCore.QRect(54, 508, 84, 22))

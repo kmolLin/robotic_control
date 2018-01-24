@@ -49,18 +49,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.work.start()
     
     def update_text(self, text):
-        print(text)
-        self.axis1.insert(str(text))
+        self.axis1.setText(str(text))
     def update_text1(self, text1):   
-        self.axis2.insert(str(text1))
+        self.axis2.setText(str(text1))
     def update_text2(self, text2):  
-        self.axis3.insert(str(text2))
+        self.axis3.setText(str(text2))
     def update_text3(self, text3):  
-        self.axis4.insert(str(text3))
+        self.axis4.setText(str(text3))
     def update_text4(self, text4):  
-        self.axis5.insert(str(text4))
+        self.axis5.setText(str(text4))
     def update_text5(self, text5):  
-        self.axis6.insert(str(text5))
+        self.axis6.setText(str(text5))
     
     @pyqtSlot()
     def on_radioButtonSimple_clicked(self):
@@ -81,9 +80,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.Ejoint = self.venv.get_object_by_name('E_joint')
         self.Fjoint = self.venv.get_object_by_name('F_joint')
         
-        
-        
-        
         #print(self.Ajoint.handle, self.Bjoint.handle, self.Cjoint.handle, self.Djoint.handle, self.Ejoint.handle, self.Fjoint.handle)
         self.venv.start_nonblocking_simulation()
         
@@ -103,8 +99,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot()
     def on_commandLinkButtonGo_clicked(self):
         TCP = [float(self.lineEditTx.text()), float(self.lineEditTy.text()), float(self.lineEditTz.text())]
-        TOV = [-90.0, 0.0, 90.0]
-        Joint_Deg = self.arm.Inverse_Kinematic(TCP, TOV)
+        TOV = []
+        ge = [self.lineEditA, self.lineEditB, self.lineEditC]
+        for i in ge:
+            TOV.append(float(i.text()))
+        nowact = self.getactjoint()
+        Joint_Deg = self.arm.Inverse_Kinematic(TCP, TOV, nowact)
         
         self.Ajoint.set_position_target(Joint_Deg[0])
         self.Bjoint.set_position_target(Joint_Deg[1])
@@ -112,3 +112,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.Djoint.set_position_target(Joint_Deg[3])
         self.Ejoint.set_position_target(Joint_Deg[4])
         self.Fjoint.set_position_target(Joint_Deg[5])
+
+
+    def getactjoint(self):
+        li = [self.axis1, self.axis2, self.axis3, self.axis4,self.axis5, self.axis6]
+        catch = []
+        for i in li:
+            catch.append(float(i.text()))
+        return catch
+        
