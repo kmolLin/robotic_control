@@ -49,17 +49,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.work.start()
     
     def update_text(self, text):
-        self.axis1.insert(text)
-    def update_text1(self, text):   
-        self.axis2.insert(text)
-    def update_text2(self, text):  
-        self.axis3.insert(text)
-    def update_text3(self, text):  
-        self.axis4.insert(text)
-    def update_text4(self, text):  
-        self.axis5.insert(text)
-    def update_text5(self, text):  
-        self.axis6.insert(text)
+        print(text)
+        self.axis1.insert(str(text))
+    def update_text1(self, text1):   
+        self.axis2.insert(str(text1))
+    def update_text2(self, text2):  
+        self.axis3.insert(str(text2))
+    def update_text3(self, text3):  
+        self.axis4.insert(str(text3))
+    def update_text4(self, text4):  
+        self.axis5.insert(str(text4))
+    def update_text5(self, text5):  
+        self.axis6.insert(str(text5))
     
     @pyqtSlot()
     def on_radioButtonSimple_clicked(self):
@@ -67,7 +68,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     @pyqtSlot()
     def on_radioButtonTarget_clicked(self):
-        a = []
         
         self.venv = vrepper(headless=False)
         self.venv.start()
@@ -82,16 +82,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.Fjoint = self.venv.get_object_by_name('F_joint')
         
         
+        
+        
+        #print(self.Ajoint.handle, self.Bjoint.handle, self.Cjoint.handle, self.Djoint.handle, self.Ejoint.handle, self.Fjoint.handle)
+        self.venv.start_nonblocking_simulation()
+        
         self.dowork(self.venv)
-        
-        print(self.Ajoint.handle, self.Bjoint.handle, self.Cjoint.handle, self.Djoint.handle, self.Ejoint.handle, self.Fjoint.handle)
-        
-        self.venv.start_blocking_simulation()
+        #self.venv.start_blocking_simulation()
         #for i in range(20):
             #print('simulation step',i)
             #print('body position',self.Ajoint.get_joint_angle())
-            #a.append([self.Ajoint.get_joint_angle(), self.Bjoint.get_joint_angle(), self.Cjoint.get_joint_angle(), self.Djoint.get_joint_angle(), self.Ejoint.get_joint_angle(), self.Fjoint.get_joint_angle()])
-
             #self.Ajoint.set_position_target(i*20)
             # you should see things moving back and forth
 
