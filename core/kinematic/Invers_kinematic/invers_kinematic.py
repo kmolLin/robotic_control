@@ -28,7 +28,6 @@ d1 = 375.0
 d4 = 338.0
 d6 = 86.5
 
-acr_joint = [0.0, 368.0, 498.42, -3.125, 180.0, -93.0]
 
 #
 offset = 10
@@ -39,7 +38,7 @@ class armrobot():
     
     def Forward_Kinematic(self, DEG):
         RAD = []
-        d6h = d6+170.0
+        d6h = d6
         for i in range(AXIS1,TOTAL_AXES ):
             RAD.append( DEG[i] * DEG2RAD)
         C1 = cos(RAD[AXIS1])
@@ -106,7 +105,7 @@ class armrobot():
         dif = np.zeros((1, 4))
         UVM =  self.Eul2R(TOV)
         #print(UVM)
-        d6h = 170
+        d6h = 0
         
         for i in range(0, 3):
             U.append(UVM[i][0])  #appen
@@ -122,10 +121,10 @@ class armrobot():
         while(passkey):
             # Theta1
             RAD[0, 0] = atan2(Py, Px)
-            #print(cos(RAD[0]))
+            #print(RAD[0, 0]*RAD2DEG)
             C1 = cos(RAD[0, 0])
             S1 = sin(RAD[0, 0])
-            # Theta3
+            # Theta3    +- ???
             Px2 = pow(Px, 2)
             Py2 = pow(Py, 2)
             Pz2 = pow(Pz - d1, 2)
@@ -138,7 +137,7 @@ class armrobot():
             else :
                 theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))
                 theta3_2 = 2.0 * atan((k1 - sqrt(kcnt)) / (k2 + k3))
-            
+            #print(theta3_1*RAD2DEG,"23", theta3_2*RAD2DEG)
             if cnt <=1:
                 RAD[0, AXIS3] = theta3_1
             else:
@@ -202,7 +201,7 @@ class armrobot():
             if cnt==3:
                 passkey = 0
             cnt = cnt+1
-            
+        print(THETA*RAD2DEG)
         for i in range(0, cnt):
             for j in range(AXIS1, TOTAL_AXES):
                 dT[i][j] = THETA[i][j]*RAD2DEG - actjoint[j] # TODO : not sure  - act_joint[j]
@@ -271,13 +270,14 @@ if __name__=='__main__':
     #TOV = [180.0, 0.0, 0.0]
     TOV = [-90.0, 0.0, 90.0]
     DEG = [0, 0, 90, 0, 0, 0]
-    GG = [180.0, 13.700509349103092, 114.13038634373724, -180.0, 10.429876994634144, -0.0]
-    a.Forward_Kinematic(DEG)
-    c =  a.Inverse_Kinematic(TCP, TOV)
-    d, e = a.Forward_Kinematic(GG)
-    #print(d)
+    #GG = [180.0, 13.700509349103092, 114.13038634373724, -180.0, 10.429876994634144, -0.0]
+    #a.Forward_Kinematic(DEG)
+    act = [89.9, 0.0, -0.0, -0.0, -90.0, 0.0]
+    c =  a.Inverse_Kinematic(TCP, TOV, act)
+    #d, e = a.Forward_Kinematic(GG)
+    print(c)
     #print(e)
-"""    
+"""
     
     
     
