@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-6.0.dtd">
 <!-- eric6 tasks file for project robotic_control -->
+<<<<<<< HEAD
 <!-- Saved: 2018-01-25, 11:41:04 -->
+=======
+<!-- Saved: 2018-01-25, 00:35:13 -->
+>>>>>>> cad465308b8e2b7219ba1d66736797a4ef89f275
 <Tasks version="6.0">
   <ProjectScanFilter></ProjectScanFilter>
 </Tasks>

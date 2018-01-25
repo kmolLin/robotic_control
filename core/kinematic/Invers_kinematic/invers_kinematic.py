@@ -28,7 +28,6 @@ d1 = 375.0
 d4 = 338.0
 d6 = 86.5
 
-acr_joint = [0.0, 368.0, 498.42, -3.125, 180.0, -93.0]
 
 #
 offset = 10
@@ -39,7 +38,7 @@ class armrobot():
     
     def Forward_Kinematic(self, DEG):
         RAD = []
-        d6h = d6+170.0
+        d6h = d6
         for i in range(AXIS1,TOTAL_AXES ):
             RAD.append( DEG[i] * DEG2RAD)
         C1 = cos(RAD[AXIS1])
@@ -94,7 +93,7 @@ class armrobot():
         
     
     
-    def Inverse_Kinematic(self, TCP, TOV):
+    def Inverse_Kinematic(self, TCP, TOV, actjoint):
         
         RAD = np.zeros((1, 6))
         THETA =  np.zeros((4, 6))
@@ -106,7 +105,7 @@ class armrobot():
         dif = np.zeros((1, 4))
         UVM =  self.Eul2R(TOV)
         #print(UVM)
-        d6h = 170
+        d6h = 0
         
         for i in range(0, 3):
             U.append(UVM[i][0])  #appen
@@ -122,10 +121,10 @@ class armrobot():
         while(passkey):
             # Theta1
             RAD[0, 0] = atan2(Py, Px)
-            #print(cos(RAD[0]))
+            #print(RAD[0, 0]*RAD2DEG)
             C1 = cos(RAD[0, 0])
             S1 = sin(RAD[0, 0])
-            # Theta3
+            # Theta3    +- ???
             Px2 = pow(Px, 2)
             Py2 = pow(Py, 2)
             Pz2 = pow(Pz - d1, 2)
@@ -133,9 +132,13 @@ class armrobot():
             k2 = 2.0 * a2 * a3
             k3 = Px2 + Py2 + Pz2 - 2.0 * a1 * (Px * C1 + Py * S1) + pow(a1, 2) - pow(a3, 2) - pow(d4, 2) - pow(a2, 2)
             kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)
-            theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))
-            theta3_2 = 2.0 * atan((k1 - sqrt(kcnt)) / (k2 + k3))
-            
+            if kcnt < 0:
+                print("Didn't have correct code.")
+            else :
+                print((k2 + k3))
+                theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))
+                theta3_2 = 2.0 * atan((k1 - sqrt(kcnt)) / (k2 + k3))
+            print(theta3_1*RAD2DEG,"23", theta3_2*RAD2DEG)
             if cnt <=1:
                 RAD[0, AXIS3] = theta3_1
             else:
@@ -147,8 +150,10 @@ class armrobot():
             # Theta2
             mu1 = -a3 * S3 + d4 *C3
             mu2 = a3 * C3 + d4 * S3 + a2
+            
             v1 = a3 * C3 + d4 * S3 + a2
             v2 = a3 * S3 - d4 * C3
+            
             gama1 = Px * C1 + Py * S1 - a1
             gama2 = Pz - d1
             
@@ -197,10 +202,10 @@ class armrobot():
             if cnt==3:
                 passkey = 0
             cnt = cnt+1
-        print(THETA)
+        print(THETA*RAD2DEG)
         for i in range(0, cnt):
             for j in range(AXIS1, TOTAL_AXES):
-                dT[i][j] = THETA[i][j]*RAD2DEG - acr_joint[j] # TODO : not sure  - act_joint[j]
+                dT[i][j] = THETA[i][j]*RAD2DEG - actjoint[j] # TODO : not sure  - act_joint[j]
                 #print(dT[i][j])
                 dif[0, i] = dif[0, i] + pow(dT[i][j], 2)
             dif[0, i] = sqrt(dif[0, i])
@@ -212,7 +217,7 @@ class armrobot():
                 min = i
         for i in range(AXIS1, TOTAL_AXES):
             Joint_Deg.append(THETA[min][i]* RAD2DEG)
-            acr_joint[i] = THETA[min][i] * RAD2DEG
+            actjoint[i] = THETA[min][i] * RAD2DEG
         
         print(Joint_Deg)
         return Joint_Deg
@@ -257,7 +262,7 @@ class armrobot():
             EUL.append( RAD[i] * RAD2DEG)
         return EUL
         
-"""
+
 if __name__=='__main__':
     import sys
     a = armrobot()
@@ -266,50 +271,14 @@ if __name__=='__main__':
     #TOV = [180.0, 0.0, 0.0]
     TOV = [-90.0, 0.0, 90.0]
     DEG = [0, 0, 90, 0, 0, 0]
-    GG = [180.0, 13.700509349103092, 114.13038634373724, -180.0, 10.429876994634144, -0.0]
-    a.Forward_Kinematic(DEG)
-    c =  a.Inverse_Kinematic(TCP, TOV)
-    d, e = a.Forward_Kinematic(GG)
-    #print(d)
+    #GG = [180.0, 13.700509349103092, 114.13038634373724, -180.0, 10.429876994634144, -0.0]
+    #a.Forward_Kinematic(DEG)
+    act = [89.9, 0.0, -0.0, -0.0, -90.0, 0.0]
+    c =  a.Inverse_Kinematic(TCP, TOV, act)
+    #d, e = a.Forward_Kinematic(GG)
+    print(c)
     #print(e)
-    
-    #239.229, 569.919
-    vrep.simxFinish(-1)
-    clientID = vrep.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
-    if clientID!= -1:
-        print("Connected to remote server")
-    else:
-        print('Connection not successful')
-        sys.exit('Could not connect')
 
-    errorCode1,A_joint=vrep.simxGetObjectHandle(clientID,'A_joint',vrep.simx_opmode_oneshot_wait)
-    errorCode2,B_joint=vrep.simxGetObjectHandle(clientID,'B_joint',vrep.simx_opmode_oneshot_wait)
-    errorCode3,C_joint=vrep.simxGetObjectHandle(clientID,'C_joint',vrep.simx_opmode_oneshot_wait)
-    errorCode3,D_joint=vrep.simxGetObjectHandle(clientID,'D_joint',vrep.simx_opmode_oneshot_wait)
-    errorCode3,E_joint=vrep.simxGetObjectHandle(clientID,'E_joint',vrep.simx_opmode_oneshot_wait)
-    errorCode3,F_joint=vrep.simxGetObjectHandle(clientID,'F_joint',vrep.simx_opmode_oneshot_wait)
-
-
-    if errorCode1 == -1:
-        print('Can not find joint1')
-        sys.exit()            
-    if errorCode2 == -1:
-        print('Can not find joint2')
-        sys.exit()            
-    if errorCode3 == -1:
-        print('Can not find joint3')
-        sys.exit()           
-
-
-
-
-    errorCode1=vrep.simxSetJointTargetPosition(clientID,A_joint,c[0], vrep.simx_opmode_oneshot)
-    errorCode2=vrep.simxSetJointTargetPosition(clientID,B_joint,c[1], vrep.simx_opmode_oneshot)
-    errorCode3=vrep.simxSetJointTargetPosition(clientID,C_joint,c[2], vrep.simx_opmode_oneshot)
-    errorCode3=vrep.simxSetJointTargetPosition(clientID,D_joint,c[3], vrep.simx_opmode_oneshot)
-    errorCode3=vrep.simxSetJointTargetPosition(clientID,E_joint,c[4], vrep.simx_opmode_oneshot)
-    errorCode3=vrep.simxSetJointTargetPosition(clientID,F_joint,c[5], vrep.simx_opmode_oneshot)
-"""    
     
     
     
