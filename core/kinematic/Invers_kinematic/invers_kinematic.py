@@ -135,10 +135,9 @@ class armrobot():
             if kcnt < 0:
                 print("Didn't have correct code.")
             else :
-                print((k2 + k3))
                 theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))
                 theta3_2 = 2.0 * atan((k1 - sqrt(kcnt)) / (k2 + k3))
-            print(theta3_1*RAD2DEG,"23", theta3_2*RAD2DEG)
+            #print(theta3_1*RAD2DEG,"23", theta3_2*RAD2DEG)
             if cnt <=1:
                 RAD[0, AXIS3] = theta3_1
             else:
@@ -262,7 +261,7 @@ class armrobot():
             EUL.append( RAD[i] * RAD2DEG)
         return EUL
         
-
+"""
 if __name__=='__main__':
     import sys
     a = armrobot()
@@ -278,7 +277,7 @@ if __name__=='__main__':
     #d, e = a.Forward_Kinematic(GG)
     print(c)
     #print(e)
-
+"""
     
     
     

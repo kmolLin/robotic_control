@@ -71,7 +71,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.venv = vrepper(headless=False)
         self.venv.start()
         # load scene
-        self.venv.load_scene(os.getcwd() + '/ra605robot.ttt')
+        self.venv.load_scene(os.getcwd() + '/ra605robotV2.ttt')
         
         self.Ajoint = self.venv.get_object_by_name('A_joint')
         self.Bjoint = self.venv.get_object_by_name('B_joint')
