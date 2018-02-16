@@ -38,18 +38,6 @@ class foward_kinematic():
         S6 = sin(RAD[AXIS6])
         C23 = cos(RAD[AXIS2] - RAD[AXIS3])
         S23 = sin(RAD[AXIS2] - RAD[AXIS3])
-        """
-        UVW[0][0] = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)
-        UVW[1][0] = S1 * S23 * (C4 * C5 * C6 + S4 * S6) - S1 * C23 *S5 * C6 - C1 * (C4 * S6 - S4 * C5 * C6)
-        UVW[2][0] = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6
-        UVW[0][1] = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)
-        UVW[1][1] = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)
-        UVW[2][1] = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6
-        UVW[0][2] = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5
-        UVW[1][2] = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5
-        UVW[2][2] = C23 * C4 * S5 - S23 * C5
-        """
-        
         
         
         a = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)
@@ -69,3 +57,29 @@ class foward_kinematic():
         TCP = [X, Y, Z]
         print(self.R2Eul(UVW))
         return TCP, self.R2Eul(UVW)
+        
+    def R2Eul(self, R):
+        RAD = [0.0, 0.0, 0.0]
+        U = []
+        V = []
+        W = []
+        EUL = []
+        for i in range(0, 3):
+            U.append(R[i][0])
+            V.append(R[i][1])
+            W.append(R[i][2])
+        
+        RAD[constant.BETA.value] = atan2(sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
+        if (fabs(sin(RAD[constant.BETA.value])) <= constant.ERRC.value):
+            RAD[constant.GAMA.value] = 0.0
+            RAD[constant.AFA.value] = atan2(V[0], U[0])
+        else:
+            RAD[constant.AFA.value] = atan2(W[0], (-W[1]))
+        
+        if fabs(RAD[constant.AFA.value]) + fabs(RAD[constant.GAMA.value]) >= pi:
+            RAD[constant.BETA.value] = atan2(-sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
+            RAD[constant.AFA.value] = atan2(-W[0], W[1])
+            RAD[constant.GAMA.value] = atan2(-U[2], -V[2])
+        for i in range(constant.AFA.value, constant.TOTAL_TOV.value):
+            EUL.append( RAD[i] * RAD2DEG)
+        return EUL

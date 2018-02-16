@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-Module implementing MainWindow.
-"""
-
-
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow
 
@@ -18,16 +13,7 @@ import time
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-    """
-    Class documentation goes here.
-    """
     def __init__(self, parent=None):
-        """
-        Constructor
-        
-        @param parent reference to the parent widget
-        @type QWidget
-        """
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.dt = 0.0
@@ -84,6 +70,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.venv.start_nonblocking_simulation()
         
         self.dowork(self.venv)
+        # TODO: need to add time to simulation on vrep
         #self.venv.start_blocking_simulation()
         #for i in range(20):
             #print('simulation step',i)

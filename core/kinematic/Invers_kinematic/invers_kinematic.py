@@ -1,35 +1,6 @@
 from math import *
 from ..constant import constant
 import numpy as np
-"""
-AFA = 0
-BETA = 1
-GAMA = 2
-TOTAL_TOV = 3
-DEG2RAD = pi/180.0
-RAD2DEG = 180.0/pi
-
-# 6-AXES ID
-AXIS1 = 0
-AXIS2 = 1
-AXIS3 = 2
-AXIS4 = 3
-AXIS5 = 4
-AXIS6 = 5
-TOTAL_AXES = 6
-
-#Error Value
-#constant.ERRC.value = 1E-6
-
-# D-H Table
-a1 = 30.0
-a2 = 340.0
-a3 = 40.0
-d1 = 375.0
-d4 = 338.0
-d6 = 86.5
-
-"""
 #
 offset = 10
 
@@ -42,9 +13,14 @@ class armrobot():
         self.d1 = constant.d1.value
         self.d4 = constant.d4.value
         self.d6 = constant.d6.value
-        pass
 
     def Inverse_Kinematic(self, TCP, TOV, actjoint):
+        a1 = self.a1
+        a2 = self.a2
+        a3 = self.a3
+        d1 = self.d1
+        d4 = self.d4
+        d6 = self.d6
         
         RAD = np.zeros((1, 6))
         THETA =  np.zeros((4, 6))
@@ -55,8 +31,8 @@ class armrobot():
         Joint_Deg = []
         dif = np.zeros((1, 4))
         UVM =  self.Eul2R(TOV)
-        #print(UVM)
-        d6h = 0
+        # TODO: need to make gui
+        d6h = d6+offset
         
         for i in range(0, 3):
             U.append(UVM[i][0])  #appen
@@ -66,13 +42,13 @@ class armrobot():
         Px = TCP[0]-d6h*W[0]
         Py = TCP[1]-d6h*W[1]
         Pz = TCP[2]-d6h*W[2]
+        
         cnt = 0
         passkey = 1
         
         while(passkey):
             # Theta1
             RAD[0, 0] = atan2(Py, Px)
-            #print(RAD[0, 0]*RAD2DEG)
             C1 = cos(RAD[0, 0])
             S1 = sin(RAD[0, 0])
             # Theta3    +- ???
@@ -84,7 +60,7 @@ class armrobot():
             k3 = Px2 + Py2 + Pz2 - 2.0 * a1 * (Px * C1 + Py * S1) + pow(a1, 2) - pow(a3, 2) - pow(d4, 2) - pow(a2, 2)
             kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)
             if kcnt < 0:
-                print("Didn't have correct code.")
+                print("Didn't have correct answer.")
             else :
                 theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))
                 theta3_2 = 2.0 * atan((k1 - sqrt(kcnt)) / (k2 + k3))
@@ -100,10 +76,8 @@ class armrobot():
             # Theta2
             mu1 = -a3 * S3 + d4 *C3
             mu2 = a3 * C3 + d4 * S3 + a2
-            
             v1 = a3 * C3 + d4 * S3 + a2
             v2 = a3 * S3 - d4 * C3
-            
             gama1 = Px * C1 + Py * S1 - a1
             gama2 = Pz - d1
             
@@ -133,30 +107,26 @@ class armrobot():
             r33 = W[0] * S1 - W[1] * C1
             
             if S5> constant.ERRC.value:
-                RAD[0, AXIS4] = atan2(-r33, r13)
+                RAD[0, constant.AXIS4.value] = atan2(-r33, r13)
             elif S5 < constant.ERRC.value:
-                RAD[0, AXIS4] = atan2(r33, -r13)
-            
-            C4 = cos(RAD[0, AXIS4])
-            S4 = sin(RAD[0, AXIS4])
+                RAD[0, constant.AXIS4.value] = atan2(r33, -r13)
+            C4 = cos(RAD[0, constant.AXIS4.value])
+            S4 = sin(RAD[0, constant.AXIS4.value])
             
             #theta 6
             if S5 > constant.ERRC.value:
                 RAD[0, constant.AXIS6.value] = atan2(-r22, r21)
             elif S5 < constant.ERRC.value:
                 RAD[0, constant.AXIS6.value] = atan2(r22, -r21)
-                
-            for i in range(AXIS1,constant.TOTAL_AXES.value ):
+            for i in range(constant.AXIS1.value,constant.TOTAL_AXES.value ):
                 THETA[cnt][i]= RAD[0, i]
-            
             if cnt==3:
                 passkey = 0
             cnt = cnt+1
-        #print(THETA*RAD2DEG)
+            
         for i in range(0, cnt):
-            for j in range(AXIS1, constant.TOTAL_AXES.value):
-                dT[i][j] = THETA[i][j]*constant.RAD2DEG.value - actjoint[j] # TODO : not sure  - act_joint[j]
-                #print(dT[i][j])
+            for j in range(constant.AXIS1.value, constant.TOTAL_AXES.value):
+                dT[i][j] = THETA[i][j]*constant.RAD2DEG.value - actjoint[j] 
                 dif[0, i] = dif[0, i] + pow(dT[i][j], 2)
             dif[0, i] = sqrt(dif[0, i])
         dif_min = dif[0, 0]
@@ -165,17 +135,17 @@ class armrobot():
             if dif_min>dif[0, i]:
                 dif_min = dif[0, i]
                 min = i
-        for i in range(AXIS1, TOTAL_AXES):
-            Joint_Deg.append(THETA[min][i]* constant.RAD2DEG.value)
-            actjoint[i] = THETA[min][i] * constant.RAD2DEG.value
-        
-        print(Joint_Deg)
+                
+        for i in range(constant.AXIS1.value, constant.TOTAL_AXES.value):
+            Joint_Deg.append(degrees(THETA[min][i]))
+            actjoint[i] = degrees(THETA[min][i])
+            
         return Joint_Deg
         
     def Eul2R(self, EUL):
         RAD = []
         for i in range(constant.AFA.value, 3):
-            RAD.append(EUL[i]*constant.DEG2RAD.value)
+            RAD.append(radians(EUL[i]))
             
         Ca = cos(RAD[constant.AFA.value])
         Cb = cos(RAD[constant.BETA.value])
@@ -183,52 +153,8 @@ class armrobot():
         Sa = sin(RAD[constant.AFA.value])
         Sb = sin(RAD[constant.BETA.value])
         Sg = sin(RAD[constant.GAMA.value])
-        R = [Ca * Cg - Sa * Cb * Sg,Sa * Cg + Ca * Cb * Sg,  Sb * Sg], [-Ca * Sg - Sa * Cb * Cg,-Sa * Sg + Ca * Cb * Cg ,Sb * Cg ], [Sa * Sb,-Ca * Sb, Cb ]
-        return R    
-    
-    def R2Eul(self, R):
-        RAD = [0.0, 0.0, 0.0]
-        U = []
-        V = []
-        W = []
-        EUL = []
-        for i in range(0, 3):
-            U.append(R[i][0])
-            V.append(R[i][1])
-            W.append(R[i][2])
-        
-        RAD[constant.BETA.value] = atan2(sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
-        if (fabs(sin(RAD[constant.BETA.value])) <= constant.ERRC.value):
-            RAD[constant.GAMA.value] = 0.0
-            RAD[constant.AFA.value] = atan2(V[0], U[0])
-        else:
-            RAD[constant.AFA.value] = atan2(W[0], (-W[1]))
-        
-        if fabs(RAD[constant.AFA.value]) + fabs(RAD[constant.GAMA.value]) >= pi:
-            RAD[constant.BETA.value] = atan2(-sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
-            RAD[constant.AFA.value] = atan2(-W[0], W[1])
-            RAD[constant.GAMA.value] = atan2(-U[2], -V[2])
-        for i in range(constant.AFA.value, constant.TOTAL_TOV.value):
-            EUL.append( RAD[i] * RAD2DEG)
-        return EUL
-        
-"""
-if __name__=='__main__':
-    import sys
-    a = armrobot()
-    #TCP = [0.0, 368.0, 500]
-    TCP = [300.229, -50.919, 600.0]
-    #TOV = [180.0, 0.0, 0.0]
-    TOV = [-90.0, 0.0, 90.0]
-    DEG = [0, 0, 90, 0, 0, 0]
-    #GG = [180.0, 13.700509349103092, 114.13038634373724, -180.0, 10.429876994634144, -0.0]
-    #a.Forward_Kinematic(DEG)
-    act = [89.9, 0.0, -0.0, -0.0, -90.0, 0.0]
-    c =  a.Inverse_Kinematic(TCP, TOV, act)
-    #d, e = a.Forward_Kinematic(GG)
-    print(c)
-    #print(e)
-"""
+        R = [[Ca * Cg - Sa * Cb * Sg, -Ca * Sg - Sa * Cb * Cg, Sa * Sb], [Sa * Cg + Ca * Cb * Sg, -Sa * Sg + Ca * Cb * Cg, -Ca * Sb], [Sb * Sg, Sb * Cg, Cb]]
+        return R 
     
     
     
