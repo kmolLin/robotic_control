@@ -54,7 +54,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot()
     def on_radioButtonTarget_clicked(self):
         
-        self.venv = vrepper(headless=False)
+        guimode = self.enablegui.isTristate()
+        print(guimode)
+        self.venv = vrepper(headless=True)
         self.venv.start()
         # load scene
         self.venv.load_scene(os.getcwd() + '/ra605robotV2.ttt')
@@ -66,7 +68,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.Ejoint = self.venv.get_object_by_name('E_joint')
         self.Fjoint = self.venv.get_object_by_name('F_joint')
         
-        #print(self.Ajoint.handle, self.Bjoint.handle, self.Cjoint.handle, self.Djoint.handle, self.Ejoint.handle, self.Fjoint.handle)
         self.venv.start_nonblocking_simulation()
         
         self.dowork(self.venv)
