@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-6.0.dtd">
 <!-- eric6 tasks file for project robotic_control -->
-<!-- Saved: 2018-02-17, 22:10:02 -->
+<!-- Saved: 2018-02-22, 13:49:13 -->
 <Tasks version="6.0">
   <ProjectScanFilter></ProjectScanFilter>
-  <Task priority="1" completed="False" type="1" uid="{599f01d1-8012-415c-a2ae-b0920405da91}">
+  <Task priority="1" completed="False" type="1" uid="{3c8164f9-87e4-4833-a9c5-9e1524cf3970}">
     <Summary>TODO: need to make gui</Summary>
     <Description></Description>
-    <Created>2018-02-16, 10:32:31</Created>
+    <Created>2018-02-22, 13:40:57</Created>
     <Resource>
       <Filename>core/kinematic/Invers_kinematic/invers_kinematic.py</Filename>
       <Linenumber>34</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{3f3e3b0e-4ca9-4e4e-a8c8-91d182b0a9b4}">
+  <Task priority="1" completed="False" type="1" uid="{df784123-0fe6-4124-b403-83e71a39c990}">
+    <Summary>TODO: need to parser model</Summary>
+    <Description></Description>
+    <Created>2018-02-22, 13:40:57</Created>
+    <Resource>
+      <Filename>core/model/modelparser.py</Filename>
+      <Linenumber>3</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{6ca4eb1b-f55c-40d9-8b4c-6f6adba552a1}">
     <Summary>TODO: need to add time to simulation on vrep</Summary>
     <Description></Description>
-    <Created>2018-02-17, 22:09:59</Created>
+    <Created>2018-02-22, 13:41:10</Created>
     <Resource>
       <Filename>mainwindow.py</Filename>
       <Linenumber>74</Linenumber>
