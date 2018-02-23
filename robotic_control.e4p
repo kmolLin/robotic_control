@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project robotic_control -->
-<!-- Saved: 2018-02-20, 11:35:51 -->
+<!-- Saved: 2018-02-23, 19:09:10 -->
 <!-- Copyright (C) 2018 ,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -21,6 +21,10 @@
     <Source>launch.py</Source>
     <Source>mainwindow.py</Source>
     <Source>openglw.py</Source>
+    <Source>testscript.py</Source>
+    <Source>vreplearn/armenv.py</Source>
+    <Source>vreplearn/main.py</Source>
+    <Source>vreplearn/rl.py</Source>
   </Sources>
   <Forms>
     <Form>mainwindow.ui</Form>
