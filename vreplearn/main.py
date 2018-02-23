@@ -7,9 +7,12 @@ from armenv import ArmVREPEnv
 from rl import DDPG
 
 #設置全局變量
-MAX_EPISODES = 500
-MAX_EP_STEPS = 200
-ON_TRAIN = True
+MAX_EPISODES = 1000
+MAX_EP_STEPS = 200  # 200
+ON_TRAIN = False
+
+# vrep gui mode
+guimode = False
 
 # 設置環境
 env = ArmVREPEnv()
@@ -23,6 +26,8 @@ rl = DDPG(a_dim, s_dim, a_bound)
 # output log dir
 OUTPUT_GRAPH = True
 
+
+
 steps = []
 # 開始訓練
 def train():
@@ -30,7 +35,8 @@ def train():
     for i in range(MAX_EPISODES):
         #初始化回合設置
         env.stopsim()
-        s = env.reset()
+        #s = env.reset()
+        s = env.test_rest()
         ep_r = 0.
         for j in range(MAX_EP_STEPS):
             # 環境渲染 
@@ -41,10 +47,9 @@ def train():
 
             # 在環境中施加動作 由 a 決定的 得到新的state (s_) 以及 reward 以及判斷是否完成動作
             s_, r, done = env.step(a)
-
+            
             # DDPG 需要將經驗存取到記憶庫
             rl.store_transition(s, a, r, s_)
-
         
             ep_r += r
             if rl.memory_full:
@@ -53,6 +58,7 @@ def train():
             # translate new state to old state
             s = s_
             if done or j == MAX_EP_STEPS-1:
+                print(env.getposition())
                 print('Ep: %i | %s | ep_r: %.1f | step: %i' % (i, '---' if not done else 'done', ep_r, j))
                 break
     rl.save()
@@ -61,12 +67,11 @@ def train():
 
 def eval():
     rl.restore()
-    env.render()
-    env.viewer.set_vsync(True)
-    while True:
-        s = env.reset()
+    #env.render()
+    #env.viewer.set_vsync(True)
+    for i in range(3):
+        s = env.test_rest()
         for _ in range(200):
-            env.render()
             a = rl.choose_action(s)
             s, r, done = env.step(a)
             if done:
