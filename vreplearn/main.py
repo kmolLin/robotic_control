@@ -7,7 +7,7 @@ from armenv import ArmVREPEnv
 from rl import DDPG
 
 #設置全局變量
-MAX_EPISODES = 1000
+MAX_EPISODES = 500
 MAX_EP_STEPS = 200  # 200
 ON_TRAIN = False
 
@@ -58,7 +58,7 @@ def train():
             # translate new state to old state
             s = s_
             if done or j == MAX_EP_STEPS-1:
-                print(env.getposition())
+                #print(env.getposition())
                 print('Ep: %i | %s | ep_r: %.1f | step: %i' % (i, '---' if not done else 'done', ep_r, j))
                 break
     rl.save()
