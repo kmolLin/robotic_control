@@ -3,7 +3,7 @@ Make it more robust.
 Stop episode once the finger stop at the final position for 50 steps.
 Feature & reward engineering.
 """
-from armenv import ArmVREPEnv
+from xyz_path import ArmVREPEnv
 from rl import DDPG
 
 #設置全局變量
@@ -34,7 +34,6 @@ def train():
     # start training
     for i in range(MAX_EPISODES):
         #初始化回合設置
-        env.stopsim()
         #s = env.reset()
         s = env.test_rest()
         ep_r = 0.

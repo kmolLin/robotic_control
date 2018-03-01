@@ -11,10 +11,10 @@ class ArmVREPEnv():
     goal = {'x': 300.0, 'y': -161.96, 'z':18.0 ,'l': 0.05} # 藍色目標的座標及長度
     
     # can get the information by the envirement
-    state_dim = 25
+    state_dim = 10
     
     # two links can input degrees control
-    action_dim = 4
+    action_dim = 3
     
     
     def __init__(self,headless=True):
@@ -86,9 +86,6 @@ class ArmVREPEnv():
         
         #print(s, r, done)
         return s, r, done
-        
-    def stopsim(self):
-        self.venv.stop_simulation()
         
     def test_rest(self):
         # act joint 
