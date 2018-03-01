@@ -1,5 +1,5 @@
 from math import *
-from ..constant import constant
+from constant import constant
 import numpy as np
 #
 offset = 10

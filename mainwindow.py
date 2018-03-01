@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-Module implementing MainWindow.
-"""
-
-
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow
 
@@ -18,16 +13,7 @@ import time
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-    """
-    Class documentation goes here.
-    """
     def __init__(self, parent=None):
-        """
-        Constructor
-        
-        @param parent reference to the parent widget
-        @type QWidget
-        """
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.dt = 0.0
@@ -68,6 +54,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot()
     def on_radioButtonTarget_clicked(self):
         
+        guimode = self.enablegui.isTristate()
+        print(guimode)
         self.venv = vrepper(headless=False)
         self.venv.start()
         # load scene
@@ -80,10 +68,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.Ejoint = self.venv.get_object_by_name('E_joint')
         self.Fjoint = self.venv.get_object_by_name('F_joint')
         
-        #print(self.Ajoint.handle, self.Bjoint.handle, self.Cjoint.handle, self.Djoint.handle, self.Ejoint.handle, self.Fjoint.handle)
         self.venv.start_nonblocking_simulation()
         
         self.dowork(self.venv)
+        # TODO: need to add time to simulation on vrep
         #self.venv.start_blocking_simulation()
         #for i in range(20):
             #print('simulation step',i)
