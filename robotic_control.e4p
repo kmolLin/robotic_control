@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project robotic_control -->
-<!-- Saved: 2018-02-23, 19:09:10 -->
+<!-- Saved: 2018-03-02, 18:14:04 -->
 <!-- Copyright (C) 2018 ,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -15,6 +15,9 @@
   <Sources>
     <Source>Ui_mainwindow.py</Source>
     <Source>core/kinematic/Invers_kinematic/invers_kinematic.py</Source>
+    <Source>core/kinematic/constant.py</Source>
+    <Source>core/kinematic/forward_kinematic/forward_kinematic.py</Source>
+    <Source>core/kinematic/math.py</Source>
     <Source>core/model/modelparser.py</Source>
     <Source>core/model/stlread.py</Source>
     <Source>core/vrep_commucation/vrepper.py</Source>
@@ -23,8 +26,11 @@
     <Source>openglw.py</Source>
     <Source>testscript.py</Source>
     <Source>vreplearn/armenv.py</Source>
+    <Source>vreplearn/constant.py</Source>
+    <Source>vreplearn/invers_kinematic.py</Source>
     <Source>vreplearn/main.py</Source>
     <Source>vreplearn/rl.py</Source>
+    <Source>vreplearn/xyz_path.py</Source>
   </Sources>
   <Forms>
     <Form>mainwindow.ui</Form>

@@ -18,8 +18,7 @@ class ArmVREPEnv():
     
     def __init__(self,headless=True):
         
-        self.arm_info = np.zeros(
-            4, dtype=[('l',np.float32), ('r', np.float32)])  # make (2,2) martix
+        self.arm_info = np.zeros(4, dtype=[('l',np.float32), ('r', np.float32)])  # make (2,2) martix
         self.arm_info['l'] = 100        # 2 arms length
         self.arm_info['r'] = np.pi/6    # 2 arms angles information
         self.on_goal = 0
@@ -29,12 +28,12 @@ class ArmVREPEnv():
         venv.load_scene(
             os.getcwd() + '/armtest.ttt')
 
-        self.motor1 = venv.get_object_by_name('PhantomXPincher_joint1')
-        self.motor2 = venv.get_object_by_name('PhantomXPincher_joint2')
-        self.motor3 = venv.get_object_by_name('PhantomXPincher_joint3')
-        self.motor4 = venv.get_object_by_name('PhantomXPincher_joint4')
+        self.motor1 = venv.get_object_by_name('A_joint')
+        self.motor2 = venv.get_object_by_name('B_joint')
+        self.motor3 = venv.get_object_by_name('C_joint')
+        #self.motor4 = venv.get_object_by_name('PhantomXPincher_joint4')
 
-        self.gripperCenter = venv.get_object_by_name('point')
+        self.gripperCenter = venv.get_object_by_name('gettingpoint')
 
         print('(armVREP) initialized')
         
@@ -44,13 +43,15 @@ class ArmVREPEnv():
         done = False
         # [a,b,c,d]
         cc = action
+        print(action)
         
-        action[0] = np.clip(action[0], *[np.deg2rad(-170), np.deg2rad(340)])  #*self.action_bound
-        action[1] = np.clip(action[1],  *[np.deg2rad(-135), np.deg2rad(270)])
-        action[2] = np.clip(action[2],  *[np.deg2rad(-135), np.deg2rad(270)])
-        action[3] = np.clip(action[3],  *[np.deg2rad(-90), np.deg2rad(180)])
+        action[0] = np.clip(action[0], *[np.deg2rad(255), np.deg2rad(-75)])  #*self.action_bound
+        action[1] = np.clip(action[1],  *[np.deg2rad(175), np.deg2rad(-25)])
+        action[2] = np.clip(action[2],  *[np.deg2rad(185), np.deg2rad(-55)])
+        #action[3] = np.clip(action[3],  *[np.deg2rad(-90), np.deg2rad(180)])
         
         self.arm_info['r'] += action * 0.1   #self.dt
+        print(self.arm_info['r'])
         self.arm_info['r'] %= np.pi * 2  #  normalize
         
         (a1l, a2l , a3l, a4l) = self.arm_info['l']  # radius, arm length
@@ -61,7 +62,7 @@ class ArmVREPEnv():
         self.motor1.set_position_target(np.rad2deg(a1r))
         self.motor2.set_position_target(np.rad2deg(a2r))
         self.motor3.set_position_target(np.rad2deg(a3r))
-        self.motor4.set_position_target(np.rad2deg(a4r))
+        #self.motor4.set_position_target(np.rad2deg(a4r))
         
         a2xy_ = np.array(self.motor2.get_position())
         a3xy_ = np.array(self.motor3.get_position())
@@ -96,11 +97,19 @@ class ArmVREPEnv():
         #print(s, r, done)
         return s, r, done
         
+    def compute_reward(self):
+        # TODO : need to add new method to calc the reward
+        pass
+        
     def sample_action(self):
         return np.random.rand(4)-0.5    # two radians
         
     def stopsim(self):
         self.venv.stop_simulation()
+        
+        
+    def goal_distance(self, goal_a, goal_b):
+        return np.linalg.norm(goal_a - goal_b, axis=-1)
         
     def test_rest(self):
         #self.venv.stop_blocking_simulation()
@@ -134,7 +143,7 @@ class ArmVREPEnv():
             rd = self.motor4.get_joint_angle()
             
             self.venv.step_blocking_simulation()
-            time.sleep(100)
+            #time.sleep(100)
             count = count+1
             
             #print(ra, rb, rc, rd)

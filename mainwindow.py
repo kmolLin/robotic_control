@@ -56,7 +56,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         guimode = self.enablegui.isTristate()
         print(guimode)
-        self.venv = vrepper(headless=True)
+        self.venv = vrepper(headless=False)
         self.venv.start()
         # load scene
         self.venv.load_scene(os.getcwd() + '/ra605robotV2.ttt')

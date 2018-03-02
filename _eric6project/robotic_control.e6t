@@ -1,34 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-6.0.dtd">
 <!-- eric6 tasks file for project robotic_control -->
-<!-- Saved: 2018-02-24, 22:26:56 -->
+<!-- Saved: 2018-03-02, 18:14:08 -->
 <Tasks version="6.0">
   <ProjectScanFilter></ProjectScanFilter>
-  <Task priority="1" completed="False" type="1" uid="{c98b6900-56b8-44f2-8e82-6c62fc6c4cdd}">
+  <Task priority="1" completed="False" type="1" uid="{4c038114-e9cd-42fc-a264-22943c78ff68}">
     <Summary>TODO: need to make gui</Summary>
     <Description></Description>
-    <Created>2018-02-23, 20:21:34</Created>
+    <Created>2018-03-02, 15:11:43</Created>
     <Resource>
       <Filename>core/kinematic/Invers_kinematic/invers_kinematic.py</Filename>
       <Linenumber>34</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{d676b6e6-75e6-43ee-8bbe-48e855493888}">
+  <Task priority="1" completed="False" type="1" uid="{750b3ef3-17b2-41f3-ba34-b5902892b8c5}">
     <Summary>TODO: need to parser model</Summary>
     <Description></Description>
-    <Created>2018-02-23, 20:21:34</Created>
+    <Created>2018-03-02, 15:11:43</Created>
     <Resource>
       <Filename>core/model/modelparser.py</Filename>
       <Linenumber>3</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{91eed05a-e092-4e2e-8a51-6f597d0da80e}">
+  <Task priority="1" completed="False" type="1" uid="{8fe9c0ca-41c7-436c-be02-686d8cea6ee1}">
     <Summary>TODO: need to add time to simulation on vrep</Summary>
     <Description></Description>
-    <Created>2018-02-23, 20:21:34</Created>
+    <Created>2018-03-02, 15:11:43</Created>
     <Resource>
       <Filename>mainwindow.py</Filename>
       <Linenumber>74</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{8393d089-e2df-4bd1-9233-fe0c091aeef3}">
+    <Summary>TODO: need to add position in this</Summary>
+    <Description></Description>
+    <Created>2018-03-02, 18:11:56</Created>
+    <Resource>
+      <Filename>vreplearn/xyz_path.py</Filename>
+      <Linenumber>86</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{4419b761-78c4-4f3d-9b71-5742b437820f}">
+    <Summary>TODO: need to make gui</Summary>
+    <Description></Description>
+    <Created>2018-03-02, 18:13:38</Created>
+    <Resource>
+      <Filename>vreplearn/invers_kinematic.py</Filename>
+      <Linenumber>34</Linenumber>
     </Resource>
   </Task>
 </Tasks>

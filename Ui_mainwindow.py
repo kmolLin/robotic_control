@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Y:\eric6_workspace\robotic_control\mainwindow.ui'
+# Form implementation generated from reading ui file 'D:\kmol\robotic_control\mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.7
+# Created by: PyQt5 UI code generator 5.9
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,14 +12,12 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1200, 800)
-        MainWindow.setMinimumSize(QtCore.QSize(1200, 600))
-        MainWindow.setMaximumSize(QtCore.QSize(1200, 800))
         self.centralWidget = QtWidgets.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
-        self.formLayout = QtWidgets.QFormLayout(self.centralWidget)
-        self.formLayout.setContentsMargins(11, 11, 11, 11)
-        self.formLayout.setSpacing(6)
-        self.formLayout.setObjectName("formLayout")
+        self.horizontalLayout_21 = QtWidgets.QHBoxLayout(self.centralWidget)
+        self.horizontalLayout_21.setContentsMargins(11, 11, 11, 11)
+        self.horizontalLayout_21.setSpacing(6)
+        self.horizontalLayout_21.setObjectName("horizontalLayout_21")
         self.horizontalLayout_14 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_14.setContentsMargins(11, 11, 11, 11)
         self.horizontalLayout_14.setSpacing(6)
@@ -46,8 +44,6 @@ class Ui_MainWindow(object):
         self.radioButtonTarget.setObjectName("radioButtonTarget")
         self.horizontalLayout_20.addWidget(self.radioButtonTarget)
         self.verticalLayout_10.addLayout(self.horizontalLayout_20)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_10.addItem(spacerItem)
         self.verticalLayout_8 = QtWidgets.QVBoxLayout()
         self.verticalLayout_8.setContentsMargins(11, 11, 11, 11)
         self.verticalLayout_8.setSpacing(6)
@@ -121,8 +117,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_19.addWidget(self.tooloffset)
         self.verticalLayout_8.addLayout(self.horizontalLayout_19)
         self.verticalLayout_10.addLayout(self.verticalLayout_8)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_10.addItem(spacerItem1)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_10.addItem(spacerItem)
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_7.setContentsMargins(11, 11, 11, 11)
         self.horizontalLayout_7.setSpacing(6)
@@ -257,8 +253,6 @@ class Ui_MainWindow(object):
         self.commandLinkButtonGo.setObjectName("commandLinkButtonGo")
         self.horizontalLayout_7.addWidget(self.commandLinkButtonGo)
         self.verticalLayout_10.addLayout(self.horizontalLayout_7)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_10.addItem(spacerItem2)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setContentsMargins(11, 11, 11, 11)
         self.verticalLayout_3.setSpacing(6)
@@ -365,7 +359,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addLayout(self.horizontalLayout_13)
         self.verticalLayout_10.addLayout(self.verticalLayout_3)
         self.horizontalLayout_14.addLayout(self.verticalLayout_10)
-        self.formLayout.setLayout(0, QtWidgets.QFormLayout.LabelRole, self.horizontalLayout_14)
+        self.horizontalLayout_21.addLayout(self.horizontalLayout_14)
         self.verticalLayout_6 = QtWidgets.QVBoxLayout()
         self.verticalLayout_6.setContentsMargins(11, 11, 11, 11)
         self.verticalLayout_6.setSpacing(6)
@@ -397,7 +391,7 @@ class Ui_MainWindow(object):
         self.horizontalSliderYaw.setTickInterval(10)
         self.horizontalSliderYaw.setObjectName("horizontalSliderYaw")
         self.verticalLayout_6.addWidget(self.horizontalSliderYaw)
-        self.formLayout.setLayout(0, QtWidgets.QFormLayout.FieldRole, self.verticalLayout_6)
+        self.horizontalLayout_21.addLayout(self.verticalLayout_6)
         MainWindow.setCentralWidget(self.centralWidget)
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 1200, 21))
