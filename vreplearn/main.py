@@ -9,7 +9,7 @@ from rl import DDPG
 #設置全局變量
 MAX_EPISODES = 500
 MAX_EP_STEPS = 200  # 200
-ON_TRAIN = False
+ON_TRAIN = True
 
 # vrep gui mode
 guimode = False

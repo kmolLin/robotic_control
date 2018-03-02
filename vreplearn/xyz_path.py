@@ -8,7 +8,7 @@ from invers_kinematic import armrobot
 class ArmVREPEnv():
     dt = .1    # refresh rate time = 0.1 for one step
     action_bound = [-1, 1] # 轉動角度範圍
-    goal = {'x': 300.0, 'y': -161.96, 'z':18.0 ,'l': 0.05} # 藍色目標的座標及長度
+    #goal = {'x': 300.0, 'y': -161.96, 'z':18.0 ,'l': 0.05} # 藍色目標的座標及長度
     
     # can get the information by the envirement
     state_dim = 10
@@ -26,11 +26,12 @@ class ArmVREPEnv():
         self.on_goal = 0
         
         self.armrobot = armrobot()
+        '''
         self.venv = venv = vrepper(headless=False)
         venv.start()
         venv.load_scene(
             os.getcwd() + '/ra605robotV3.ttt')
-
+        
         self.motor1 = venv.get_object_by_name('A_joint')
         self.motor2 = venv.get_object_by_name('B_joint')
         self.motor3 = venv.get_object_by_name('C_joint')
@@ -40,7 +41,7 @@ class ArmVREPEnv():
         self.gripperCenter = venv.get_object_by_name('gettingpoint')
 
         print('(armVREP) initialized')
-        
+        '''
      
     def step(self, action):
         
@@ -141,7 +142,7 @@ class ArmVREPEnv():
         #a2xy_ = np.array([self.motor2.get_joint_angle()])
         #a3xy_ = np.array([self.motor3.get_joint_angle()])
         #a4xy_ = np.array([self.motor4.get_joint_angle()])
-        finger = np.array([self.gripperCenter.get_position()])
+        #finger = np.array([self.gripperCenter.get_position()])
         #print(a2xy_, a3xy_, a4xy_, finger)
         a1r = np.random.uniform(np.deg2rad(-170), np.deg2rad(340), 1) # a1  -170~340
         a2r = np.random.uniform(np.deg2rad(-135), np.deg2rad(270), 1)  #  a2 -135~ 270
