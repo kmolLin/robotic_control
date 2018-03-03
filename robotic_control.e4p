@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project robotic_control -->
-<!-- Saved: 2018-03-02, 18:14:04 -->
+<!-- Saved: 2018-03-03, 20:35:54 -->
 <!-- Copyright (C) 2018 ,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -14,10 +14,12 @@
   <Eol index="0"/>
   <Sources>
     <Source>Ui_mainwindow.py</Source>
+    <Source>core/Armrobot.py</Source>
     <Source>core/kinematic/Invers_kinematic/invers_kinematic.py</Source>
     <Source>core/kinematic/constant.py</Source>
     <Source>core/kinematic/forward_kinematic/forward_kinematic.py</Source>
     <Source>core/kinematic/math.py</Source>
+    <Source>core/model/model.py</Source>
     <Source>core/model/modelparser.py</Source>
     <Source>core/model/stlread.py</Source>
     <Source>core/vrep_commucation/vrepper.py</Source>
