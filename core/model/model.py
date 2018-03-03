@@ -148,11 +148,11 @@ class Model(QObject):
                 
             n_normal = int(face.normal - 1)
             
-            gl.glNormal3fv(self.normals[n_normal].x)
+            gl.glNormal3fv(self.normals[n_normal])
             
             for j in range(3):
                 n_vtx = int(face.vertex[j] - 1)
-                gl.glVertex3fv(self.vertex[n_vtx].x)
+                gl.glVertex3fv(self.vertex[n_vtx])
             
         gl.glEnd()
         
