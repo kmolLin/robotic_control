@@ -8,6 +8,7 @@ from invers_kinematic import armrobot
 class ArmVREPEnv():
     dt = .1    # refresh rate time = 0.1 for one step
     action_bound = [-1, 1] # 轉動角度範圍
+    
     #goal = {'x': 300.0, 'y': -161.96, 'z':18.0 ,'l': 0.05} # 藍色目標的座標及長度
     
     # can get the information by the envirement
@@ -17,31 +18,15 @@ class ArmVREPEnv():
     action_dim = 3
     
     
-    def __init__(self,headless=True):
+    def __init__(self):
         
-        self.arm_info = np.zeros(
-            3, dtype=[('l',np.float32), ('r', np.float32),('pos', np.float32)], ('deg', np.float32) )  # make (2,3) martix
+        self.arm_info = np.zeros(3, dtype=[('l',np.float32), ('r', np.float32),('pos', np.float32), ('deg', np.float32)] )
         self.arm_info['l'] = 10        # 2 arms length
         self.arm_info['r'] = np.pi/6    # 2 arms angles information
         self.on_goal = 0
-        
+        self.actjoint = [0.0, 0.0, -90.0, 0.0, -90.0, 0.0]
+        self.goal = {'l':10}
         self.armrobot = armrobot()
-        '''
-        self.venv = venv = vrepper(headless=False)
-        venv.start()
-        venv.load_scene(
-            os.getcwd() + '/ra605robotV3.ttt')
-        
-        self.motor1 = venv.get_object_by_name('A_joint')
-        self.motor2 = venv.get_object_by_name('B_joint')
-        self.motor3 = venv.get_object_by_name('C_joint')
-        #self.motor4 = venv.get_object_by_name('PhantomXPincher_joint4')
-        
-
-        self.gripperCenter = venv.get_object_by_name('gettingpoint')
-
-        print('(armVREP) initialized')
-        '''
      
     def step(self, action):
         
@@ -49,18 +34,18 @@ class ArmVREPEnv():
         # [a,b,c,d]
         
         action = np.clip(action, *self.action_bound) #*self.action_bound
-
-
         
-        self.arm_info['pos'] += action * 0.1   #self.dt
+        self.arm_info['pos'] += action * 0.1# 0.5   #self.dt
         #self.arm_info['pos'] %= np.pi * 2  #  normalize
 
         (X, Y, Z) = self.arm_info['pos']  # radian, angle
         
+        print(X, Y, Z)
+        
         # joint degree inverse
-        a1r, a2r, a3r, a4r, a5r, a6r = self.armrobot.Inverse_Kinematic(arm_info['pos'], [0, 180, 0], actjoint)
+        (a1r, a2r, a3r, a4r, a5r, a6r), check = self.armrobot.Inverse_Kinematic(self.arm_info['pos'], [0, 180, 0], self.actjoint)
         # block position joint
-        blocka1r, blocka2r, blocka3r, blocka4r, blocka5r, blocka6r = self.armrobot.Inverse_Kinematic([self.blockX, self.blockY, 0], [0, 180, 0], actjoint)
+        (blocka1r, blocka2r, blocka3r, blocka4r, blocka5r, blocka6r) , check= self.armrobot.Inverse_Kinematic([self.blockX, self.blockY, 0], [0, 180, 0], self.actjoint)
         
         a1 = a1r-blocka1r
         b1 = a2r-blocka2r
@@ -69,8 +54,16 @@ class ArmVREPEnv():
         e1 = a5r-blocka5r
         f1 = a6r-blocka6r
         
+        a1 %= 360
+        b1 %= 360
+        c1 %= 360
+        d1 %= 360
+        e1 %= 360
+        f1 %= 360
+        
+        
         # normalize features
-        dist = [(self.blockX-X)/20, (self.blockY-Y)/20, (0-Z)/20]
+        dist = [(self.blockX-X)/678, (self.blockY-Y)/678, (0-Z)/678]
         r = -np.sqrt(dist[0]**2+dist[1]**2+dist[2]**2)
         
         if self.blockX - self.goal['l']/2 < X < self.blockX + self.goal['l']/2:
@@ -83,14 +76,14 @@ class ArmVREPEnv():
         else:
             self.on_goal = 0
             
-        s = np.concatenate((a1/360., b1/360.,c1/360.,d1/360.,e1/360.,f1/360., dist, [1. if self.on_goal else 0.]))
+        s = np.concatenate(([a1/360., b1/360.,c1/360.,d1/360.,e1/360.,f1/360.], dist, [1. if self.on_goal else 0.]))
         
         #print(s, r, done)
-        return s, r, done
+        return s, r, done, check
         
-    def test_rest(self):
+    def test_reset(self):
         # act joint 
-        actjoint = []  # TODO: need to add position in this 
+       # actjoint = []  # TODO: need to add position in this 
         
         #self.arm_info['r'] = 2 * np.pi * np.random.rand(4)
         #self.arm_info['r'] %= np.pi * 2
@@ -101,8 +94,8 @@ class ArmVREPEnv():
         blockrtheta = np.random.uniform(-45.0,45.0, 1)
         blockranR = np.random.uniform(200, 678, 1)
         blockrtheta %= 360
-        self.blockX = blockranR*math.cos(np.deg2rad(blockrtheta))
-        self.blockY = blockranR*math.sin(np.deg2rad(blockrtheta))
+        self.blockX =   300.0     #blockranR*math.cos(np.deg2rad(blockrtheta))
+        self.blockY =   -162.0         #blockranR*math.sin(np.deg2rad(blockrtheta))
         self.blockZ = 10
         
         # this is random arm robot position
@@ -117,10 +110,10 @@ class ArmVREPEnv():
         self.arm_info['pos'] = [ranX, ranY, ranZ]
         
         # joint degree inverse
-        a1r, a2r, a3r, a4r, a5r, a6r = self.armrobot.Inverse_Kinematic(arm_info['pos'], [0, 180, 0], actjoint)
+        (a1r, a2r, a3r, a4r, a5r, a6r), check = self.armrobot.Inverse_Kinematic(self.arm_info['pos'], [0, 180, 0], self.actjoint)
         
         # block position joint
-        blocka1r, blocka2r, blocka3r, blocka4r, blocka5r, blocka6r = self.armrobot.Inverse_Kinematic([self.blockX, self.blockY, 10], [0, 180, 0], actjoint)
+        (blocka1r, blocka2r, blocka3r, blocka4r, blocka5r, blocka6r), check = self.armrobot.Inverse_Kinematic([self.blockX, self.blockY, 10], [0, 180, 0], self.actjoint)
         
         a1 = a1r-blocka1r
         b1 = a2r-blocka2r
@@ -129,11 +122,17 @@ class ArmVREPEnv():
         e1 = a5r-blocka5r
         f1 = a6r-blocka6r
         
+        a1 %= 360
+        b1 %= 360
+        c1 %= 360
+        d1 %= 360
+        e1 %= 360
+        f1 %= 360
+        
         # normalize features
-        dist = [(blockX-ranX)/20, (blockY-ranY)/20, (self.blockZ-ranZ)/20]
+        dist = [(self.blockX-ranX)[0]/20, (self.blockY-ranY)[0]/20, (self.blockZ-ranZ)[0]/20]
         
-        s = np.concatenate((a1/360., b1/360.,c1/360.,d1/360.,e1/360.,f1/360., dist, [1. if self.on_goal else 0.]))
-        
+        s = np.concatenate(([a1/360., b1/360.,c1/360.,d1/360.,e1/360.,f1/360.], dist, [1. if self.on_goal else 0.]))
         return s
         
     def getposition(self):
@@ -184,28 +183,6 @@ class ArmVREPEnv():
         #return finger
         
 if __name__ == '__main__':
-    arm_info = np.zeros(
-            3, dtype=[('l',np.float32), ('r', np.float32),('pos', np.float32)] )
-        
-    def testcode():
-        rantehte = np.random.uniform(-45.0,45.0, 1)
-        ranR = np.random.uniform(200, 678, 1)
-        rantehte %= 360
-        
-        
-        ranX = ranR*math.cos(np.deg2rad(rantehte))
-        ranY = ranR*math.sin(np.deg2rad(rantehte))
-        ranZ = np.random.uniform(0, 200, 1)
-        print(ranR, rantehte )
-        arm_info['pos'] = [ranX, ranY, ranZ]
-        print(arm_info['pos'])
-        
-    testcode()
-
-    #env.getposition()
-    #print(s)
-    #print("*"*10)
-    #print(env.sample_action())
-        #for k in range(5):
-            #env.step(env.sample_action())
-    #env.getposition()
+    env = ArmVREPEnv()
+    a = env.test_reset()
+    print(a)

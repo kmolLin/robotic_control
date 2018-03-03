@@ -8,7 +8,9 @@ from openglw import GLWidget
 from core.vrep_commucation.vrepper import vrepper
 import os
 from core.kinematic.Invers_kinematic.invers_kinematic import armrobot
+from core.model.model import Model
 from worker import Worker
+from core.Armrobot import Armrobot
 import time
 
 
@@ -21,7 +23,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         self.verticalLayout.addWidget(self.view1)
         
-        self.arm = armrobot()
+        #self.arm = armrobot()
+        self.robot = Armrobot()
+        self.robot.display()
         #venv.start()
         
     def dowork(self, venv):

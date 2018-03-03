@@ -1,6 +1,6 @@
 import OpenGL.GL as gl
 import OpenGL.GLU as glu
-
+from PyQt5.QtCore import QObject
 from PyQt5.QtWidgets import QOpenGLWidget
 
 
@@ -102,3 +102,5 @@ class GLWidget(QOpenGLWidget):
         gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, lpos)
         gl.glLightfv(gl.GL_LIGHT0, gl.GL_AMBIENT, lamb)
         gl.glLightfv(gl.GL_LIGHT0, gl.GL_DIFFUSE, ldif)
+        
+    

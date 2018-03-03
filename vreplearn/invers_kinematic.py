@@ -60,10 +60,14 @@ class armrobot():
             k3 = Px2 + Py2 + Pz2 - 2.0 * a1 * (Px * C1 + Py * S1) + pow(a1, 2) - pow(a3, 2) - pow(d4, 2) - pow(a2, 2)
             kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)
             if kcnt < 0:
-                print("Didn't have correct answer.")
+                #print("No correct answer.")
+                check = False
+                return (0, 0, 0, 0, 0, 0), check
+                break
             else :
                 theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))
                 theta3_2 = 2.0 * atan((k1 - sqrt(kcnt)) / (k2 + k3))
+                check = True
             #print(theta3_1*RAD2DEG,"23", theta3_2*RAD2DEG)
             if cnt <=1:
                 RAD[0, constant.AXIS3.value] = theta3_1
@@ -140,7 +144,7 @@ class armrobot():
             Joint_Deg.append(degrees(THETA[min][i]))
             actjoint[i] = degrees(THETA[min][i])
             
-        return Joint_Deg
+        return Joint_Deg , check
         
     def Eul2R(self, EUL):
         RAD = []

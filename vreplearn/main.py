@@ -35,7 +35,7 @@ def train():
     for i in range(MAX_EPISODES):
         #初始化回合設置
         #s = env.reset()
-        s = env.test_rest()
+        s = env.test_reset()
         ep_r = 0.
         for j in range(MAX_EP_STEPS):
             # 環境渲染 
@@ -43,9 +43,10 @@ def train():
             
             # RL 選擇 action
             a = rl.choose_action(s)
+            #print(a)
 
             # 在環境中施加動作 由 a 決定的 得到新的state (s_) 以及 reward 以及判斷是否完成動作
-            s_, r, done = env.step(a)
+            s_, r, done, check = env.step(a)
             
             # DDPG 需要將經驗存取到記憶庫
             rl.store_transition(s, a, r, s_)
@@ -56,7 +57,7 @@ def train():
                 rl.learn()
             # translate new state to old state
             s = s_
-            if done or j == MAX_EP_STEPS-1:
+            if done or j == MAX_EP_STEPS-1 or check:
                 #print(env.getposition())
                 print('Ep: %i | %s | ep_r: %.1f | step: %i' % (i, '---' if not done else 'done', ep_r, j))
                 break
@@ -69,10 +70,10 @@ def eval():
     #env.render()
     #env.viewer.set_vsync(True)
     for i in range(3):
-        s = env.test_rest()
+        s = env.test_reset()
         for _ in range(200):
             a = rl.choose_action(s)
-            s, r, done = env.step(a)
+            s, r, done, check = env.step(a)
             if done:
                 break
 
