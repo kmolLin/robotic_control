@@ -19,14 +19,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.dt = 0.0
-        self.view1 = GLWidget()
+        #self.robot = Armrobot(self)
+        self.view1 = GLWidget(self)
         
         self.verticalLayout.addWidget(self.view1)
         
-        #self.arm = armrobot()
-        self.robot = Armrobot()
-        self.robot.display()
-        #venv.start()
+        self.arm = armrobot()
+        
+        #self.robot.display()
+        
         
     def dowork(self, venv):
         self.work = Worker(venv, self)

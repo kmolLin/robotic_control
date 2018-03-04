@@ -9,7 +9,7 @@ class GLWidget(QOpenGLWidget):
     
     def __init__(self, parent=None):
         super(GLWidget, self).__init__(parent)
-        
+        #self.robot = parent.robot
         self.pitch = 30.0
         self.yaw = 0.0
         self.distance =7.0
