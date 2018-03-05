@@ -7,7 +7,7 @@ from invers_kinematic import armrobot
 
 class ArmVREPEnv():
     dt = .1    # refresh rate time = 0.1 for one step
-    action_bound = [-10, 10] # 轉動角度範圍
+    action_bound = [-5, 5] # 轉動角度範圍
     
     #goal = {'x': 300.0, 'y': -161.96, 'z':18.0 ,'l': 0.05} # 藍色目標的座標及長度
     
@@ -27,7 +27,7 @@ class ArmVREPEnv():
         self.actjoint = [0.0, 0.0, -90.0, 0.0, -90.0, 0.0]
         self.goal = {'l':10}
         self.armrobot = armrobot()
-        
+        """
         self.venv = venv = vrepper(headless=False)
         venv.start()
         venv.load_scene(
@@ -40,7 +40,7 @@ class ArmVREPEnv():
         self.motor5 = venv.get_object_by_name('E_joint')
         self.motor6 = venv.get_object_by_name('F_joint')
         print('(armVREP) initialized')
-        
+        """
     def step(self, action):
         #self.venv.start_blocking_simulation()
         done = False
@@ -51,29 +51,30 @@ class ArmVREPEnv():
         self.arm_info['pos'] += action * 0.1# 0.5   #self.dt
 
         (X, Y, Z) = self.arm_info['pos']  # radian, angle
-        
+        print(X, Y, Z)
         #print(X, Y, Z)
-        actjoint = [self.motor1.get_joint_angle(), self.motor2.get_joint_angle(), self.motor3.get_joint_angle(), 
-                    self.motor4.get_joint_angle(), self.motor5.get_joint_angle(), self.motor6.get_joint_angle()]
+        #actjoint = [self.motor1.get_joint_angle(), self.motor2.get_joint_angle(), self.motor3.get_joint_angle(), 
+        #            self.motor4.get_joint_angle(), self.motor5.get_joint_angle(), self.motor6.get_joint_angle()]
         
         
         # joint degree inverse
-        (a1r, a2r, a3r, a4r, a5r, a6r), check = self.armrobot.Inverse_Kinematic(self.arm_info['pos'], [0, 180, 0], actjoint)
+        (a1r, a2r, a3r, a4r, a5r, a6r), check = self.armrobot.Inverse_Kinematic(self.arm_info['pos'], [0, 180, 0], self.actjoint)
         
         if check == False:
             a= False
             print("error")
-            self.venv.step_blocking_simulation()
+            #self.venv.step_blocking_simulation()
             return a, a,  a , False
         angle = [a1r, a2r, a3r, a4r, a5r, a6r]
         #self.movemotors([a1r, a2r, a3r, a4r, a5r, a6r])
+        """
         self.motor1.set_position_target(angle[0])
         self.motor2.set_position_target(angle[1])
         self.motor3.set_position_target(angle[2])
         self.motor4.set_position_target(angle[3])
         self.motor5.set_position_target(angle[4])
         self.motor6.set_position_target(angle[5])
-        
+        """
         #self.venv.step_blocking_simulation()
         
         # block position joint
@@ -96,7 +97,7 @@ class ArmVREPEnv():
         e1 %= 360
         f1 %= 360
         
-        self.venv.step_blocking_simulation()
+        #self.venv.step_blocking_simulation()
         # normalize features
         dist = [(self.blockX-X)/479, (self.blockY-Y)/679, (0-Z)/668]
         
@@ -119,7 +120,7 @@ class ArmVREPEnv():
         
     def reset(self):
         #self.venv.stop_blocking_simulation()
-        self.venv.start_blocking_simulation()
+        #self.venv.start_blocking_simulation()
         
         self.on_goal = 0
         
@@ -142,26 +143,26 @@ class ArmVREPEnv():
 
         self.arm_info['pos'] = [ranX, ranY, ranZ]
         
-        actjoint = [self.motor1.get_joint_angle(), self.motor2.get_joint_angle(), self.motor3.get_joint_angle(), 
-                    self.motor4.get_joint_angle(), self.motor5.get_joint_angle(), self.motor6.get_joint_angle()]
+        #actjoint = [self.motor1.get_joint_angle(), self.motor2.get_joint_angle(), self.motor3.get_joint_angle(), 
+        #            self.motor4.get_joint_angle(), self.motor5.get_joint_angle(), self.motor6.get_joint_angle()]
         #self.venv.step_blocking_simulation()
         # joint degree inverse
-        (a1r, a2r, a3r, a4r, a5r, a6r), check = self.armrobot.Inverse_Kinematic(self.arm_info['pos'], [0, 180, 0], actjoint)
+        (a1r, a2r, a3r, a4r, a5r, a6r), check = self.armrobot.Inverse_Kinematic(self.arm_info['pos'], [0, 180, 0], self.actjoint)
         
         if check == False:
-            self.venv.step_blocking_simulation()
+            #self.venv.step_blocking_simulation()
             return False
             
         angle = [a1r, a2r, a3r, a4r, a5r, a6r]
-        
+        """
         self.motor1.set_position_target(angle[0])
         self.motor2.set_position_target(angle[1])
         self.motor3.set_position_target(angle[2])
         self.motor4.set_position_target(angle[3])
         self.motor5.set_position_target(angle[4])
         self.motor6.set_position_target(angle[5])
-        self.venv.step_blocking_simulation()
-        
+        #self.venv.step_blocking_simulation()
+        """
         # block position joint
         (blocka1r, blocka2r, blocka3r, blocka4r, blocka5r, blocka6r), check = self.armrobot.Inverse_Kinematic([self.blockX, self.blockY, 10], [0, 180, 0], self.actjoint)
         #print(blocka1r, blocka2r, blocka3r, blocka4r, blocka5r, blocka6r)

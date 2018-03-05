@@ -20,9 +20,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.dt = 0.0
         #self.robot = Armrobot(self)
-        self.view1 = GLWidget(self)
+        #self.view1 = GLWidget(self)
         
-        self.verticalLayout.addWidget(self.view1)
+        #self.verticalLayout.addWidget(self.view1)
         
         self.arm = armrobot()
         
