@@ -32,9 +32,11 @@ cdef class build_path(object):
         self.targetPoint = mechanismParams['Target']
         self.POINTS = len(self.targetPoint)
         #upper
-        self.upper = [255, 175, 180, 190, 115, 360]*self.POINTS
+        self.upper = [360]*6*self.POINTS
+        #self.upper = [255, 175, 180, 190, 115, 360]*self.POINTS
         #lower
-        self.lower = [-75, -25, -55, -190, -115, -360]*self.POINTS
+        self.lower = [0]*6*self.POINTS
+        #self.lower = [-75, -25, -55, -190, -115, -360]*self.POINTS
         
     cpdef object get_upper(self):
         return self.upper
