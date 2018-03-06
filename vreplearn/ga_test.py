@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from planpath import build_path
-from rga import Genetic
-from kinematic import forward_kinematic, Inverse_Kinematic
+import os
+from ga_algorithm.planpath import build_path
+from ga_algorithm.rga import Genetic
+from ga_algorithm.kinematic import forward_kinematic
 from time import time
+from vrep_commucation.vrepper import vrepper
 
 t0 = time()
 Target= [(150, 0, 300), (155, 0, 300), (160, 0, 300)]
@@ -12,9 +14,7 @@ GeneticPrams = {'nPop':500, 'pCross':0.95, 'pMute':0.05, 'pWin':0.95, 'bDelta':5
 foo = Genetic(func, GeneticPrams)
 angles, f = foo.run()
 print(time()-t0)
-print(angles)
+
 for angle in angles:
     print(tuple(round(v, 4) for v in forward_kinematic(angle)))
     
-
-
