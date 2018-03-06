@@ -42,11 +42,18 @@ def train():
             #env.render()
             
             # RL 選擇 action
-            a = rl.choose_action(s)
-            #print(a)
-            if a==False:
+            if s is False:
                 print("error point")
                 break
+            else:
+                a = rl.choose_action(s)
+            #print(a)
+            #if a == False:
+            #   print("error point")
+            #    break
+                
+            #else :
+                
 
             # 在環境中施加動作 由 a 決定的 得到新的state (s_) 以及 reward 以及判斷是否完成動作
             s_, r, done, check = env.step(a)

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE UserProject SYSTEM "UserProject-4.0.dtd">
 <!-- eric6 user project file for project robotic_control -->
+<<<<<<< HEAD
 <!-- Saved: 2018-03-06, 13:55:11 -->
+=======
+<!-- Saved: 2018-03-05, 16:18:43 -->
+>>>>>>> 86e908abb512793b80f112a9d15991c964eb20f0
 <!-- Copyright (C) 2018 ,  -->
 <UserProject version="4.0"/>

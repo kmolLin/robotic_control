@@ -55,7 +55,7 @@ class foward_kinematic():
         Y = S1 * (self.a1 + C23 * (d6h * C5 + d4) + self.a2 * S2 + S23 * (self.a3 + d6h * C4 * S5)) + d6h * C1 * S4 * S5
         Z = self.d1 - S23 * (d6h * C5 + self.d4) + self.a2 * C2 + C23 * (self.a3 + d6h * C4 * S5)
         TCP = [X, Y, Z]
-        print(self.R2Eul(UVW))
+        #print(self.R2Eul(UVW))
         return TCP, self.R2Eul(UVW)
         
     def R2Eul(self, R):
