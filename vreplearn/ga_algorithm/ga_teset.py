@@ -8,10 +8,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 t0 = time()
-Target= [(150, 0, 300), (155, 0, 300), (155, -10, 300), (150, -10, 300), (150, 0, 300)]
+Target= [(50, 0, 150), (55, 0, 150), (55, -10, 150), (50, -10, 150), (50, 0, 150)]
 Posture = np.array([0, 180, 0])
 func = build_path({'Target':Target, 'Posture':Posture})
-GeneticPrams = {'nPop':1000, 'pCross':0.95, 'pMute':0.05, 'pWin':0.95, 'bDelta':5.,'maxGen':500 , 'report':0} # 'minFit':0.1,
+GeneticPrams = {'nPop':1500, 'pCross':0.85, 'pMute':0.05, 'pWin':0.95, 'bDelta':5.,'maxGen':500 , 'report':0} # 'minFit':0.1,
 foo = Genetic(func, GeneticPrams)
 angles, time_and_fitness = foo.run()
 print("second:", time()-t0)

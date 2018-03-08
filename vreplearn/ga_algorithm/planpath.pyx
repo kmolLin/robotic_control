@@ -58,16 +58,19 @@ cdef class build_path(object):
         """
         #My fitness
         cdef double fitness = 0
-        cdef np.ndarray tmparray = np.array(v).reshape((-1,6))
+        cdef np.ndarray tmp_array = np.array(v).reshape((-1,6))
         cdef double distance
         cdef np.ndarray posturederror
+        cdef double anglefitness = 0
         
-        for i, angles in enumerate(tmparray):
+        for i, angles in enumerate(tmp_array):
+            if i != 0:
+                anglefitness = np.sum(np.abs(angles - tmp_array[i-1]))
             x, y, z,posture = forward_kinematic(angles)
             x1, y1, z1 = self.targetPoint[i]
             distance = sqrt(pow(x-x1,2)+pow(y-y1,2)+pow(z-z1,2))
             posturederror = np.abs(self.posture - posture)
-            fitness += distance
+            fitness += 1.5*distance+anglefitness
         
         return fitness
     
