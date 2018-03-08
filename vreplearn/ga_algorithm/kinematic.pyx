@@ -2,7 +2,7 @@
 # kinematic math
 import numpy as np
 cimport numpy as np
-from libc.math cimport sin,cos,pow,atan2,atan,sqrt
+from libc.math cimport sin,cos,pow,atan2,atan,sqrt,fabs
 
 cdef double d6h = 86.5
 cdef int AXIS1 = 0
@@ -29,6 +29,7 @@ cdef void foo(object RAD, object angles):
 
 cpdef object forward_kinematic(object angles):
     cdef object RAD = []
+    cdef np.ndarray UVM = np.zeros((3,3))
     foo(RAD, angles)
     
     cdef double C1 = cos(RAD[AXIS1])
@@ -56,11 +57,13 @@ cpdef object forward_kinematic(object angles):
     cdef double h = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5
     cdef double i = C23 * C4 * S5 - S23 * C5
     
+    UVM = np.array([[a, b, c], [d, e, f], [g, h, i]])
+    
     cdef double X = C1 * (a1 + C23 * (d6h * C5 + d4) + a2 * S2 + S23 * (a3 + d6h * C4 * S5)) - d6h * S1 * S4 * S5
     cdef double Y = S1 * (a1 + C23 * (d6h * C5 + d4) + a2 * S2 + S23 * (a3 + d6h * C4 * S5)) + d6h * C1 * S4 * S5
     cdef double Z = d1 - S23 * (d6h * C5 + d4) + a2 * C2 + C23 * (a3 + d6h * C4 * S5)
      
-    return X, Y, Z
+    return X, Y, Z,R2Eul(UVM)
     
 cpdef object Inverse_Kinematic(object TCP,object TOV, object actjoint):
     cdef np.ndarray THETA =  np.zeros((4, 6))
@@ -99,7 +102,6 @@ cpdef object Inverse_Kinematic(object TCP,object TOV, object actjoint):
         k3 = Px2 + Py2 + Pz2 - 2.0 * a1 * (Px * C1 + Py * S1) + pow(a1, 2) - pow(a3, 2) - pow(d4, 2) - pow(a2, 2)
         kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)
         if kcnt < 0:
-            #print("No correct answer.")
             check = False
             return (0, 0, 0, 0, 0, 0) , check
             break
@@ -197,3 +199,30 @@ cdef object Eul2R(object EUL):
     Sg = sin(RAD[2])
     cdef object R = [[Ca * Cg - Sa * Cb * Sg, Sa * Cg + Ca * Cb * Sg,Sb * Sg ], [-Ca * Sg - Sa * Cb * Cg, -Sa * Sg + Ca * Cb * Cg, Sa * Sb  ], [ Sb * Cg, -Ca * Sb, Cb]]
     return R 
+
+cdef R2Eul(object R):
+    cdef np.ndarray RAD = np.zeros((3))
+    cdef np.ndarray U= np.zeros((3))
+    cdef np.ndarray V= np.zeros((3))
+    cdef np.ndarray W= np.zeros((3))
+    cdef np.ndarray EUL = np.zeros((3))
+    for i in range(0, 3):
+        U[i] = R[i][0]
+        V[i] = R[i][1]
+        W[i] = R[i][2]
+    
+    RAD[1] = atan2(sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
+    if (fabs(sin(RAD[1])) <= ERRC):
+        RAD[2] = 0.0
+        RAD[0] = atan2(V[0], U[0])
+    else:
+        RAD[0] = atan2(W[0], (-W[1]))
+        RAD[2] = atan2(U[2], V[2])
+        
+    if fabs(RAD[0]) + fabs(RAD[2]) >= np.pi:
+        RAD[1] = atan2(-sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
+        RAD[0] = atan2(-W[0], W[1])
+        RAD[2] = atan2(-U[2], -V[2])
+    #for i in range(0, 3):
+    EUL = np.rad2deg( RAD)
+    return EUL

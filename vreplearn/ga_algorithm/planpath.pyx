@@ -15,13 +15,14 @@ cdef double FAILURE = 9487945
 cdef class build_path(object):
     # Target get px py pz
     cdef object motors,upper, lower, targetPoint
+    cdef np.ndarray posture
     cdef int POINTS
     
     def __cinit__(self,object mechanismParams):
         '''
         mechanismParams = {
             'Target',
-            'Driver',
+            'Posture',
             'Follower',
             'constraint',
             'Expression',
@@ -30,6 +31,7 @@ cdef class build_path(object):
         }
         '''
         self.targetPoint = mechanismParams['Target']
+        self.posture = mechanismParams['Posture']
         self.POINTS = len(self.targetPoint)
         #upper
         self.upper = [360]*6*self.POINTS
@@ -58,11 +60,13 @@ cdef class build_path(object):
         cdef double fitness = 0
         cdef np.ndarray tmparray = np.array(v).reshape((-1,6))
         cdef double distance
+        cdef np.ndarray posturederror
         
         for i, angles in enumerate(tmparray):
-            x, y, z = forward_kinematic(angles)
+            x, y, z,posture = forward_kinematic(angles)
             x1, y1, z1 = self.targetPoint[i]
             distance = sqrt(pow(x-x1,2)+pow(y-y1,2)+pow(z-z1,2))
+            posturederror = np.abs(self.posture - posture)
             fitness += distance
         
         return fitness
