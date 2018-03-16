@@ -1651,8 +1651,19 @@ static PyObject *__pyx_tp_new_8planpath_build_path(PyTypeObject *t, PyObject *a,
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_6;
+static PyObject *__pyx_int_115;
+static PyObject *__pyx_int_125;
+static PyObject *__pyx_int_165;
+static PyObject *__pyx_int_185;
+static PyObject *__pyx_int_190;
 static PyObject *__pyx_int_360;
 static PyObject *__pyx_int_neg_1;
+static PyObject *__pyx_int_neg_55;
+static PyObject *__pyx_int_neg_85;
+static PyObject *__pyx_int_neg_115;
+static PyObject *__pyx_int_neg_165;
+static PyObject *__pyx_int_neg_190;
+static PyObject *__pyx_int_neg_360;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
@@ -1732,8 +1743,6 @@ static int __pyx_pf_8planpath_10build_path___cinit__(struct __pyx_obj_8planpath_
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   Py_ssize_t __pyx_t_2;
-  PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
   /* "planpath.pyx":33
@@ -1772,7 +1781,7 @@ static int __pyx_pf_8planpath_10build_path___cinit__(struct __pyx_obj_8planpath_
  *         self.posture = mechanismParams['Posture']
  *         self.POINTS = len(self.targetPoint)             # <<<<<<<<<<<<<<
  *         #upper
- *         self.upper = [360]*6*self.POINTS
+ *         #self.upper = [360]*6*self.POINTS
  */
   __pyx_t_1 = __pyx_v_self->targetPoint;
   __Pyx_INCREF(__pyx_t_1);
@@ -1780,56 +1789,74 @@ static int __pyx_pf_8planpath_10build_path___cinit__(struct __pyx_obj_8planpath_
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_self->POINTS = __pyx_t_2;
 
-  /* "planpath.pyx":37
- *         self.POINTS = len(self.targetPoint)
+  /* "planpath.pyx":38
  *         #upper
- *         self.upper = [360]*6*self.POINTS             # <<<<<<<<<<<<<<
- *         #self.upper = [255, 175, 180, 190, 115, 360]*self.POINTS
+ *         #self.upper = [360]*6*self.POINTS
+ *         self.upper = [165, 125, 185, 190, 115, 360]*self.POINTS             # <<<<<<<<<<<<<<
  *         #lower
+ *         #self.lower = [0]*6*self.POINTS
  */
-  __pyx_t_1 = PyList_New(1 * 6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(6 * ((__pyx_v_self->POINTS<0) ? 0:__pyx_v_self->POINTS)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   { Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < 6; __pyx_temp++) {
+    for (__pyx_temp=0; __pyx_temp < __pyx_v_self->POINTS; __pyx_temp++) {
+      __Pyx_INCREF(__pyx_int_165);
+      __Pyx_GIVEREF(__pyx_int_165);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6, __pyx_int_165);
+      __Pyx_INCREF(__pyx_int_125);
+      __Pyx_GIVEREF(__pyx_int_125);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6 + 1, __pyx_int_125);
+      __Pyx_INCREF(__pyx_int_185);
+      __Pyx_GIVEREF(__pyx_int_185);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6 + 2, __pyx_int_185);
+      __Pyx_INCREF(__pyx_int_190);
+      __Pyx_GIVEREF(__pyx_int_190);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6 + 3, __pyx_int_190);
+      __Pyx_INCREF(__pyx_int_115);
+      __Pyx_GIVEREF(__pyx_int_115);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6 + 4, __pyx_int_115);
       __Pyx_INCREF(__pyx_int_360);
       __Pyx_GIVEREF(__pyx_int_360);
-      PyList_SET_ITEM(__pyx_t_1, __pyx_temp, __pyx_int_360);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6 + 5, __pyx_int_360);
     }
   }
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->POINTS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyNumber_Multiply(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 37, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_GIVEREF(__pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->upper);
   __Pyx_DECREF(__pyx_v_self->upper);
-  __pyx_v_self->upper = __pyx_t_4;
-  __pyx_t_4 = 0;
+  __pyx_v_self->upper = __pyx_t_1;
+  __pyx_t_1 = 0;
 
-  /* "planpath.pyx":40
- *         #self.upper = [255, 175, 180, 190, 115, 360]*self.POINTS
+  /* "planpath.pyx":41
  *         #lower
- *         self.lower = [0]*6*self.POINTS             # <<<<<<<<<<<<<<
- *         #self.lower = [-75, -25, -55, -190, -115, -360]*self.POINTS
+ *         #self.lower = [0]*6*self.POINTS
+ *         self.lower = [-165, -85, -55, -190, -115, -360]*self.POINTS             # <<<<<<<<<<<<<<
  * 
+ *     cpdef object get_upper(self):
  */
-  __pyx_t_4 = PyList_New(1 * 6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_1 = PyList_New(6 * ((__pyx_v_self->POINTS<0) ? 0:__pyx_v_self->POINTS)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   { Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < 6; __pyx_temp++) {
-      __Pyx_INCREF(__pyx_int_0);
-      __Pyx_GIVEREF(__pyx_int_0);
-      PyList_SET_ITEM(__pyx_t_4, __pyx_temp, __pyx_int_0);
+    for (__pyx_temp=0; __pyx_temp < __pyx_v_self->POINTS; __pyx_temp++) {
+      __Pyx_INCREF(__pyx_int_neg_165);
+      __Pyx_GIVEREF(__pyx_int_neg_165);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6, __pyx_int_neg_165);
+      __Pyx_INCREF(__pyx_int_neg_85);
+      __Pyx_GIVEREF(__pyx_int_neg_85);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6 + 1, __pyx_int_neg_85);
+      __Pyx_INCREF(__pyx_int_neg_55);
+      __Pyx_GIVEREF(__pyx_int_neg_55);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6 + 2, __pyx_int_neg_55);
+      __Pyx_INCREF(__pyx_int_neg_190);
+      __Pyx_GIVEREF(__pyx_int_neg_190);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6 + 3, __pyx_int_neg_190);
+      __Pyx_INCREF(__pyx_int_neg_115);
+      __Pyx_GIVEREF(__pyx_int_neg_115);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6 + 4, __pyx_int_neg_115);
+      __Pyx_INCREF(__pyx_int_neg_360);
+      __Pyx_GIVEREF(__pyx_int_neg_360);
+      PyList_SET_ITEM(__pyx_t_1, __pyx_temp * 6 + 5, __pyx_int_neg_360);
     }
   }
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->POINTS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = PyNumber_Multiply(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->lower);
   __Pyx_DECREF(__pyx_v_self->lower);
@@ -1849,8 +1876,6 @@ static int __pyx_pf_8planpath_10build_path___cinit__(struct __pyx_obj_8planpath_
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("planpath.build_path.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
@@ -1859,7 +1884,7 @@ static int __pyx_pf_8planpath_10build_path___cinit__(struct __pyx_obj_8planpath_
 }
 
 /* "planpath.pyx":43
- *         #self.lower = [-75, -25, -55, -190, -115, -360]*self.POINTS
+ *         self.lower = [-165, -85, -55, -190, -115, -360]*self.POINTS
  * 
  *     cpdef object get_upper(self):             # <<<<<<<<<<<<<<
  *         return self.upper
@@ -1923,7 +1948,7 @@ static PyObject *__pyx_f_8planpath_10build_path_get_upper(struct __pyx_obj_8plan
   goto __pyx_L0;
 
   /* "planpath.pyx":43
- *         #self.lower = [-75, -25, -55, -190, -115, -360]*self.POINTS
+ *         self.lower = [-165, -85, -55, -190, -115, -360]*self.POINTS
  * 
  *     cpdef object get_upper(self):             # <<<<<<<<<<<<<<
  *         return self.upper
@@ -2331,14 +2356,13 @@ static double __pyx_f_8planpath_10build_path_run(struct __pyx_obj_8planpath_buil
   double __pyx_v_fitness;
   PyArrayObject *__pyx_v_tmp_array = 0;
   double __pyx_v_distance;
-  CYTHON_UNUSED PyArrayObject *__pyx_v_posturederror = 0;
   double __pyx_v_anglefitness;
+  CYTHON_UNUSED PyArrayObject *__pyx_v_posture_old = 0;
   PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_v_angles = NULL;
   PyObject *__pyx_v_x = NULL;
   PyObject *__pyx_v_y = NULL;
   PyObject *__pyx_v_z = NULL;
-  PyObject *__pyx_v_posture = NULL;
   PyObject *__pyx_v_x1 = NULL;
   PyObject *__pyx_v_y1 = NULL;
   PyObject *__pyx_v_z1 = NULL;
@@ -2440,14 +2464,14 @@ static double __pyx_f_8planpath_10build_path_run(struct __pyx_obj_8planpath_buil
  *         cdef double distance
  *         cdef np.ndarray posturederror
  *         cdef double anglefitness = 0             # <<<<<<<<<<<<<<
- * 
+ *         cdef np.ndarray posture_old
  *         for i, angles in enumerate(tmp_array):
  */
   __pyx_v_anglefitness = 0.0;
 
   /* "planpath.pyx":66
  *         cdef double anglefitness = 0
- * 
+ *         cdef np.ndarray posture_old
  *         for i, angles in enumerate(tmp_array):             # <<<<<<<<<<<<<<
  *             if i != 0:
  *                 anglefitness = np.sum(np.abs(angles - tmp_array[i-1]))
@@ -2504,11 +2528,11 @@ static double __pyx_f_8planpath_10build_path_run(struct __pyx_obj_8planpath_buil
     __pyx_t_4 = 0;
 
     /* "planpath.pyx":67
- * 
+ *         cdef np.ndarray posture_old
  *         for i, angles in enumerate(tmp_array):
  *             if i != 0:             # <<<<<<<<<<<<<<
  *                 anglefitness = np.sum(np.abs(angles - tmp_array[i-1]))
- *             x, y, z,posture = forward_kinematic(angles)
+ *             x, y, z,posture_old = forward_kinematic(angles)
  */
     __pyx_t_4 = PyObject_RichCompare(__pyx_v_i, __pyx_int_0, Py_NE); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 67, __pyx_L1_error)
     __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 67, __pyx_L1_error)
@@ -2519,7 +2543,7 @@ static double __pyx_f_8planpath_10build_path_run(struct __pyx_obj_8planpath_buil
  *         for i, angles in enumerate(tmp_array):
  *             if i != 0:
  *                 anglefitness = np.sum(np.abs(angles - tmp_array[i-1]))             # <<<<<<<<<<<<<<
- *             x, y, z,posture = forward_kinematic(angles)
+ *             x, y, z,posture_old = forward_kinematic(angles)
  *             x1, y1, z1 = self.targetPoint[i]
  */
       __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
@@ -2637,18 +2661,18 @@ static double __pyx_f_8planpath_10build_path_run(struct __pyx_obj_8planpath_buil
       __pyx_v_anglefitness = __pyx_t_13;
 
       /* "planpath.pyx":67
- * 
+ *         cdef np.ndarray posture_old
  *         for i, angles in enumerate(tmp_array):
  *             if i != 0:             # <<<<<<<<<<<<<<
  *                 anglefitness = np.sum(np.abs(angles - tmp_array[i-1]))
- *             x, y, z,posture = forward_kinematic(angles)
+ *             x, y, z,posture_old = forward_kinematic(angles)
  */
     }
 
     /* "planpath.pyx":69
  *             if i != 0:
  *                 anglefitness = np.sum(np.abs(angles - tmp_array[i-1]))
- *             x, y, z,posture = forward_kinematic(angles)             # <<<<<<<<<<<<<<
+ *             x, y, z,posture_old = forward_kinematic(angles)             # <<<<<<<<<<<<<<
  *             x1, y1, z1 = self.targetPoint[i]
  *             distance = sqrt(pow(x-x1,2)+pow(y-y1,2)+pow(z-z1,2))
  */
@@ -2760,21 +2784,22 @@ static double __pyx_f_8planpath_10build_path_run(struct __pyx_obj_8planpath_buil
       __PYX_ERR(0, 69, __pyx_L1_error)
       __pyx_L7_unpacking_done:;
     }
+    if (!(likely(((__pyx_t_10) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_10, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 69, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_8);
     __pyx_t_8 = 0;
     __Pyx_XDECREF_SET(__pyx_v_y, __pyx_t_2);
     __pyx_t_2 = 0;
     __Pyx_XDECREF_SET(__pyx_v_z, __pyx_t_12);
     __pyx_t_12 = 0;
-    __Pyx_XDECREF_SET(__pyx_v_posture, __pyx_t_10);
+    __Pyx_XDECREF_SET(__pyx_v_posture_old, ((PyArrayObject *)__pyx_t_10));
     __pyx_t_10 = 0;
 
     /* "planpath.pyx":70
  *                 anglefitness = np.sum(np.abs(angles - tmp_array[i-1]))
- *             x, y, z,posture = forward_kinematic(angles)
+ *             x, y, z,posture_old = forward_kinematic(angles)
  *             x1, y1, z1 = self.targetPoint[i]             # <<<<<<<<<<<<<<
  *             distance = sqrt(pow(x-x1,2)+pow(y-y1,2)+pow(z-z1,2))
- *             posturederror = np.abs(self.posture - posture)
+ *             #posturederror = np.abs(self.posture - posture_old)
  */
     __pyx_t_4 = PyObject_GetItem(__pyx_v_self->targetPoint, __pyx_v_i); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -2843,11 +2868,11 @@ static double __pyx_f_8planpath_10build_path_run(struct __pyx_obj_8planpath_buil
     __pyx_t_2 = 0;
 
     /* "planpath.pyx":71
- *             x, y, z,posture = forward_kinematic(angles)
+ *             x, y, z,posture_old = forward_kinematic(angles)
  *             x1, y1, z1 = self.targetPoint[i]
  *             distance = sqrt(pow(x-x1,2)+pow(y-y1,2)+pow(z-z1,2))             # <<<<<<<<<<<<<<
- *             posturederror = np.abs(self.posture - posture)
- *             fitness += 1.5*distance+anglefitness
+ *             #posturederror = np.abs(self.posture - posture_old)
+ *             fitness += distance+anglefitness
  */
     __pyx_t_4 = PyNumber_Subtract(__pyx_v_x, __pyx_v_x1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
@@ -2863,82 +2888,18 @@ static double __pyx_f_8planpath_10build_path_run(struct __pyx_obj_8planpath_buil
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_distance = sqrt(((pow(__pyx_t_13, 2.0) + pow(__pyx_t_15, 2.0)) + pow(__pyx_t_16, 2.0)));
 
-    /* "planpath.pyx":72
- *             x1, y1, z1 = self.targetPoint[i]
- *             distance = sqrt(pow(x-x1,2)+pow(y-y1,2)+pow(z-z1,2))
- *             posturederror = np.abs(self.posture - posture)             # <<<<<<<<<<<<<<
- *             fitness += 1.5*distance+anglefitness
- * 
- */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_abs); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 72, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_12);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Subtract(((PyObject *)__pyx_v_self->posture), __pyx_v_posture); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_10 = NULL;
-    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_12))) {
-      __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_12);
-      if (likely(__pyx_t_10)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_12);
-        __Pyx_INCREF(__pyx_t_10);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_12, function);
-      }
-    }
-    if (!__pyx_t_10) {
-      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __Pyx_GOTREF(__pyx_t_4);
-    } else {
-      #if CYTHON_FAST_PYCALL
-      if (PyFunction_Check(__pyx_t_12)) {
-        PyObject *__pyx_temp[2] = {__pyx_t_10, __pyx_t_2};
-        __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_12, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      } else
-      #endif
-      #if CYTHON_FAST_PYCCALL
-      if (__Pyx_PyFastCFunction_Check(__pyx_t_12)) {
-        PyObject *__pyx_temp[2] = {__pyx_t_10, __pyx_t_2};
-        __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_12, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      } else
-      #endif
-      {
-        __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 72, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_8);
-        __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_10); __pyx_t_10 = NULL;
-        __Pyx_GIVEREF(__pyx_t_2);
-        PyTuple_SET_ITEM(__pyx_t_8, 0+1, __pyx_t_2);
-        __pyx_t_2 = 0;
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_8, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      }
-    }
-    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    if (!(likely(((__pyx_t_4) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_4, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 72, __pyx_L1_error)
-    __Pyx_XDECREF_SET(__pyx_v_posturederror, ((PyArrayObject *)__pyx_t_4));
-    __pyx_t_4 = 0;
-
     /* "planpath.pyx":73
  *             distance = sqrt(pow(x-x1,2)+pow(y-y1,2)+pow(z-z1,2))
- *             posturederror = np.abs(self.posture - posture)
- *             fitness += 1.5*distance+anglefitness             # <<<<<<<<<<<<<<
+ *             #posturederror = np.abs(self.posture - posture_old)
+ *             fitness += distance+anglefitness             # <<<<<<<<<<<<<<
  * 
  *         return fitness
  */
-    __pyx_v_fitness = (__pyx_v_fitness + ((1.5 * __pyx_v_distance) + __pyx_v_anglefitness));
+    __pyx_v_fitness = (__pyx_v_fitness + (__pyx_v_distance + __pyx_v_anglefitness));
 
     /* "planpath.pyx":66
  *         cdef double anglefitness = 0
- * 
+ *         cdef np.ndarray posture_old
  *         for i, angles in enumerate(tmp_array):             # <<<<<<<<<<<<<<
  *             if i != 0:
  *                 anglefitness = np.sum(np.abs(angles - tmp_array[i-1]))
@@ -2948,7 +2909,7 @@ static double __pyx_f_8planpath_10build_path_run(struct __pyx_obj_8planpath_buil
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "planpath.pyx":75
- *             fitness += 1.5*distance+anglefitness
+ *             fitness += distance+anglefitness
  * 
  *         return fitness             # <<<<<<<<<<<<<<
  * 
@@ -2980,13 +2941,12 @@ static double __pyx_f_8planpath_10build_path_run(struct __pyx_obj_8planpath_buil
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_tmp_array);
-  __Pyx_XDECREF((PyObject *)__pyx_v_posturederror);
+  __Pyx_XDECREF((PyObject *)__pyx_v_posture_old);
   __Pyx_XDECREF(__pyx_v_i);
   __Pyx_XDECREF(__pyx_v_angles);
   __Pyx_XDECREF(__pyx_v_x);
   __Pyx_XDECREF(__pyx_v_y);
   __Pyx_XDECREF(__pyx_v_z);
-  __Pyx_XDECREF(__pyx_v_posture);
   __Pyx_XDECREF(__pyx_v_x1);
   __Pyx_XDECREF(__pyx_v_y1);
   __Pyx_XDECREF(__pyx_v_z1);
@@ -6286,8 +6246,19 @@ static int __Pyx_InitGlobals(void) {
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_6 = PyInt_FromLong(6); if (unlikely(!__pyx_int_6)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_115 = PyInt_FromLong(115); if (unlikely(!__pyx_int_115)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_125 = PyInt_FromLong(125); if (unlikely(!__pyx_int_125)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_165 = PyInt_FromLong(165); if (unlikely(!__pyx_int_165)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_185 = PyInt_FromLong(185); if (unlikely(!__pyx_int_185)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_190 = PyInt_FromLong(190); if (unlikely(!__pyx_int_190)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_360 = PyInt_FromLong(360); if (unlikely(!__pyx_int_360)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_neg_1 = PyInt_FromLong(-1); if (unlikely(!__pyx_int_neg_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_neg_55 = PyInt_FromLong(-55); if (unlikely(!__pyx_int_neg_55)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_neg_85 = PyInt_FromLong(-85); if (unlikely(!__pyx_int_neg_85)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_neg_115 = PyInt_FromLong(-115); if (unlikely(!__pyx_int_neg_115)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_neg_165 = PyInt_FromLong(-165); if (unlikely(!__pyx_int_neg_165)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_neg_190 = PyInt_FromLong(-190); if (unlikely(!__pyx_int_neg_190)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_neg_360 = PyInt_FromLong(-360); if (unlikely(!__pyx_int_neg_360)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -8043,6 +8014,28 @@ bad:
     Py_XDECREF(py_frame);
 }
 
+/* CIntFromPyVerify */
+      #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
+    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
+#define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
+    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
+#define __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, exc)\
+    {\
+        func_type value = func_value;\
+        if (sizeof(target_type) < sizeof(func_type)) {\
+            if (unlikely(value != (func_type) (target_type) value)) {\
+                func_type zero = 0;\
+                if (exc && unlikely(value == (func_type)-1 && PyErr_Occurred()))\
+                    return (target_type) -1;\
+                if (is_unsigned && unlikely(value < zero))\
+                    goto raise_neg_overflow;\
+                else\
+                    goto raise_overflow;\
+            }\
+        }\
+        return (target_type) value;\
+    }
+
 /* CIntToPy */
       static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
     const int neg_one = (int) -1, const_zero = (int) 0;
@@ -8073,28 +8066,6 @@ bad:
                                      little, !is_unsigned);
     }
 }
-
-/* CIntFromPyVerify */
-      #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
-    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
-#define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
-    __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
-#define __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, exc)\
-    {\
-        func_type value = func_value;\
-        if (sizeof(target_type) < sizeof(func_type)) {\
-            if (unlikely(value != (func_type) (target_type) value)) {\
-                func_type zero = 0;\
-                if (exc && unlikely(value == (func_type)-1 && PyErr_Occurred()))\
-                    return (target_type) -1;\
-                if (is_unsigned && unlikely(value < zero))\
-                    goto raise_neg_overflow;\
-                else\
-                    goto raise_overflow;\
-            }\
-        }\
-        return (target_type) value;\
-    }
 
 /* Declarations */
       #if CYTHON_CCOMPLEX

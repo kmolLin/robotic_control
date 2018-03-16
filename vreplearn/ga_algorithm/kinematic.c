@@ -1552,7 +1552,6 @@ static const char __pyx_k_TCP[] = "TCP";
 static const char __pyx_k_TOV[] = "TOV";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
-static const char __pyx_k_array[] = "array";
 static const char __pyx_k_numpy[] = "numpy";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_zeros[] = "zeros";
@@ -1584,7 +1583,6 @@ static PyObject *__pyx_n_s_TOV;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_actjoint;
 static PyObject *__pyx_n_s_append;
-static PyObject *__pyx_n_s_array;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_degrees;
 static PyObject *__pyx_n_s_import;
@@ -1758,13 +1756,13 @@ static void __pyx_f_9kinematic_foo(PyObject *__pyx_v_RAD, PyObject *__pyx_v_angl
  * 
  * cpdef object forward_kinematic(object angles):             # <<<<<<<<<<<<<<
  *     cdef object RAD = []
- *     cdef np.ndarray UVM = np.zeros((3,3))
+ *     cdef np.ndarray UVW = np.zeros((3,3))
  */
 
 static PyObject *__pyx_pw_9kinematic_1forward_kinematic(PyObject *__pyx_self, PyObject *__pyx_v_angles); /*proto*/
 static PyObject *__pyx_f_9kinematic_forward_kinematic(PyObject *__pyx_v_angles, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_RAD = 0;
-  PyArrayObject *__pyx_v_UVM = 0;
+  PyArrayObject *__pyx_v_UVW = 0;
   double __pyx_v_C1;
   double __pyx_v_C2;
   CYTHON_UNUSED double __pyx_v_C3;
@@ -1779,15 +1777,6 @@ static PyObject *__pyx_f_9kinematic_forward_kinematic(PyObject *__pyx_v_angles, 
   double __pyx_v_S6;
   double __pyx_v_C23;
   double __pyx_v_S23;
-  double __pyx_v_a;
-  double __pyx_v_b;
-  double __pyx_v_c;
-  double __pyx_v_d;
-  double __pyx_v_e;
-  double __pyx_v_f;
-  double __pyx_v_g;
-  double __pyx_v_h;
-  double __pyx_v_i;
   double __pyx_v_X;
   double __pyx_v_Y;
   double __pyx_v_Z;
@@ -1799,16 +1788,13 @@ static PyObject *__pyx_f_9kinematic_forward_kinematic(PyObject *__pyx_v_angles, 
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
-  PyObject *__pyx_t_7 = NULL;
-  PyObject *__pyx_t_8 = NULL;
-  PyObject *__pyx_t_9 = NULL;
   __Pyx_RefNannySetupContext("forward_kinematic", 0);
 
   /* "kinematic.pyx":31
  * 
  * cpdef object forward_kinematic(object angles):
  *     cdef object RAD = []             # <<<<<<<<<<<<<<
- *     cdef np.ndarray UVM = np.zeros((3,3))
+ *     cdef np.ndarray UVW = np.zeros((3,3))
  *     foo(RAD, angles)
  */
   __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
@@ -1819,7 +1805,7 @@ static PyObject *__pyx_f_9kinematic_forward_kinematic(PyObject *__pyx_v_angles, 
   /* "kinematic.pyx":32
  * cpdef object forward_kinematic(object angles):
  *     cdef object RAD = []
- *     cdef np.ndarray UVM = np.zeros((3,3))             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray UVW = np.zeros((3,3))             # <<<<<<<<<<<<<<
  *     foo(RAD, angles)
  * 
  */
@@ -1832,12 +1818,12 @@ static PyObject *__pyx_f_9kinematic_forward_kinematic(PyObject *__pyx_v_angles, 
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 32, __pyx_L1_error)
-  __pyx_v_UVM = ((PyArrayObject *)__pyx_t_1);
+  __pyx_v_UVW = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
   /* "kinematic.pyx":33
  *     cdef object RAD = []
- *     cdef np.ndarray UVM = np.zeros((3,3))
+ *     cdef np.ndarray UVW = np.zeros((3,3))
  *     foo(RAD, angles)             # <<<<<<<<<<<<<<
  * 
  *     cdef double C1 = cos(RAD[AXIS1])
@@ -2024,7 +2010,7 @@ static PyObject *__pyx_f_9kinematic_forward_kinematic(PyObject *__pyx_v_angles, 
  *     cdef double C23 = cos(RAD[AXIS2] - RAD[AXIS3])
  *     cdef double S23 = sin(RAD[AXIS2] - RAD[AXIS3])             # <<<<<<<<<<<<<<
  * 
- *     cdef double a = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)
+ *     UVW[0][0] = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)
  */
   __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_RAD, __pyx_v_9kinematic_AXIS2, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
@@ -2041,210 +2027,140 @@ static PyObject *__pyx_f_9kinematic_forward_kinematic(PyObject *__pyx_v_angles, 
   /* "kinematic.pyx":50
  *     cdef double S23 = sin(RAD[AXIS2] - RAD[AXIS3])
  * 
- *     cdef double a = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)             # <<<<<<<<<<<<<<
- *     cdef double b = S1 * S23 * (C4 * C5 * C6 + S4 * S6) - S1 * C23 *S5 * C6 - C1 * (C4 * S6 - S4 * C5 * C6)
- *     cdef double c = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6
+ *     UVW[0][0] = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)             # <<<<<<<<<<<<<<
+ *     UVW[1][0] = S1 * S23 * (C4 * C5 * C6 + S4 * S6) - S1 * C23 *S5 * C6 - C1 * (C4 * S6 - S4 * C5 * C6)
+ *     UVW[2][0] = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6
  */
-  __pyx_v_a = ((((__pyx_v_C1 * __pyx_v_S23) * (((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_C6) + (__pyx_v_S4 * __pyx_v_S6))) - (((__pyx_v_C1 * __pyx_v_C23) * __pyx_v_S5) * __pyx_v_C6)) + (__pyx_v_S1 * ((__pyx_v_C4 * __pyx_v_S6) - ((__pyx_v_S4 * __pyx_v_C5) * __pyx_v_C6))));
+  __pyx_t_1 = PyFloat_FromDouble(((((__pyx_v_C1 * __pyx_v_S23) * (((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_C6) + (__pyx_v_S4 * __pyx_v_S6))) - (((__pyx_v_C1 * __pyx_v_C23) * __pyx_v_S5) * __pyx_v_C6)) + (__pyx_v_S1 * ((__pyx_v_C4 * __pyx_v_S6) - ((__pyx_v_S4 * __pyx_v_C5) * __pyx_v_C6))))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_UVW), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_2, 0, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "kinematic.pyx":51
  * 
- *     cdef double a = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)
- *     cdef double b = S1 * S23 * (C4 * C5 * C6 + S4 * S6) - S1 * C23 *S5 * C6 - C1 * (C4 * S6 - S4 * C5 * C6)             # <<<<<<<<<<<<<<
- *     cdef double c = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6
- *     cdef double d = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)
+ *     UVW[0][0] = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)
+ *     UVW[1][0] = S1 * S23 * (C4 * C5 * C6 + S4 * S6) - S1 * C23 *S5 * C6 - C1 * (C4 * S6 - S4 * C5 * C6)             # <<<<<<<<<<<<<<
+ *     UVW[2][0] = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6
+ *     UVW[0][1] = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)
  */
-  __pyx_v_b = ((((__pyx_v_S1 * __pyx_v_S23) * (((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_C6) + (__pyx_v_S4 * __pyx_v_S6))) - (((__pyx_v_S1 * __pyx_v_C23) * __pyx_v_S5) * __pyx_v_C6)) - (__pyx_v_C1 * ((__pyx_v_C4 * __pyx_v_S6) - ((__pyx_v_S4 * __pyx_v_C5) * __pyx_v_C6))));
+  __pyx_t_1 = PyFloat_FromDouble(((((__pyx_v_S1 * __pyx_v_S23) * (((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_C6) + (__pyx_v_S4 * __pyx_v_S6))) - (((__pyx_v_S1 * __pyx_v_C23) * __pyx_v_S5) * __pyx_v_C6)) - (__pyx_v_C1 * ((__pyx_v_C4 * __pyx_v_S6) - ((__pyx_v_S4 * __pyx_v_C5) * __pyx_v_C6))))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_UVW), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_2, 0, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "kinematic.pyx":52
- *     cdef double a = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)
- *     cdef double b = S1 * S23 * (C4 * C5 * C6 + S4 * S6) - S1 * C23 *S5 * C6 - C1 * (C4 * S6 - S4 * C5 * C6)
- *     cdef double c = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6             # <<<<<<<<<<<<<<
- *     cdef double d = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)
- *     cdef double e = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)
+ *     UVW[0][0] = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)
+ *     UVW[1][0] = S1 * S23 * (C4 * C5 * C6 + S4 * S6) - S1 * C23 *S5 * C6 - C1 * (C4 * S6 - S4 * C5 * C6)
+ *     UVW[2][0] = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6             # <<<<<<<<<<<<<<
+ *     UVW[0][1] = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)
+ *     UVW[1][1] = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)
  */
-  __pyx_v_c = ((__pyx_v_C23 * (((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_C6) + (__pyx_v_S4 * __pyx_v_S6))) + ((__pyx_v_S23 * __pyx_v_S5) * __pyx_v_C6));
+  __pyx_t_1 = PyFloat_FromDouble(((__pyx_v_C23 * (((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_C6) + (__pyx_v_S4 * __pyx_v_S6))) + ((__pyx_v_S23 * __pyx_v_S5) * __pyx_v_C6))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_UVW), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_2, 0, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "kinematic.pyx":53
- *     cdef double b = S1 * S23 * (C4 * C5 * C6 + S4 * S6) - S1 * C23 *S5 * C6 - C1 * (C4 * S6 - S4 * C5 * C6)
- *     cdef double c = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6
- *     cdef double d = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)             # <<<<<<<<<<<<<<
- *     cdef double e = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)
- *     cdef double f = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6
+ *     UVW[1][0] = S1 * S23 * (C4 * C5 * C6 + S4 * S6) - S1 * C23 *S5 * C6 - C1 * (C4 * S6 - S4 * C5 * C6)
+ *     UVW[2][0] = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6
+ *     UVW[0][1] = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)             # <<<<<<<<<<<<<<
+ *     UVW[1][1] = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)
+ *     UVW[2][1] = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6
  */
-  __pyx_v_d = ((((__pyx_v_C1 * __pyx_v_S23) * ((__pyx_v_S4 * __pyx_v_C6) - ((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_S6))) + (((__pyx_v_C1 * __pyx_v_C23) * __pyx_v_S5) * __pyx_v_S6)) + (__pyx_v_S1 * (((__pyx_v_S4 * __pyx_v_C5) * __pyx_v_S6) + (__pyx_v_C4 * __pyx_v_C6))));
+  __pyx_t_1 = PyFloat_FromDouble(((((__pyx_v_C1 * __pyx_v_S23) * ((__pyx_v_S4 * __pyx_v_C6) - ((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_S6))) + (((__pyx_v_C1 * __pyx_v_C23) * __pyx_v_S5) * __pyx_v_S6)) + (__pyx_v_S1 * (((__pyx_v_S4 * __pyx_v_C5) * __pyx_v_S6) + (__pyx_v_C4 * __pyx_v_C6))))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_UVW), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_2, 1, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "kinematic.pyx":54
- *     cdef double c = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6
- *     cdef double d = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)
- *     cdef double e = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)             # <<<<<<<<<<<<<<
- *     cdef double f = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6
- *     cdef double g = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5
+ *     UVW[2][0] = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6
+ *     UVW[0][1] = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)
+ *     UVW[1][1] = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)             # <<<<<<<<<<<<<<
+ *     UVW[2][1] = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6
+ *     UVW[0][2] = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5
  */
-  __pyx_v_e = ((((__pyx_v_S1 * __pyx_v_S23) * ((__pyx_v_S4 * __pyx_v_C6) - ((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_S6))) + (((__pyx_v_S1 * __pyx_v_C23) * __pyx_v_S5) * __pyx_v_S6)) - (__pyx_v_C1 * (((__pyx_v_S4 * __pyx_v_C5) * __pyx_v_S6) + (__pyx_v_C4 * __pyx_v_C6))));
+  __pyx_t_1 = PyFloat_FromDouble(((((__pyx_v_S1 * __pyx_v_S23) * ((__pyx_v_S4 * __pyx_v_C6) - ((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_S6))) + (((__pyx_v_S1 * __pyx_v_C23) * __pyx_v_S5) * __pyx_v_S6)) - (__pyx_v_C1 * (((__pyx_v_S4 * __pyx_v_C5) * __pyx_v_S6) + (__pyx_v_C4 * __pyx_v_C6))))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_UVW), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_2, 1, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "kinematic.pyx":55
- *     cdef double d = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)
- *     cdef double e = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)
- *     cdef double f = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6             # <<<<<<<<<<<<<<
- *     cdef double g = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5
- *     cdef double h = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5
+ *     UVW[0][1] = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)
+ *     UVW[1][1] = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)
+ *     UVW[2][1] = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6             # <<<<<<<<<<<<<<
+ *     UVW[0][2] = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5
+ *     UVW[1][2] = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5
  */
-  __pyx_v_f = ((__pyx_v_C23 * ((__pyx_v_S4 * __pyx_v_C6) - ((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_S6))) - ((__pyx_v_S23 * __pyx_v_S5) * __pyx_v_S6));
+  __pyx_t_1 = PyFloat_FromDouble(((__pyx_v_C23 * ((__pyx_v_S4 * __pyx_v_C6) - ((__pyx_v_C4 * __pyx_v_C5) * __pyx_v_S6))) - ((__pyx_v_S23 * __pyx_v_S5) * __pyx_v_S6))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_UVW), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_2, 1, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "kinematic.pyx":56
- *     cdef double e = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)
- *     cdef double f = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6
- *     cdef double g = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5             # <<<<<<<<<<<<<<
- *     cdef double h = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5
- *     cdef double i = C23 * C4 * S5 - S23 * C5
+ *     UVW[1][1] = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)
+ *     UVW[2][1] = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6
+ *     UVW[0][2] = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5             # <<<<<<<<<<<<<<
+ *     UVW[1][2] = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5
+ *     UVW[2][2] = C23 * C4 * S5 - S23 * C5
  */
-  __pyx_v_g = (((((__pyx_v_C1 * __pyx_v_S23) * __pyx_v_C4) * __pyx_v_S5) + ((__pyx_v_C1 * __pyx_v_C23) * __pyx_v_C5)) - ((__pyx_v_S1 * __pyx_v_S4) * __pyx_v_S5));
+  __pyx_t_1 = PyFloat_FromDouble((((((__pyx_v_C1 * __pyx_v_S23) * __pyx_v_C4) * __pyx_v_S5) + ((__pyx_v_C1 * __pyx_v_C23) * __pyx_v_C5)) - ((__pyx_v_S1 * __pyx_v_S4) * __pyx_v_S5))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_UVW), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_2, 2, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "kinematic.pyx":57
- *     cdef double f = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6
- *     cdef double g = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5
- *     cdef double h = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5             # <<<<<<<<<<<<<<
- *     cdef double i = C23 * C4 * S5 - S23 * C5
+ *     UVW[2][1] = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6
+ *     UVW[0][2] = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5
+ *     UVW[1][2] = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5             # <<<<<<<<<<<<<<
+ *     UVW[2][2] = C23 * C4 * S5 - S23 * C5
  * 
  */
-  __pyx_v_h = (((((__pyx_v_S1 * __pyx_v_S23) * __pyx_v_C4) * __pyx_v_S5) + ((__pyx_v_S1 * __pyx_v_C23) * __pyx_v_C5)) + ((__pyx_v_C1 * __pyx_v_S4) * __pyx_v_S5));
+  __pyx_t_1 = PyFloat_FromDouble((((((__pyx_v_S1 * __pyx_v_S23) * __pyx_v_C4) * __pyx_v_S5) + ((__pyx_v_S1 * __pyx_v_C23) * __pyx_v_C5)) + ((__pyx_v_C1 * __pyx_v_S4) * __pyx_v_S5))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_UVW), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_2, 2, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "kinematic.pyx":58
- *     cdef double g = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5
- *     cdef double h = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5
- *     cdef double i = C23 * C4 * S5 - S23 * C5             # <<<<<<<<<<<<<<
- * 
- *     UVM = np.array([[a, b, c], [d, e, f], [g, h, i]])
- */
-  __pyx_v_i = (((__pyx_v_C23 * __pyx_v_C4) * __pyx_v_S5) - (__pyx_v_S23 * __pyx_v_C5));
-
-  /* "kinematic.pyx":60
- *     cdef double i = C23 * C4 * S5 - S23 * C5
- * 
- *     UVM = np.array([[a, b, c], [d, e, f], [g, h, i]])             # <<<<<<<<<<<<<<
+ *     UVW[0][2] = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5
+ *     UVW[1][2] = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5
+ *     UVW[2][2] = C23 * C4 * S5 - S23 * C5             # <<<<<<<<<<<<<<
  * 
  *     cdef double X = C1 * (a1 + C23 * (d6h * C5 + d4) + a2 * S2 + S23 * (a3 + d6h * C4 * S5)) - d6h * S1 * S4 * S5
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((((__pyx_v_C23 * __pyx_v_C4) * __pyx_v_S5) - (__pyx_v_S23 * __pyx_v_C5))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_UVW), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  if (unlikely(__Pyx_SetItemInt(__pyx_t_2, 2, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_a); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_b); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_c); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyList_New(3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyList_SET_ITEM(__pyx_t_7, 0, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_5);
-  PyList_SET_ITEM(__pyx_t_7, 1, __pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_6);
-  PyList_SET_ITEM(__pyx_t_7, 2, __pyx_t_6);
-  __pyx_t_2 = 0;
-  __pyx_t_5 = 0;
-  __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_d); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_e); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_f); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = PyList_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
-  __Pyx_GIVEREF(__pyx_t_6);
-  PyList_SET_ITEM(__pyx_t_8, 0, __pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_5);
-  PyList_SET_ITEM(__pyx_t_8, 1, __pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyList_SET_ITEM(__pyx_t_8, 2, __pyx_t_2);
-  __pyx_t_6 = 0;
-  __pyx_t_5 = 0;
-  __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_g); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_h); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_i); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_9 = PyList_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_9);
-  __Pyx_GIVEREF(__pyx_t_2);
-  PyList_SET_ITEM(__pyx_t_9, 0, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_5);
-  PyList_SET_ITEM(__pyx_t_9, 1, __pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_6);
-  PyList_SET_ITEM(__pyx_t_9, 2, __pyx_t_6);
-  __pyx_t_2 = 0;
-  __pyx_t_5 = 0;
-  __pyx_t_6 = 0;
-  __pyx_t_6 = PyList_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_GIVEREF(__pyx_t_7);
-  PyList_SET_ITEM(__pyx_t_6, 0, __pyx_t_7);
-  __Pyx_GIVEREF(__pyx_t_8);
-  PyList_SET_ITEM(__pyx_t_6, 1, __pyx_t_8);
-  __Pyx_GIVEREF(__pyx_t_9);
-  PyList_SET_ITEM(__pyx_t_6, 2, __pyx_t_9);
-  __pyx_t_7 = 0;
-  __pyx_t_8 = 0;
-  __pyx_t_9 = 0;
-  __pyx_t_9 = NULL;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_4);
-    if (likely(__pyx_t_9)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-      __Pyx_INCREF(__pyx_t_9);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
-    }
-  }
-  if (!__pyx_t_9) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
-  } else {
-    #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_4)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_9, __pyx_t_6};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    } else
-    #endif
-    #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_9, __pyx_t_6};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    } else
-    #endif
-    {
-      __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 60, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_8);
-      __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_9); __pyx_t_9 = NULL;
-      __Pyx_GIVEREF(__pyx_t_6);
-      PyTuple_SET_ITEM(__pyx_t_8, 0+1, __pyx_t_6);
-      __pyx_t_6 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    }
-  }
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_DECREF_SET(__pyx_v_UVM, ((PyArrayObject *)__pyx_t_1));
-  __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":62
- *     UVM = np.array([[a, b, c], [d, e, f], [g, h, i]])
+  /* "kinematic.pyx":60
+ *     UVW[2][2] = C23 * C4 * S5 - S23 * C5
  * 
  *     cdef double X = C1 * (a1 + C23 * (d6h * C5 + d4) + a2 * S2 + S23 * (a3 + d6h * C4 * S5)) - d6h * S1 * S4 * S5             # <<<<<<<<<<<<<<
  *     cdef double Y = S1 * (a1 + C23 * (d6h * C5 + d4) + a2 * S2 + S23 * (a3 + d6h * C4 * S5)) + d6h * C1 * S4 * S5
@@ -2252,7 +2168,7 @@ static PyObject *__pyx_f_9kinematic_forward_kinematic(PyObject *__pyx_v_angles, 
  */
   __pyx_v_X = ((__pyx_v_C1 * (((__pyx_v_9kinematic_a1 + (__pyx_v_C23 * ((__pyx_v_9kinematic_d6h * __pyx_v_C5) + __pyx_v_9kinematic_d4))) + (__pyx_v_9kinematic_a2 * __pyx_v_S2)) + (__pyx_v_S23 * (__pyx_v_9kinematic_a3 + ((__pyx_v_9kinematic_d6h * __pyx_v_C4) * __pyx_v_S5))))) - (((__pyx_v_9kinematic_d6h * __pyx_v_S1) * __pyx_v_S4) * __pyx_v_S5));
 
-  /* "kinematic.pyx":63
+  /* "kinematic.pyx":61
  * 
  *     cdef double X = C1 * (a1 + C23 * (d6h * C5 + d4) + a2 * S2 + S23 * (a3 + d6h * C4 * S5)) - d6h * S1 * S4 * S5
  *     cdef double Y = S1 * (a1 + C23 * (d6h * C5 + d4) + a2 * S2 + S23 * (a3 + d6h * C4 * S5)) + d6h * C1 * S4 * S5             # <<<<<<<<<<<<<<
@@ -2261,47 +2177,47 @@ static PyObject *__pyx_f_9kinematic_forward_kinematic(PyObject *__pyx_v_angles, 
  */
   __pyx_v_Y = ((__pyx_v_S1 * (((__pyx_v_9kinematic_a1 + (__pyx_v_C23 * ((__pyx_v_9kinematic_d6h * __pyx_v_C5) + __pyx_v_9kinematic_d4))) + (__pyx_v_9kinematic_a2 * __pyx_v_S2)) + (__pyx_v_S23 * (__pyx_v_9kinematic_a3 + ((__pyx_v_9kinematic_d6h * __pyx_v_C4) * __pyx_v_S5))))) + (((__pyx_v_9kinematic_d6h * __pyx_v_C1) * __pyx_v_S4) * __pyx_v_S5));
 
-  /* "kinematic.pyx":64
+  /* "kinematic.pyx":62
  *     cdef double X = C1 * (a1 + C23 * (d6h * C5 + d4) + a2 * S2 + S23 * (a3 + d6h * C4 * S5)) - d6h * S1 * S4 * S5
  *     cdef double Y = S1 * (a1 + C23 * (d6h * C5 + d4) + a2 * S2 + S23 * (a3 + d6h * C4 * S5)) + d6h * C1 * S4 * S5
  *     cdef double Z = d1 - S23 * (d6h * C5 + d4) + a2 * C2 + C23 * (a3 + d6h * C4 * S5)             # <<<<<<<<<<<<<<
  * 
- *     return X, Y, Z,R2Eul(UVM)
+ *     return X, Y, Z,R2Eul(UVW)
  */
   __pyx_v_Z = (((__pyx_v_9kinematic_d1 - (__pyx_v_S23 * ((__pyx_v_9kinematic_d6h * __pyx_v_C5) + __pyx_v_9kinematic_d4))) + (__pyx_v_9kinematic_a2 * __pyx_v_C2)) + (__pyx_v_C23 * (__pyx_v_9kinematic_a3 + ((__pyx_v_9kinematic_d6h * __pyx_v_C4) * __pyx_v_S5))));
 
-  /* "kinematic.pyx":66
+  /* "kinematic.pyx":64
  *     cdef double Z = d1 - S23 * (d6h * C5 + d4) + a2 * C2 + C23 * (a3 + d6h * C4 * S5)
  * 
- *     return X, Y, Z,R2Eul(UVM)             # <<<<<<<<<<<<<<
+ *     return X, Y, Z,R2Eul(UVW)             # <<<<<<<<<<<<<<
  * 
  * cpdef object Inverse_Kinematic(object TCP,object TOV, object actjoint):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_X); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_X); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_Y); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Y); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_Z); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_Z); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 66, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_6 = __pyx_f_9kinematic_R2Eul(((PyObject *)__pyx_v_UVM)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_5 = __pyx_f_9kinematic_R2Eul(((PyObject *)__pyx_v_UVW)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = PyTuple_New(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_9 = PyTuple_New(4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 66, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_9);
   __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_4);
-  PyTuple_SET_ITEM(__pyx_t_9, 1, __pyx_t_4);
-  __Pyx_GIVEREF(__pyx_t_8);
-  PyTuple_SET_ITEM(__pyx_t_9, 2, __pyx_t_8);
-  __Pyx_GIVEREF(__pyx_t_6);
-  PyTuple_SET_ITEM(__pyx_t_9, 3, __pyx_t_6);
+  PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_5);
+  PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_t_5);
   __pyx_t_1 = 0;
+  __pyx_t_2 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_8 = 0;
+  __pyx_t_5 = 0;
+  __pyx_r = __pyx_t_6;
   __pyx_t_6 = 0;
-  __pyx_r = __pyx_t_9;
-  __pyx_t_9 = 0;
   goto __pyx_L0;
 
   /* "kinematic.pyx":30
@@ -2309,7 +2225,7 @@ static PyObject *__pyx_f_9kinematic_forward_kinematic(PyObject *__pyx_v_angles, 
  * 
  * cpdef object forward_kinematic(object angles):             # <<<<<<<<<<<<<<
  *     cdef object RAD = []
- *     cdef np.ndarray UVM = np.zeros((3,3))
+ *     cdef np.ndarray UVW = np.zeros((3,3))
  */
 
   /* function exit code */
@@ -2319,14 +2235,11 @@ static PyObject *__pyx_f_9kinematic_forward_kinematic(PyObject *__pyx_v_angles, 
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_XDECREF(__pyx_t_9);
   __Pyx_AddTraceback("kinematic.forward_kinematic", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_RAD);
-  __Pyx_XDECREF((PyObject *)__pyx_v_UVM);
+  __Pyx_XDECREF((PyObject *)__pyx_v_UVW);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -2368,8 +2281,8 @@ static PyObject *__pyx_pf_9kinematic_forward_kinematic(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "kinematic.pyx":68
- *     return X, Y, Z,R2Eul(UVM)
+/* "kinematic.pyx":66
+ *     return X, Y, Z,R2Eul(UVW)
  * 
  * cpdef object Inverse_Kinematic(object TCP,object TOV, object actjoint):             # <<<<<<<<<<<<<<
  *     cdef np.ndarray THETA =  np.zeros((4, 6))
@@ -2448,164 +2361,164 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
   int __pyx_t_13;
   __Pyx_RefNannySetupContext("Inverse_Kinematic", 0);
 
-  /* "kinematic.pyx":69
+  /* "kinematic.pyx":67
  * 
  * cpdef object Inverse_Kinematic(object TCP,object TOV, object actjoint):
  *     cdef np.ndarray THETA =  np.zeros((4, 6))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray dT = np.zeros((4, 6))
  *     cdef np.ndarray RAD = np.zeros((6))
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 67, __pyx_L1_error)
   __pyx_v_THETA = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":70
+  /* "kinematic.pyx":68
  * cpdef object Inverse_Kinematic(object TCP,object TOV, object actjoint):
  *     cdef np.ndarray THETA =  np.zeros((4, 6))
  *     cdef np.ndarray dT = np.zeros((4, 6))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray RAD = np.zeros((6))
  *     cdef np.ndarray U= np.zeros((3))
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 70, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 68, __pyx_L1_error)
   __pyx_v_dT = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":71
+  /* "kinematic.pyx":69
  *     cdef np.ndarray THETA =  np.zeros((4, 6))
  *     cdef np.ndarray dT = np.zeros((4, 6))
  *     cdef np.ndarray RAD = np.zeros((6))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 71, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 69, __pyx_L1_error)
   __pyx_v_RAD = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":72
+  /* "kinematic.pyx":70
  *     cdef np.ndarray dT = np.zeros((4, 6))
  *     cdef np.ndarray RAD = np.zeros((6))
  *     cdef np.ndarray U= np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray V= np.zeros((3))
  *     cdef np.ndarray W= np.zeros((3))
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 72, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 70, __pyx_L1_error)
   __pyx_v_U = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":73
+  /* "kinematic.pyx":71
  *     cdef np.ndarray RAD = np.zeros((6))
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray W= np.zeros((3))
  *     Joint_Deg = []
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 73, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 71, __pyx_L1_error)
   __pyx_v_V = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":74
+  /* "kinematic.pyx":72
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))
  *     cdef np.ndarray W= np.zeros((3))             # <<<<<<<<<<<<<<
  *     Joint_Deg = []
  *     cdef np.ndarray dif = np.zeros((4))
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 74, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 72, __pyx_L1_error)
   __pyx_v_W = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":75
+  /* "kinematic.pyx":73
  *     cdef np.ndarray V= np.zeros((3))
  *     cdef np.ndarray W= np.zeros((3))
  *     Joint_Deg = []             # <<<<<<<<<<<<<<
  *     cdef np.ndarray dif = np.zeros((4))
  *     UVM =  Eul2R(TOV)
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_Joint_Deg = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":76
+  /* "kinematic.pyx":74
  *     cdef np.ndarray W= np.zeros((3))
  *     Joint_Deg = []
  *     cdef np.ndarray dif = np.zeros((4))             # <<<<<<<<<<<<<<
  *     UVM =  Eul2R(TOV)
  * 
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 76, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 74, __pyx_L1_error)
   __pyx_v_dif = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":77
+  /* "kinematic.pyx":75
  *     Joint_Deg = []
  *     cdef np.ndarray dif = np.zeros((4))
  *     UVM =  Eul2R(TOV)             # <<<<<<<<<<<<<<
  * 
  *     for i in range(0, 3):
  */
-  __pyx_t_1 = __pyx_f_9kinematic_Eul2R(__pyx_v_TOV); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9kinematic_Eul2R(__pyx_v_TOV); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_UVM = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":79
+  /* "kinematic.pyx":77
  *     UVM =  Eul2R(TOV)
  * 
  *     for i in range(0, 3):             # <<<<<<<<<<<<<<
@@ -2615,64 +2528,112 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
   for (__pyx_t_3 = 0; __pyx_t_3 < 3; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "kinematic.pyx":80
+    /* "kinematic.pyx":78
  * 
  *     for i in range(0, 3):
  *         U[i] = UVM[i][0]             # <<<<<<<<<<<<<<
  *         V[i] = UVM[i][1]
  *         W[i] = UVM[i][2]
  */
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_UVM, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_UVM, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 78, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 78, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_U), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 80, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_U), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 78, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kinematic.pyx":81
+    /* "kinematic.pyx":79
  *     for i in range(0, 3):
  *         U[i] = UVM[i][0]
  *         V[i] = UVM[i][1]             # <<<<<<<<<<<<<<
  *         W[i] = UVM[i][2]
  * 
  */
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_UVM, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_UVM, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_V), __pyx_v_i, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 81, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_V), __pyx_v_i, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kinematic.pyx":82
+    /* "kinematic.pyx":80
  *         U[i] = UVM[i][0]
  *         V[i] = UVM[i][1]
  *         W[i] = UVM[i][2]             # <<<<<<<<<<<<<<
  * 
  *     Px = TCP[0]-d6h*W[0]
  */
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_UVM, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_UVM, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_W), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 82, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_W), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 80, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
 
-  /* "kinematic.pyx":84
+  /* "kinematic.pyx":82
  *         W[i] = UVM[i][2]
  * 
  *     Px = TCP[0]-d6h*W[0]             # <<<<<<<<<<<<<<
  *     Py = TCP[1]-d6h*W[1]
  *     Pz = TCP[2]-d6h*W[2]
  */
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_TCP, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_TCP, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_9kinematic_d6h); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_5 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = PyNumber_Subtract(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_v_Px = __pyx_t_4;
+  __pyx_t_4 = 0;
+
+  /* "kinematic.pyx":83
+ * 
+ *     Px = TCP[0]-d6h*W[0]
+ *     Py = TCP[1]-d6h*W[1]             # <<<<<<<<<<<<<<
+ *     Pz = TCP[2]-d6h*W[2]
+ * 
+ */
+  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_TCP, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_9kinematic_d6h); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyNumber_Multiply(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = PyNumber_Subtract(__pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v_Py = __pyx_t_2;
+  __pyx_t_2 = 0;
+
+  /* "kinematic.pyx":84
+ *     Px = TCP[0]-d6h*W[0]
+ *     Py = TCP[1]-d6h*W[1]
+ *     Pz = TCP[2]-d6h*W[2]             # <<<<<<<<<<<<<<
+ * 
+ *     cdef int cnt = 0
+ */
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_TCP, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_1 = PyFloat_FromDouble(__pyx_v_9kinematic_d6h); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
@@ -2682,58 +2643,10 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_v_Px = __pyx_t_4;
-  __pyx_t_4 = 0;
-
-  /* "kinematic.pyx":85
- * 
- *     Px = TCP[0]-d6h*W[0]
- *     Py = TCP[1]-d6h*W[1]             # <<<<<<<<<<<<<<
- *     Pz = TCP[2]-d6h*W[2]
- * 
- */
-  __pyx_t_4 = __Pyx_GetItemInt(__pyx_v_TCP, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 85, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_9kinematic_d6h); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 85, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyNumber_Multiply(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Subtract(__pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_Py = __pyx_t_2;
-  __pyx_t_2 = 0;
-
-  /* "kinematic.pyx":86
- *     Px = TCP[0]-d6h*W[0]
- *     Py = TCP[1]-d6h*W[1]
- *     Pz = TCP[2]-d6h*W[2]             # <<<<<<<<<<<<<<
- * 
- *     cdef int cnt = 0
- */
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_TCP, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_9kinematic_d6h); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyNumber_Multiply(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 86, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_Subtract(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_Pz = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "kinematic.pyx":88
+  /* "kinematic.pyx":86
  *     Pz = TCP[2]-d6h*W[2]
  * 
  *     cdef int cnt = 0             # <<<<<<<<<<<<<<
@@ -2742,7 +2655,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
   __pyx_v_cnt = 0;
 
-  /* "kinematic.pyx":89
+  /* "kinematic.pyx":87
  * 
  *     cdef int cnt = 0
  *     cdef int passkey = 1             # <<<<<<<<<<<<<<
@@ -2751,7 +2664,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
   __pyx_v_passkey = 1;
 
-  /* "kinematic.pyx":91
+  /* "kinematic.pyx":89
  *     cdef int passkey = 1
  * 
  *     while(passkey):             # <<<<<<<<<<<<<<
@@ -2762,83 +2675,83 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     __pyx_t_6 = (__pyx_v_passkey != 0);
     if (!__pyx_t_6) break;
 
-    /* "kinematic.pyx":93
+    /* "kinematic.pyx":91
  *     while(passkey):
  *         # Theta1
  *         RAD[0] = atan2(Py, Px)             # <<<<<<<<<<<<<<
  *         C1 = cos(RAD[0])
  *         S1 = sin(RAD[0])
  */
-    __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_Py); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 93, __pyx_L1_error)
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_Px); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 93, __pyx_L1_error)
-    __pyx_t_4 = PyFloat_FromDouble(atan2(__pyx_t_7, __pyx_t_8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error)
+    __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_Py); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_Px); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble(atan2(__pyx_t_7, __pyx_t_8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 0, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 93, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 0, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "kinematic.pyx":94
+    /* "kinematic.pyx":92
  *         # Theta1
  *         RAD[0] = atan2(Py, Px)
  *         C1 = cos(RAD[0])             # <<<<<<<<<<<<<<
  *         S1 = sin(RAD[0])
  *         # Theta3    +- ???
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 94, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_C1 = cos(__pyx_t_8);
 
-    /* "kinematic.pyx":95
+    /* "kinematic.pyx":93
  *         RAD[0] = atan2(Py, Px)
  *         C1 = cos(RAD[0])
  *         S1 = sin(RAD[0])             # <<<<<<<<<<<<<<
  *         # Theta3    +- ???
  *         Px2 = pow(Px, 2)
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 95, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 95, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_S1 = sin(__pyx_t_8);
 
-    /* "kinematic.pyx":97
+    /* "kinematic.pyx":95
  *         S1 = sin(RAD[0])
  *         # Theta3    +- ???
  *         Px2 = pow(Px, 2)             # <<<<<<<<<<<<<<
  *         Py2 = pow(Py, 2)
  *         Pz2 = pow(Pz - d1, 2) ##d1
  */
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_Px); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 97, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_Px); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 95, __pyx_L1_error)
     __pyx_v_Px2 = pow(__pyx_t_8, 2.0);
 
-    /* "kinematic.pyx":98
+    /* "kinematic.pyx":96
  *         # Theta3    +- ???
  *         Px2 = pow(Px, 2)
  *         Py2 = pow(Py, 2)             # <<<<<<<<<<<<<<
  *         Pz2 = pow(Pz - d1, 2) ##d1
  *         k1 = 2.0 * a2 * d4
  */
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_Py); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_Py); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L1_error)
     __pyx_v_Py2 = pow(__pyx_t_8, 2.0);
 
-    /* "kinematic.pyx":99
+    /* "kinematic.pyx":97
  *         Px2 = pow(Px, 2)
  *         Py2 = pow(Py, 2)
  *         Pz2 = pow(Pz - d1, 2) ##d1             # <<<<<<<<<<<<<<
  *         k1 = 2.0 * a2 * d4
  *         k2 = 2.0 * a2 * a3
  */
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_9kinematic_d1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_9kinematic_d1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 97, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyNumber_Subtract(__pyx_v_Pz, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Subtract(__pyx_v_Pz, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 97, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 97, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_Pz2 = pow(__pyx_t_8, 2.0);
 
-    /* "kinematic.pyx":100
+    /* "kinematic.pyx":98
  *         Py2 = pow(Py, 2)
  *         Pz2 = pow(Pz - d1, 2) ##d1
  *         k1 = 2.0 * a2 * d4             # <<<<<<<<<<<<<<
@@ -2847,7 +2760,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
     __pyx_v_k1 = ((2.0 * __pyx_v_9kinematic_a2) * __pyx_v_9kinematic_d4);
 
-    /* "kinematic.pyx":101
+    /* "kinematic.pyx":99
  *         Pz2 = pow(Pz - d1, 2) ##d1
  *         k1 = 2.0 * a2 * d4
  *         k2 = 2.0 * a2 * a3             # <<<<<<<<<<<<<<
@@ -2856,77 +2769,77 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
     __pyx_v_k2 = ((2.0 * __pyx_v_9kinematic_a2) * __pyx_v_9kinematic_a3);
 
-    /* "kinematic.pyx":102
+    /* "kinematic.pyx":100
  *         k1 = 2.0 * a2 * d4
  *         k2 = 2.0 * a2 * a3
  *         k3 = Px2 + Py2 + Pz2 - 2.0 * a1 * (Px * C1 + Py * S1) + pow(a1, 2) - pow(a3, 2) - pow(d4, 2) - pow(a2, 2)             # <<<<<<<<<<<<<<
  *         kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)
  *         if kcnt < 0:
  */
-    __pyx_t_5 = PyFloat_FromDouble(((__pyx_v_Px2 + __pyx_v_Py2) + __pyx_v_Pz2)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_5 = PyFloat_FromDouble(((__pyx_v_Px2 + __pyx_v_Py2) + __pyx_v_Pz2)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = PyFloat_FromDouble((2.0 * __pyx_v_9kinematic_a1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble((2.0 * __pyx_v_9kinematic_a1)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyNumber_Multiply(__pyx_v_Px, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Multiply(__pyx_v_Px, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = PyNumber_Multiply(__pyx_v_Py, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Multiply(__pyx_v_Py, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = PyNumber_Multiply(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Multiply(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Subtract(__pyx_t_5, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Subtract(__pyx_t_5, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = PyFloat_FromDouble(pow(__pyx_v_9kinematic_a1, 2.0)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_9 = PyFloat_FromDouble(pow(__pyx_v_9kinematic_a1, 2.0)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_5 = PyNumber_Add(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Add(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = PyFloat_FromDouble(pow(__pyx_v_9kinematic_a3, 2.0)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_9 = PyFloat_FromDouble(pow(__pyx_v_9kinematic_a3, 2.0)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = PyNumber_Subtract(__pyx_t_5, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Subtract(__pyx_t_5, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = PyFloat_FromDouble(pow(__pyx_v_9kinematic_d4, 2.0)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_9 = PyFloat_FromDouble(pow(__pyx_v_9kinematic_d4, 2.0)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_5 = PyNumber_Subtract(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Subtract(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = PyFloat_FromDouble(pow(__pyx_v_9kinematic_a2, 2.0)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_9 = PyFloat_FromDouble(pow(__pyx_v_9kinematic_a2, 2.0)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = PyNumber_Subtract(__pyx_t_5, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Subtract(__pyx_t_5, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_XDECREF_SET(__pyx_v_k3, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "kinematic.pyx":103
+    /* "kinematic.pyx":101
  *         k2 = 2.0 * a2 * a3
  *         k3 = Px2 + Py2 + Pz2 - 2.0 * a1 * (Px * C1 + Py * S1) + pow(a1, 2) - pow(a3, 2) - pow(d4, 2) - pow(a2, 2)
  *         kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)             # <<<<<<<<<<<<<<
  *         if kcnt < 0:
  *             check = False
  */
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_k3); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 103, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_k3); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 101, __pyx_L1_error)
     __pyx_v_kcnt = ((pow(__pyx_v_k1, 2.0) + pow(__pyx_v_k2, 2.0)) - pow(__pyx_t_8, 2.0));
 
-    /* "kinematic.pyx":104
+    /* "kinematic.pyx":102
  *         k3 = Px2 + Py2 + Pz2 - 2.0 * a1 * (Px * C1 + Py * S1) + pow(a1, 2) - pow(a3, 2) - pow(d4, 2) - pow(a2, 2)
  *         kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)
  *         if kcnt < 0:             # <<<<<<<<<<<<<<
@@ -2936,7 +2849,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     __pyx_t_6 = ((__pyx_v_kcnt < 0.0) != 0);
     if (__pyx_t_6) {
 
-      /* "kinematic.pyx":105
+      /* "kinematic.pyx":103
  *         kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)
  *         if kcnt < 0:
  *             check = False             # <<<<<<<<<<<<<<
@@ -2945,7 +2858,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
       __pyx_v_check = 0;
 
-      /* "kinematic.pyx":106
+      /* "kinematic.pyx":104
  *         if kcnt < 0:
  *             check = False
  *             return (0, 0, 0, 0, 0, 0) , check             # <<<<<<<<<<<<<<
@@ -2953,9 +2866,9 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  *         else :
  */
       __Pyx_XDECREF(__pyx_r);
-      __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_check); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_check); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 106, __pyx_L1_error)
+      __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 104, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_INCREF(__pyx_tuple__12);
       __Pyx_GIVEREF(__pyx_tuple__12);
@@ -2967,7 +2880,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
       __pyx_t_9 = 0;
       goto __pyx_L0;
 
-      /* "kinematic.pyx":104
+      /* "kinematic.pyx":102
  *         k3 = Px2 + Py2 + Pz2 - 2.0 * a1 * (Px * C1 + Py * S1) + pow(a1, 2) - pow(a3, 2) - pow(d4, 2) - pow(a2, 2)
  *         kcnt = pow(k1, 2) + pow(k2, 2) - pow(k3, 2)
  *         if kcnt < 0:             # <<<<<<<<<<<<<<
@@ -2976,7 +2889,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
     }
 
-    /* "kinematic.pyx":109
+    /* "kinematic.pyx":107
  *             break
  *         else :
  *             theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))             # <<<<<<<<<<<<<<
@@ -2984,44 +2897,44 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  *             check = True
  */
     /*else*/ {
-      __pyx_t_9 = PyFloat_FromDouble((__pyx_v_k1 + sqrt(__pyx_v_kcnt))); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 109, __pyx_L1_error)
+      __pyx_t_9 = PyFloat_FromDouble((__pyx_v_k1 + sqrt(__pyx_v_kcnt))); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_2 = PyFloat_FromDouble(__pyx_v_k2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
+      __pyx_t_2 = PyFloat_FromDouble(__pyx_v_k2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_5 = PyNumber_Add(__pyx_t_2, __pyx_v_k3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
+      __pyx_t_5 = PyNumber_Add(__pyx_t_2, __pyx_v_k3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_9, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_9, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)
+      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_v_theta3_1 = (2.0 * atan(__pyx_t_8));
 
-      /* "kinematic.pyx":110
+      /* "kinematic.pyx":108
  *         else :
  *             theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))
  *             theta3_2 = 2.0 * atan((k1 - sqrt(kcnt)) / (k2 + k3))             # <<<<<<<<<<<<<<
  *             check = True
  * 
  */
-      __pyx_t_2 = PyFloat_FromDouble((__pyx_v_k1 - sqrt(__pyx_v_kcnt))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_2 = PyFloat_FromDouble((__pyx_v_k1 - sqrt(__pyx_v_kcnt))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_k2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_k2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_9 = PyNumber_Add(__pyx_t_5, __pyx_v_k3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_9 = PyNumber_Add(__pyx_t_5, __pyx_v_k3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 108, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 108, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_v_theta3_2 = (2.0 * atan(__pyx_t_8));
 
-      /* "kinematic.pyx":111
+      /* "kinematic.pyx":109
  *             theta3_1 = 2.0 * atan((k1 + sqrt(kcnt)) / (k2 + k3))
  *             theta3_2 = 2.0 * atan((k1 - sqrt(kcnt)) / (k2 + k3))
  *             check = True             # <<<<<<<<<<<<<<
@@ -3031,7 +2944,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
       __pyx_v_check = 1;
     }
 
-    /* "kinematic.pyx":113
+    /* "kinematic.pyx":111
  *             check = True
  * 
  *         if cnt <=1:             # <<<<<<<<<<<<<<
@@ -3041,19 +2954,19 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     __pyx_t_6 = ((__pyx_v_cnt <= 1) != 0);
     if (__pyx_t_6) {
 
-      /* "kinematic.pyx":114
+      /* "kinematic.pyx":112
  * 
  *         if cnt <=1:
  *             RAD[2] = theta3_1             # <<<<<<<<<<<<<<
  *         else:
  *             RAD[2] = theta3_2
  */
-      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_theta3_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error)
+      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_theta3_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 112, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 2, __pyx_t_5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 114, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 2, __pyx_t_5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 112, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "kinematic.pyx":113
+      /* "kinematic.pyx":111
  *             check = True
  * 
  *         if cnt <=1:             # <<<<<<<<<<<<<<
@@ -3063,7 +2976,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
       goto __pyx_L8;
     }
 
-    /* "kinematic.pyx":116
+    /* "kinematic.pyx":114
  *             RAD[2] = theta3_1
  *         else:
  *             RAD[2] = theta3_2             # <<<<<<<<<<<<<<
@@ -3071,40 +2984,40 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  *         C3 = cos(RAD[2])
  */
     /*else*/ {
-      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_theta3_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 116, __pyx_L1_error)
+      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_theta3_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 2, __pyx_t_5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 116, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 2, __pyx_t_5, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 114, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
     __pyx_L8:;
 
-    /* "kinematic.pyx":118
+    /* "kinematic.pyx":116
  *             RAD[2] = theta3_2
  * 
  *         C3 = cos(RAD[2])             # <<<<<<<<<<<<<<
  *         S3 = sin(RAD[2])
  * 
  */
-    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 118, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 116, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 118, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 116, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_C3 = cos(__pyx_t_8);
 
-    /* "kinematic.pyx":119
+    /* "kinematic.pyx":117
  * 
  *         C3 = cos(RAD[2])
  *         S3 = sin(RAD[2])             # <<<<<<<<<<<<<<
  * 
  *         # Theta2
  */
-    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 119, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 119, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_S3 = sin(__pyx_t_8);
 
-    /* "kinematic.pyx":122
+    /* "kinematic.pyx":120
  * 
  *         # Theta2
  *         mu1 = -a3 * S3 + d4 *C3             # <<<<<<<<<<<<<<
@@ -3113,7 +3026,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
     __pyx_v_mu1 = (((-__pyx_v_9kinematic_a3) * __pyx_v_S3) + (__pyx_v_9kinematic_d4 * __pyx_v_C3));
 
-    /* "kinematic.pyx":123
+    /* "kinematic.pyx":121
  *         # Theta2
  *         mu1 = -a3 * S3 + d4 *C3
  *         mu2 = a3 * C3 + d4 * S3 + a2             # <<<<<<<<<<<<<<
@@ -3122,7 +3035,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
     __pyx_v_mu2 = (((__pyx_v_9kinematic_a3 * __pyx_v_C3) + (__pyx_v_9kinematic_d4 * __pyx_v_S3)) + __pyx_v_9kinematic_a2);
 
-    /* "kinematic.pyx":124
+    /* "kinematic.pyx":122
  *         mu1 = -a3 * S3 + d4 *C3
  *         mu2 = a3 * C3 + d4 * S3 + a2
  *         v1 = a3 * C3 + d4 * S3 + a2             # <<<<<<<<<<<<<<
@@ -3131,7 +3044,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
     __pyx_v_v1 = (((__pyx_v_9kinematic_a3 * __pyx_v_C3) + (__pyx_v_9kinematic_d4 * __pyx_v_S3)) + __pyx_v_9kinematic_a2);
 
-    /* "kinematic.pyx":125
+    /* "kinematic.pyx":123
  *         mu2 = a3 * C3 + d4 * S3 + a2
  *         v1 = a3 * C3 + d4 * S3 + a2
  *         v2 = a3 * S3 - d4 * C3             # <<<<<<<<<<<<<<
@@ -3140,363 +3053,363 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
     __pyx_v_v2 = ((__pyx_v_9kinematic_a3 * __pyx_v_S3) - (__pyx_v_9kinematic_d4 * __pyx_v_C3));
 
-    /* "kinematic.pyx":126
+    /* "kinematic.pyx":124
  *         v1 = a3 * C3 + d4 * S3 + a2
  *         v2 = a3 * S3 - d4 * C3
  *         gama1 = Px * C1 + Py * S1 - a1             # <<<<<<<<<<<<<<
  *         gama2 = Pz - d1
  * 
  */
-    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 124, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_9 = PyNumber_Multiply(__pyx_v_Px, __pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Multiply(__pyx_v_Px, __pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 124, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 124, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = PyNumber_Multiply(__pyx_v_Py, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Multiply(__pyx_v_Py, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyNumber_Add(__pyx_t_9, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Add(__pyx_t_9, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 124, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_9kinematic_a1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_9kinematic_a1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = PyNumber_Subtract(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Subtract(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 124, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_XDECREF_SET(__pyx_v_gama1, __pyx_t_9);
     __pyx_t_9 = 0;
 
-    /* "kinematic.pyx":127
+    /* "kinematic.pyx":125
  *         v2 = a3 * S3 - d4 * C3
  *         gama1 = Px * C1 + Py * S1 - a1
  *         gama2 = Pz - d1             # <<<<<<<<<<<<<<
  * 
  *         RAD[1] = atan(((mu1 * gama2) - (gama1 * mu2)) / ((gama1 * v2) - (v1 * gama2)))
  */
-    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_9kinematic_d1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_9kinematic_d1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = PyNumber_Subtract(__pyx_v_Pz, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Subtract(__pyx_v_Pz, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_XDECREF_SET(__pyx_v_gama2, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "kinematic.pyx":129
+    /* "kinematic.pyx":127
  *         gama2 = Pz - d1
  * 
  *         RAD[1] = atan(((mu1 * gama2) - (gama1 * mu2)) / ((gama1 * v2) - (v1 * gama2)))             # <<<<<<<<<<<<<<
  * 
  *         C2 = cos(RAD[1])
  */
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_mu1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_mu1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = PyNumber_Multiply(__pyx_t_2, __pyx_v_gama2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Multiply(__pyx_t_2, __pyx_v_gama2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_mu2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_mu2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = PyNumber_Multiply(__pyx_v_gama1, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Multiply(__pyx_v_gama1, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Subtract(__pyx_t_9, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Subtract(__pyx_t_9, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_9 = PyNumber_Multiply(__pyx_v_gama1, __pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Multiply(__pyx_v_gama1, __pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_v1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = PyNumber_Multiply(__pyx_t_5, __pyx_v_gama2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Multiply(__pyx_t_5, __pyx_v_gama2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyNumber_Subtract(__pyx_t_9, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Subtract(__pyx_t_9, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyFloat_FromDouble(atan(__pyx_t_8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble(atan(__pyx_t_8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 1, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 129, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 1, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "kinematic.pyx":131
+    /* "kinematic.pyx":129
  *         RAD[1] = atan(((mu1 * gama2) - (gama1 * mu2)) / ((gama1 * v2) - (v1 * gama2)))
  * 
  *         C2 = cos(RAD[1])             # <<<<<<<<<<<<<<
  *         S2 = sin(RAD[1])
  *         C23 = cos(RAD[1] - RAD[2])
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 129, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 129, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_C2 = cos(__pyx_t_8);
 
-    /* "kinematic.pyx":132
+    /* "kinematic.pyx":130
  * 
  *         C2 = cos(RAD[1])
  *         S2 = sin(RAD[1])             # <<<<<<<<<<<<<<
  *         C23 = cos(RAD[1] - RAD[2])
  *         S23 = sin(RAD[1] - RAD[2])
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 132, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_S2 = sin(__pyx_t_8);
 
-    /* "kinematic.pyx":133
+    /* "kinematic.pyx":131
  *         C2 = cos(RAD[1])
  *         S2 = sin(RAD[1])
  *         C23 = cos(RAD[1] - RAD[2])             # <<<<<<<<<<<<<<
  *         S23 = sin(RAD[1] - RAD[2])
  * 
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 131, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 131, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = PyNumber_Subtract(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Subtract(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 131, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_C23 = cos(__pyx_t_8);
 
-    /* "kinematic.pyx":134
+    /* "kinematic.pyx":132
  *         S2 = sin(RAD[1])
  *         C23 = cos(RAD[1] - RAD[2])
  *         S23 = sin(RAD[1] - RAD[2])             # <<<<<<<<<<<<<<
  * 
  *         # Theta5
  */
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = PyNumber_Subtract(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Subtract(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_S23 = sin(__pyx_t_8);
 
-    /* "kinematic.pyx":137
+    /* "kinematic.pyx":135
  * 
  *         # Theta5
  *         r21 = -U[0] * C1 * C23 - U[1] * S1 * C23 + U[2] * S23             # <<<<<<<<<<<<<<
  *         r22 = -V[0] * C1 * C23 - V[1] * S1 * C23 + V[2] * S23
  *         r23 = -W[0] * C1 * C23 - W[1] * S1 * C23 + W[2] * S23
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyNumber_Negative(__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Negative(__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = PyNumber_Multiply(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Multiply(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyNumber_Multiply(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Multiply(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = PyNumber_Multiply(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Multiply(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = PyNumber_Multiply(__pyx_t_9, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Multiply(__pyx_t_9, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Subtract(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Subtract(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_S23); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_S23); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_9 = PyNumber_Multiply(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Multiply(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyNumber_Add(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Add(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_XDECREF_SET(__pyx_v_r21, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "kinematic.pyx":138
+    /* "kinematic.pyx":136
  *         # Theta5
  *         r21 = -U[0] * C1 * C23 - U[1] * S1 * C23 + U[2] * S23
  *         r22 = -V[0] * C1 * C23 - V[1] * S1 * C23 + V[2] * S23             # <<<<<<<<<<<<<<
  *         r23 = -W[0] * C1 * C23 - W[1] * S1 * C23 + W[2] * S23
  *         theta5_1 = atan2(sqrt(pow(r21, 2) + pow(r22, 2)), -r23)
  */
-    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_9 = PyNumber_Negative(__pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Negative(__pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = PyNumber_Multiply(__pyx_t_9, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Multiply(__pyx_t_9, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_9 = PyNumber_Multiply(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Multiply(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = PyNumber_Multiply(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Multiply(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = PyNumber_Multiply(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Multiply(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Subtract(__pyx_t_9, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Subtract(__pyx_t_9, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_S23); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_S23); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_4 = PyNumber_Multiply(__pyx_t_5, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Multiply(__pyx_t_5, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = PyNumber_Add(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Add(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_XDECREF_SET(__pyx_v_r22, __pyx_t_9);
     __pyx_t_9 = 0;
 
-    /* "kinematic.pyx":139
+    /* "kinematic.pyx":137
  *         r21 = -U[0] * C1 * C23 - U[1] * S1 * C23 + U[2] * S23
  *         r22 = -V[0] * C1 * C23 - V[1] * S1 * C23 + V[2] * S23
  *         r23 = -W[0] * C1 * C23 - W[1] * S1 * C23 + W[2] * S23             # <<<<<<<<<<<<<<
  *         theta5_1 = atan2(sqrt(pow(r21, 2) + pow(r22, 2)), -r23)
  *         theta5_2 = atan2(-sqrt(pow(r21, 2) + pow(r22, 2)), -r23)
  */
-    __pyx_t_9 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_4 = PyNumber_Negative(__pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Negative(__pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = PyNumber_Multiply(__pyx_t_9, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Multiply(__pyx_t_9, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = PyNumber_Multiply(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Multiply(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Subtract(__pyx_t_4, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Subtract(__pyx_t_4, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_S23); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_S23); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyNumber_Multiply(__pyx_t_9, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Multiply(__pyx_t_9, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyNumber_Add(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Add(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF_SET(__pyx_v_r23, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "kinematic.pyx":140
+    /* "kinematic.pyx":138
  *         r22 = -V[0] * C1 * C23 - V[1] * S1 * C23 + V[2] * S23
  *         r23 = -W[0] * C1 * C23 - W[1] * S1 * C23 + W[2] * S23
  *         theta5_1 = atan2(sqrt(pow(r21, 2) + pow(r22, 2)), -r23)             # <<<<<<<<<<<<<<
  *         theta5_2 = atan2(-sqrt(pow(r21, 2) + pow(r22, 2)), -r23)
  * 
  */
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_r21); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 140, __pyx_L1_error)
-    __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r22); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 140, __pyx_L1_error)
-    __pyx_t_4 = PyNumber_Negative(__pyx_v_r23); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 140, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_r21); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r22); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Negative(__pyx_v_r23); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 140, __pyx_L1_error)
+    __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_theta5_1 = atan2(sqrt((pow(__pyx_t_8, 2.0) + pow(__pyx_t_7, 2.0))), __pyx_t_10);
 
-    /* "kinematic.pyx":141
+    /* "kinematic.pyx":139
  *         r23 = -W[0] * C1 * C23 - W[1] * S1 * C23 + W[2] * S23
  *         theta5_1 = atan2(sqrt(pow(r21, 2) + pow(r22, 2)), -r23)
  *         theta5_2 = atan2(-sqrt(pow(r21, 2) + pow(r22, 2)), -r23)             # <<<<<<<<<<<<<<
  * 
  *         if cnt ==0 or cnt == 2:
  */
-    __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_v_r21); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L1_error)
-    __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r22); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L1_error)
-    __pyx_t_4 = PyNumber_Negative(__pyx_v_r23); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 141, __pyx_L1_error)
+    __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_v_r21); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r22); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Negative(__pyx_v_r23); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_theta5_2 = atan2((-sqrt((pow(__pyx_t_10, 2.0) + pow(__pyx_t_7, 2.0)))), __pyx_t_8);
 
-    /* "kinematic.pyx":143
+    /* "kinematic.pyx":141
  *         theta5_2 = atan2(-sqrt(pow(r21, 2) + pow(r22, 2)), -r23)
  * 
  *         if cnt ==0 or cnt == 2:             # <<<<<<<<<<<<<<
@@ -3507,19 +3420,19 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
       case 0:
       case 2:
 
-      /* "kinematic.pyx":144
+      /* "kinematic.pyx":142
  * 
  *         if cnt ==0 or cnt == 2:
  *             RAD[4] = theta5_1             # <<<<<<<<<<<<<<
  *         else:
  *             RAD[4] = theta5_2
  */
-      __pyx_t_4 = PyFloat_FromDouble(__pyx_v_theta5_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
+      __pyx_t_4 = PyFloat_FromDouble(__pyx_v_theta5_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 4, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 144, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 4, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 142, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "kinematic.pyx":143
+      /* "kinematic.pyx":141
  *         theta5_2 = atan2(-sqrt(pow(r21, 2) + pow(r22, 2)), -r23)
  * 
  *         if cnt ==0 or cnt == 2:             # <<<<<<<<<<<<<<
@@ -3529,131 +3442,131 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
       break;
       default:
 
-      /* "kinematic.pyx":146
+      /* "kinematic.pyx":144
  *             RAD[4] = theta5_1
  *         else:
  *             RAD[4] = theta5_2             # <<<<<<<<<<<<<<
  * 
  *         C5 = cos(RAD[4])
  */
-      __pyx_t_4 = PyFloat_FromDouble(__pyx_v_theta5_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
+      __pyx_t_4 = PyFloat_FromDouble(__pyx_v_theta5_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 4, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 146, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 4, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 144, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       break;
     }
 
-    /* "kinematic.pyx":148
+    /* "kinematic.pyx":146
  *             RAD[4] = theta5_2
  * 
  *         C5 = cos(RAD[4])             # <<<<<<<<<<<<<<
  *         S5 = sin(RAD[4])
  *         # Theta4
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 148, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 148, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 146, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_C5 = cos(__pyx_t_8);
 
-    /* "kinematic.pyx":149
+    /* "kinematic.pyx":147
  * 
  *         C5 = cos(RAD[4])
  *         S5 = sin(RAD[4])             # <<<<<<<<<<<<<<
  *         # Theta4
  *         r13 = W[0] * C1 * S23 + W[1] * S1 * S23 + W[2] * C23
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_S5 = sin(__pyx_t_8);
 
-    /* "kinematic.pyx":151
+    /* "kinematic.pyx":149
  *         S5 = sin(RAD[4])
  *         # Theta4
  *         r13 = W[0] * C1 * S23 + W[1] * S1 * S23 + W[2] * C23             # <<<<<<<<<<<<<<
  *         r33 = W[0] * S1 - W[1] * C1
  * 
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_S23); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_S23); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Multiply(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = PyNumber_Multiply(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Multiply(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S23); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_S23); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = PyNumber_Multiply(__pyx_t_9, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Multiply(__pyx_t_9, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_C23); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_9 = PyNumber_Multiply(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_9 = PyNumber_Multiply(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyNumber_Add(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Add(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 149, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_XDECREF_SET(__pyx_v_r13, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "kinematic.pyx":152
+    /* "kinematic.pyx":150
  *         # Theta4
  *         r13 = W[0] * C1 * S23 + W[1] * S1 * S23 + W[2] * C23
  *         r33 = W[0] * S1 - W[1] * C1             # <<<<<<<<<<<<<<
  * 
  *         if S5> ERRC:
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 152, __pyx_L1_error)
+    __pyx_t_9 = PyFloat_FromDouble(__pyx_v_S1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Multiply(__pyx_t_4, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 152, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_C1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyNumber_Multiply(__pyx_t_9, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 152, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Multiply(__pyx_t_9, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyNumber_Subtract(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Subtract(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF_SET(__pyx_v_r33, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "kinematic.pyx":154
+    /* "kinematic.pyx":152
  *         r33 = W[0] * S1 - W[1] * C1
  * 
  *         if S5> ERRC:             # <<<<<<<<<<<<<<
@@ -3663,24 +3576,24 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     __pyx_t_6 = ((__pyx_v_S5 > __pyx_v_9kinematic_ERRC) != 0);
     if (__pyx_t_6) {
 
-      /* "kinematic.pyx":155
+      /* "kinematic.pyx":153
  * 
  *         if S5> ERRC:
  *             RAD[3] = atan2(-r33, r13)             # <<<<<<<<<<<<<<
  *         elif S5 < ERRC:
  *             RAD[3] = atan2(r33, -r13)
  */
-      __pyx_t_4 = PyNumber_Negative(__pyx_v_r33); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_4 = PyNumber_Negative(__pyx_v_r33); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 153, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 153, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r13); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 155, __pyx_L1_error)
-      __pyx_t_4 = PyFloat_FromDouble(atan2(__pyx_t_8, __pyx_t_7)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r13); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_4 = PyFloat_FromDouble(atan2(__pyx_t_8, __pyx_t_7)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 153, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 3, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 3, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 153, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "kinematic.pyx":154
+      /* "kinematic.pyx":152
  *         r33 = W[0] * S1 - W[1] * C1
  * 
  *         if S5> ERRC:             # <<<<<<<<<<<<<<
@@ -3690,7 +3603,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
       goto __pyx_L9;
     }
 
-    /* "kinematic.pyx":156
+    /* "kinematic.pyx":154
  *         if S5> ERRC:
  *             RAD[3] = atan2(-r33, r13)
  *         elif S5 < ERRC:             # <<<<<<<<<<<<<<
@@ -3700,24 +3613,24 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     __pyx_t_6 = ((__pyx_v_S5 < __pyx_v_9kinematic_ERRC) != 0);
     if (__pyx_t_6) {
 
-      /* "kinematic.pyx":157
+      /* "kinematic.pyx":155
  *             RAD[3] = atan2(-r33, r13)
  *         elif S5 < ERRC:
  *             RAD[3] = atan2(r33, -r13)             # <<<<<<<<<<<<<<
  *         C4 = cos(RAD[3])
  *         S4 = sin(RAD[3])
  */
-      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r33); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 157, __pyx_L1_error)
-      __pyx_t_4 = PyNumber_Negative(__pyx_v_r13); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 157, __pyx_L1_error)
+      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r33); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_4 = PyNumber_Negative(__pyx_v_r13); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 155, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 157, __pyx_L1_error)
+      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 155, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_4 = PyFloat_FromDouble(atan2(__pyx_t_7, __pyx_t_8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 157, __pyx_L1_error)
+      __pyx_t_4 = PyFloat_FromDouble(atan2(__pyx_t_7, __pyx_t_8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 155, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 3, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 157, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 3, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "kinematic.pyx":156
+      /* "kinematic.pyx":154
  *         if S5> ERRC:
  *             RAD[3] = atan2(-r33, r13)
  *         elif S5 < ERRC:             # <<<<<<<<<<<<<<
@@ -3727,33 +3640,33 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     }
     __pyx_L9:;
 
-    /* "kinematic.pyx":158
+    /* "kinematic.pyx":156
  *         elif S5 < ERRC:
  *             RAD[3] = atan2(r33, -r13)
  *         C4 = cos(RAD[3])             # <<<<<<<<<<<<<<
  *         S4 = sin(RAD[3])
  * 
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 156, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 156, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_C4 = cos(__pyx_t_8);
 
-    /* "kinematic.pyx":159
+    /* "kinematic.pyx":157
  *             RAD[3] = atan2(r33, -r13)
  *         C4 = cos(RAD[3])
  *         S4 = sin(RAD[3])             # <<<<<<<<<<<<<<
  * 
  *         #theta 6
  */
-    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_S4 = sin(__pyx_t_8);
 
-    /* "kinematic.pyx":162
+    /* "kinematic.pyx":160
  * 
  *         #theta 6
  *         if S5 > ERRC:             # <<<<<<<<<<<<<<
@@ -3763,24 +3676,24 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     __pyx_t_6 = ((__pyx_v_S5 > __pyx_v_9kinematic_ERRC) != 0);
     if (__pyx_t_6) {
 
-      /* "kinematic.pyx":163
+      /* "kinematic.pyx":161
  *         #theta 6
  *         if S5 > ERRC:
  *             RAD[5] = atan2(-r22, r21)             # <<<<<<<<<<<<<<
  *         elif S5 < ERRC:
  *             RAD[5] = atan2(r22, -r21)
  */
-      __pyx_t_4 = PyNumber_Negative(__pyx_v_r22); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
+      __pyx_t_4 = PyNumber_Negative(__pyx_v_r22); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 161, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L1_error)
+      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r21); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L1_error)
-      __pyx_t_4 = PyFloat_FromDouble(atan2(__pyx_t_8, __pyx_t_7)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
+      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r21); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L1_error)
+      __pyx_t_4 = PyFloat_FromDouble(atan2(__pyx_t_8, __pyx_t_7)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 161, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 5, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 163, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 5, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 161, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "kinematic.pyx":162
+      /* "kinematic.pyx":160
  * 
  *         #theta 6
  *         if S5 > ERRC:             # <<<<<<<<<<<<<<
@@ -3790,7 +3703,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
       goto __pyx_L10;
     }
 
-    /* "kinematic.pyx":164
+    /* "kinematic.pyx":162
  *         if S5 > ERRC:
  *             RAD[5] = atan2(-r22, r21)
  *         elif S5 < ERRC:             # <<<<<<<<<<<<<<
@@ -3800,24 +3713,24 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     __pyx_t_6 = ((__pyx_v_S5 < __pyx_v_9kinematic_ERRC) != 0);
     if (__pyx_t_6) {
 
-      /* "kinematic.pyx":165
+      /* "kinematic.pyx":163
  *             RAD[5] = atan2(-r22, r21)
  *         elif S5 < ERRC:
  *             RAD[5] = atan2(r22, -r21)             # <<<<<<<<<<<<<<
  * 
  *         for i in range(6):
  */
-      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r22); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 165, __pyx_L1_error)
-      __pyx_t_4 = PyNumber_Negative(__pyx_v_r21); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 165, __pyx_L1_error)
+      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_r22); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L1_error)
+      __pyx_t_4 = PyNumber_Negative(__pyx_v_r21); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 165, __pyx_L1_error)
+      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_4 = PyFloat_FromDouble(atan2(__pyx_t_7, __pyx_t_8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 165, __pyx_L1_error)
+      __pyx_t_4 = PyFloat_FromDouble(atan2(__pyx_t_7, __pyx_t_8)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 163, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 5, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 165, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 5, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 163, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "kinematic.pyx":164
+      /* "kinematic.pyx":162
  *         if S5 > ERRC:
  *             RAD[5] = atan2(-r22, r21)
  *         elif S5 < ERRC:             # <<<<<<<<<<<<<<
@@ -3827,7 +3740,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     }
     __pyx_L10:;
 
-    /* "kinematic.pyx":167
+    /* "kinematic.pyx":165
  *             RAD[5] = atan2(r22, -r21)
  * 
  *         for i in range(6):             # <<<<<<<<<<<<<<
@@ -3837,23 +3750,23 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     for (__pyx_t_3 = 0; __pyx_t_3 < 6; __pyx_t_3+=1) {
       __pyx_v_i = __pyx_t_3;
 
-      /* "kinematic.pyx":168
+      /* "kinematic.pyx":166
  * 
  *         for i in range(6):
  *             THETA[cnt][i]= RAD[i]             # <<<<<<<<<<<<<<
  *         if cnt==3:
  *             passkey = 0
  */
-      __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 168, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 166, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_THETA), __pyx_v_cnt, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 168, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_THETA), __pyx_v_cnt, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 166, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      if (unlikely(__Pyx_SetItemInt(__pyx_t_5, __pyx_v_i, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 168, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(__pyx_t_5, __pyx_v_i, __pyx_t_4, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 166, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
 
-    /* "kinematic.pyx":169
+    /* "kinematic.pyx":167
  *         for i in range(6):
  *             THETA[cnt][i]= RAD[i]
  *         if cnt==3:             # <<<<<<<<<<<<<<
@@ -3863,7 +3776,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     __pyx_t_6 = ((__pyx_v_cnt == 3) != 0);
     if (__pyx_t_6) {
 
-      /* "kinematic.pyx":170
+      /* "kinematic.pyx":168
  *             THETA[cnt][i]= RAD[i]
  *         if cnt==3:
  *             passkey = 0             # <<<<<<<<<<<<<<
@@ -3872,7 +3785,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
       __pyx_v_passkey = 0;
 
-      /* "kinematic.pyx":169
+      /* "kinematic.pyx":167
  *         for i in range(6):
  *             THETA[cnt][i]= RAD[i]
  *         if cnt==3:             # <<<<<<<<<<<<<<
@@ -3881,7 +3794,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
     }
 
-    /* "kinematic.pyx":171
+    /* "kinematic.pyx":169
  *         if cnt==3:
  *             passkey = 0
  *         cnt = cnt+1             # <<<<<<<<<<<<<<
@@ -3891,7 +3804,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     __pyx_v_cnt = (__pyx_v_cnt + 1);
   }
 
-  /* "kinematic.pyx":172
+  /* "kinematic.pyx":170
  *             passkey = 0
  *         cnt = cnt+1
  *     for i in range(0, cnt):             # <<<<<<<<<<<<<<
@@ -3902,7 +3815,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_11; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "kinematic.pyx":173
+    /* "kinematic.pyx":171
  *         cnt = cnt+1
  *     for i in range(0, cnt):
  *         for j in range(0, 6):             # <<<<<<<<<<<<<<
@@ -3912,21 +3825,21 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     for (__pyx_t_12 = 0; __pyx_t_12 < 6; __pyx_t_12+=1) {
       __pyx_v_j = __pyx_t_12;
 
-      /* "kinematic.pyx":174
+      /* "kinematic.pyx":172
  *     for i in range(0, cnt):
  *         for j in range(0, 6):
  *             dT[i][j] = np.degrees(THETA[i][j]) - actjoint[j]             # <<<<<<<<<<<<<<
  *             dif[i] = dif[i] + pow(dT[i][j], 2)
  *         dif[i] = sqrt(dif[i])
  */
-      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 172, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_degrees); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_degrees); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_THETA), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_GetItemInt(((PyObject *)__pyx_v_THETA), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 172, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_9 = __Pyx_GetItemInt(__pyx_t_5, __pyx_v_j, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_GetItemInt(__pyx_t_5, __pyx_v_j, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 172, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -3940,14 +3853,14 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
         }
       }
       if (!__pyx_t_5) {
-        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 174, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 172, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_GOTREF(__pyx_t_4);
       } else {
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_2)) {
           PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_9};
-          __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 174, __pyx_L1_error)
+          __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 172, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -3956,93 +3869,93 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
           PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_9};
-          __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 174, __pyx_L1_error)
+          __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 172, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         } else
         #endif
         {
-          __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+          __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __pyx_t_5 = NULL;
           __Pyx_GIVEREF(__pyx_t_9);
           PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_9);
           __pyx_t_9 = 0;
-          __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 174, __pyx_L1_error)
+          __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 172, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         }
       }
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_actjoint, __pyx_v_j, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_actjoint, __pyx_v_j, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = PyNumber_Subtract(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __pyx_t_1 = PyNumber_Subtract(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dT), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dT), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      if (unlikely(__Pyx_SetItemInt(__pyx_t_2, __pyx_v_j, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 174, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(__pyx_t_2, __pyx_v_j, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 172, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "kinematic.pyx":175
+      /* "kinematic.pyx":173
  *         for j in range(0, 6):
  *             dT[i][j] = np.degrees(THETA[i][j]) - actjoint[j]
  *             dif[i] = dif[i] + pow(dT[i][j], 2)             # <<<<<<<<<<<<<<
  *         dif[i] = sqrt(dif[i])
  *     dif_min = dif[0]
  */
-      __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dT), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dT), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_2, __pyx_v_j, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 175, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_GetItemInt(__pyx_t_2, __pyx_v_j, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 173, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 175, __pyx_L1_error)
+      __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 173, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_4 = PyFloat_FromDouble(pow(__pyx_t_8, 2.0)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 175, __pyx_L1_error)
+      __pyx_t_4 = PyFloat_FromDouble(pow(__pyx_t_8, 2.0)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 173, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
+      __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 175, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 173, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
 
-    /* "kinematic.pyx":176
+    /* "kinematic.pyx":174
  *             dT[i][j] = np.degrees(THETA[i][j]) - actjoint[j]
  *             dif[i] = dif[i] + pow(dT[i][j], 2)
  *         dif[i] = sqrt(dif[i])             # <<<<<<<<<<<<<<
  *     dif_min = dif[0]
  *     min = 0
  */
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L1_error)
+    __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(sqrt(__pyx_t_8)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(sqrt(__pyx_t_8)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 176, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 174, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
 
-  /* "kinematic.pyx":177
+  /* "kinematic.pyx":175
  *             dif[i] = dif[i] + pow(dT[i][j], 2)
  *         dif[i] = sqrt(dif[i])
  *     dif_min = dif[0]             # <<<<<<<<<<<<<<
  *     min = 0
  *     for i in range(1, 4):
  */
-  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dif), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dif), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_dif_min = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "kinematic.pyx":178
+  /* "kinematic.pyx":176
  *         dif[i] = sqrt(dif[i])
  *     dif_min = dif[0]
  *     min = 0             # <<<<<<<<<<<<<<
@@ -4051,7 +3964,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
   __pyx_v_min = 0;
 
-  /* "kinematic.pyx":179
+  /* "kinematic.pyx":177
  *     dif_min = dif[0]
  *     min = 0
  *     for i in range(1, 4):             # <<<<<<<<<<<<<<
@@ -4061,34 +3974,34 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
   for (__pyx_t_3 = 1; __pyx_t_3 < 4; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "kinematic.pyx":180
+    /* "kinematic.pyx":178
  *     min = 0
  *     for i in range(1, 4):
  *         if dif_min>dif[i]:             # <<<<<<<<<<<<<<
  *             dif_min = dif[i]
  *             min = i
  */
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = PyObject_RichCompare(__pyx_v_dif_min, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 180, __pyx_L1_error)
+    __pyx_t_4 = PyObject_RichCompare(__pyx_v_dif_min, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 180, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (__pyx_t_6) {
 
-      /* "kinematic.pyx":181
+      /* "kinematic.pyx":179
  *     for i in range(1, 4):
  *         if dif_min>dif[i]:
  *             dif_min = dif[i]             # <<<<<<<<<<<<<<
  *             min = i
  *     for i in range(6):
  */
-      __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 181, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_GetItemInt(((PyObject *)__pyx_v_dif), __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 179, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF_SET(__pyx_v_dif_min, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "kinematic.pyx":182
+      /* "kinematic.pyx":180
  *         if dif_min>dif[i]:
  *             dif_min = dif[i]
  *             min = i             # <<<<<<<<<<<<<<
@@ -4097,7 +4010,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
  */
       __pyx_v_min = __pyx_v_i;
 
-      /* "kinematic.pyx":180
+      /* "kinematic.pyx":178
  *     min = 0
  *     for i in range(1, 4):
  *         if dif_min>dif[i]:             # <<<<<<<<<<<<<<
@@ -4107,7 +4020,7 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
     }
   }
 
-  /* "kinematic.pyx":183
+  /* "kinematic.pyx":181
  *             dif_min = dif[i]
  *             min = i
  *     for i in range(6):             # <<<<<<<<<<<<<<
@@ -4117,21 +4030,21 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
   for (__pyx_t_3 = 0; __pyx_t_3 < 6; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "kinematic.pyx":184
+    /* "kinematic.pyx":182
  *             min = i
  *     for i in range(6):
  *         Joint_Deg.append(np.degrees(THETA[min][i]))             # <<<<<<<<<<<<<<
  *     return Joint_Deg
  * 
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 182, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_degrees); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_degrees); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_THETA), __pyx_v_min, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_THETA), __pyx_v_min, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 182, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = __Pyx_GetItemInt(__pyx_t_2, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_GetItemInt(__pyx_t_2, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 182, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -4145,14 +4058,14 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
       }
     }
     if (!__pyx_t_2) {
-      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 184, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 182, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_GOTREF(__pyx_t_4);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_1)) {
         PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_t_9};
-        __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 184, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 182, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -4161,30 +4074,30 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
         PyObject *__pyx_temp[2] = {__pyx_t_2, __pyx_t_9};
-        __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 184, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 182, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       } else
       #endif
       {
-        __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 184, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 182, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __pyx_t_2 = NULL;
         __Pyx_GIVEREF(__pyx_t_9);
         PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_9);
         __pyx_t_9 = 0;
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 184, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 182, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       }
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_13 = __Pyx_PyList_Append(__pyx_v_Joint_Deg, __pyx_t_4); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 184, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyList_Append(__pyx_v_Joint_Deg, __pyx_t_4); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 182, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
 
-  /* "kinematic.pyx":185
+  /* "kinematic.pyx":183
  *     for i in range(6):
  *         Joint_Deg.append(np.degrees(THETA[min][i]))
  *     return Joint_Deg             # <<<<<<<<<<<<<<
@@ -4196,8 +4109,8 @@ static PyObject *__pyx_f_9kinematic_Inverse_Kinematic(PyObject *__pyx_v_TCP, PyO
   __pyx_r = __pyx_v_Joint_Deg;
   goto __pyx_L0;
 
-  /* "kinematic.pyx":68
- *     return X, Y, Z,R2Eul(UVM)
+  /* "kinematic.pyx":66
+ *     return X, Y, Z,R2Eul(UVW)
  * 
  * cpdef object Inverse_Kinematic(object TCP,object TOV, object actjoint):             # <<<<<<<<<<<<<<
  *     cdef np.ndarray THETA =  np.zeros((4, 6))
@@ -4274,17 +4187,17 @@ static PyObject *__pyx_pw_9kinematic_3Inverse_Kinematic(PyObject *__pyx_self, Py
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_TOV)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Inverse_Kinematic", 1, 3, 3, 1); __PYX_ERR(0, 68, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Inverse_Kinematic", 1, 3, 3, 1); __PYX_ERR(0, 66, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_actjoint)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Inverse_Kinematic", 1, 3, 3, 2); __PYX_ERR(0, 68, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Inverse_Kinematic", 1, 3, 3, 2); __PYX_ERR(0, 66, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Inverse_Kinematic") < 0)) __PYX_ERR(0, 68, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Inverse_Kinematic") < 0)) __PYX_ERR(0, 66, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -4299,7 +4212,7 @@ static PyObject *__pyx_pw_9kinematic_3Inverse_Kinematic(PyObject *__pyx_self, Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("Inverse_Kinematic", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 68, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("Inverse_Kinematic", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 66, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("kinematic.Inverse_Kinematic", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4318,7 +4231,7 @@ static PyObject *__pyx_pf_9kinematic_2Inverse_Kinematic(CYTHON_UNUSED PyObject *
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("Inverse_Kinematic", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_9kinematic_Inverse_Kinematic(__pyx_v_TCP, __pyx_v_TOV, __pyx_v_actjoint, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9kinematic_Inverse_Kinematic(__pyx_v_TCP, __pyx_v_TOV, __pyx_v_actjoint, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4335,7 +4248,7 @@ static PyObject *__pyx_pf_9kinematic_2Inverse_Kinematic(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "kinematic.pyx":189
+/* "kinematic.pyx":187
  * 
  * 
  * cdef object Eul2R(object EUL):             # <<<<<<<<<<<<<<
@@ -4366,19 +4279,19 @@ static PyObject *__pyx_f_9kinematic_Eul2R(PyObject *__pyx_v_EUL) {
   PyObject *__pyx_t_9 = NULL;
   __Pyx_RefNannySetupContext("Eul2R", 0);
 
-  /* "kinematic.pyx":190
+  /* "kinematic.pyx":188
  * 
  * cdef object Eul2R(object EUL):
  *     cdef object RAD = []             # <<<<<<<<<<<<<<
  *     for i in range(3):
  *         RAD.append(np.radians(EUL[i]))
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_RAD = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":191
+  /* "kinematic.pyx":189
  * cdef object Eul2R(object EUL):
  *     cdef object RAD = []
  *     for i in range(3):             # <<<<<<<<<<<<<<
@@ -4388,19 +4301,19 @@ static PyObject *__pyx_f_9kinematic_Eul2R(PyObject *__pyx_v_EUL) {
   for (__pyx_t_2 = 0; __pyx_t_2 < 3; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "kinematic.pyx":192
+    /* "kinematic.pyx":190
  *     cdef object RAD = []
  *     for i in range(3):
  *         RAD.append(np.radians(EUL[i]))             # <<<<<<<<<<<<<<
  * 
  *     Ca = cos(RAD[0])
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 192, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_radians); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 192, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_radians); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 190, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_EUL, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 192, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_EUL, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -4413,14 +4326,14 @@ static PyObject *__pyx_f_9kinematic_Eul2R(PyObject *__pyx_v_EUL) {
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_3};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4429,121 +4342,121 @@ static PyObject *__pyx_f_9kinematic_Eul2R(PyObject *__pyx_v_EUL) {
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_3};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       } else
       #endif
       {
-        __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 192, __pyx_L1_error)
+        __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 190, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
         __Pyx_GIVEREF(__pyx_t_3);
         PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_3);
         __pyx_t_3 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       }
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_7 = __Pyx_PyObject_Append(__pyx_v_RAD, __pyx_t_1); if (unlikely(__pyx_t_7 == ((int)-1))) __PYX_ERR(0, 192, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Append(__pyx_v_RAD, __pyx_t_1); if (unlikely(__pyx_t_7 == ((int)-1))) __PYX_ERR(0, 190, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
 
-  /* "kinematic.pyx":194
+  /* "kinematic.pyx":192
  *         RAD.append(np.radians(EUL[i]))
  * 
  *     Ca = cos(RAD[0])             # <<<<<<<<<<<<<<
  *     Cb = cos(RAD[1])
  *     Cg = cos(RAD[2])
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 192, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_Ca = cos(__pyx_t_8);
 
-  /* "kinematic.pyx":195
+  /* "kinematic.pyx":193
  * 
  *     Ca = cos(RAD[0])
  *     Cb = cos(RAD[1])             # <<<<<<<<<<<<<<
  *     Cg = cos(RAD[2])
  *     Sa = sin(RAD[0])
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_Cb = cos(__pyx_t_8);
 
-  /* "kinematic.pyx":196
+  /* "kinematic.pyx":194
  *     Ca = cos(RAD[0])
  *     Cb = cos(RAD[1])
  *     Cg = cos(RAD[2])             # <<<<<<<<<<<<<<
  *     Sa = sin(RAD[0])
  *     Sb = sin(RAD[1])
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 196, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 196, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 194, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_Cg = cos(__pyx_t_8);
 
-  /* "kinematic.pyx":197
+  /* "kinematic.pyx":195
  *     Cb = cos(RAD[1])
  *     Cg = cos(RAD[2])
  *     Sa = sin(RAD[0])             # <<<<<<<<<<<<<<
  *     Sb = sin(RAD[1])
  *     Sg = sin(RAD[2])
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_Sa = sin(__pyx_t_8);
 
-  /* "kinematic.pyx":198
+  /* "kinematic.pyx":196
  *     Cg = cos(RAD[2])
  *     Sa = sin(RAD[0])
  *     Sb = sin(RAD[1])             # <<<<<<<<<<<<<<
  *     Sg = sin(RAD[2])
  *     cdef object R = [[Ca * Cg - Sa * Cb * Sg, Sa * Cg + Ca * Cb * Sg,Sb * Sg ], [-Ca * Sg - Sa * Cb * Cg, -Sa * Sg + Ca * Cb * Cg, Sa * Sb  ], [ Sb * Cg, -Ca * Sb, Cb]]
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_Sb = sin(__pyx_t_8);
 
-  /* "kinematic.pyx":199
+  /* "kinematic.pyx":197
  *     Sa = sin(RAD[0])
  *     Sb = sin(RAD[1])
  *     Sg = sin(RAD[2])             # <<<<<<<<<<<<<<
  *     cdef object R = [[Ca * Cg - Sa * Cb * Sg, Sa * Cg + Ca * Cb * Sg,Sb * Sg ], [-Ca * Sg - Sa * Cb * Cg, -Sa * Sg + Ca * Cb * Cg, Sa * Sb  ], [ Sb * Cg, -Ca * Sb, Cb]]
  *     return R
  */
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 199, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_RAD, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 199, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_Sg = sin(__pyx_t_8);
 
-  /* "kinematic.pyx":200
+  /* "kinematic.pyx":198
  *     Sb = sin(RAD[1])
  *     Sg = sin(RAD[2])
  *     cdef object R = [[Ca * Cg - Sa * Cb * Sg, Sa * Cg + Ca * Cb * Sg,Sb * Sg ], [-Ca * Sg - Sa * Cb * Cg, -Sa * Sg + Ca * Cb * Cg, Sa * Sb  ], [ Sb * Cg, -Ca * Sb, Cb]]             # <<<<<<<<<<<<<<
  *     return R
  * 
  */
-  __pyx_t_1 = PyFloat_FromDouble(((__pyx_v_Ca * __pyx_v_Cg) - ((__pyx_v_Sa * __pyx_v_Cb) * __pyx_v_Sg))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((__pyx_v_Ca * __pyx_v_Cg) - ((__pyx_v_Sa * __pyx_v_Cb) * __pyx_v_Sg))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyFloat_FromDouble(((__pyx_v_Sa * __pyx_v_Cg) + ((__pyx_v_Ca * __pyx_v_Cb) * __pyx_v_Sg))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble(((__pyx_v_Sa * __pyx_v_Cg) + ((__pyx_v_Ca * __pyx_v_Cb) * __pyx_v_Sg))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = PyFloat_FromDouble((__pyx_v_Sb * __pyx_v_Sg)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble((__pyx_v_Sb * __pyx_v_Sg)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_3 = PyList_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyList_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -4554,13 +4467,13 @@ static PyObject *__pyx_f_9kinematic_Eul2R(PyObject *__pyx_v_EUL) {
   __pyx_t_1 = 0;
   __pyx_t_4 = 0;
   __pyx_t_6 = 0;
-  __pyx_t_6 = PyFloat_FromDouble((((-__pyx_v_Ca) * __pyx_v_Sg) - ((__pyx_v_Sa * __pyx_v_Cb) * __pyx_v_Cg))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble((((-__pyx_v_Ca) * __pyx_v_Sg) - ((__pyx_v_Sa * __pyx_v_Cb) * __pyx_v_Cg))); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_4 = PyFloat_FromDouble((((-__pyx_v_Sa) * __pyx_v_Sg) + ((__pyx_v_Ca * __pyx_v_Cb) * __pyx_v_Cg))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble((((-__pyx_v_Sa) * __pyx_v_Sg) + ((__pyx_v_Ca * __pyx_v_Cb) * __pyx_v_Cg))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_Sa * __pyx_v_Sb)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_Sa * __pyx_v_Sb)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyList_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_5 = PyList_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_6);
   PyList_SET_ITEM(__pyx_t_5, 0, __pyx_t_6);
@@ -4571,13 +4484,13 @@ static PyObject *__pyx_f_9kinematic_Eul2R(PyObject *__pyx_v_EUL) {
   __pyx_t_6 = 0;
   __pyx_t_4 = 0;
   __pyx_t_1 = 0;
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_Sb * __pyx_v_Cg)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_Sb * __pyx_v_Cg)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyFloat_FromDouble(((-__pyx_v_Ca) * __pyx_v_Sb)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble(((-__pyx_v_Ca) * __pyx_v_Sb)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Cb); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_Cb); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_9 = PyList_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_9 = PyList_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_GIVEREF(__pyx_t_1);
   PyList_SET_ITEM(__pyx_t_9, 0, __pyx_t_1);
@@ -4588,7 +4501,7 @@ static PyObject *__pyx_f_9kinematic_Eul2R(PyObject *__pyx_v_EUL) {
   __pyx_t_1 = 0;
   __pyx_t_4 = 0;
   __pyx_t_6 = 0;
-  __pyx_t_6 = PyList_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_t_6 = PyList_New(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_3);
   PyList_SET_ITEM(__pyx_t_6, 0, __pyx_t_3);
@@ -4602,7 +4515,7 @@ static PyObject *__pyx_f_9kinematic_Eul2R(PyObject *__pyx_v_EUL) {
   __pyx_v_R = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "kinematic.pyx":201
+  /* "kinematic.pyx":199
  *     Sg = sin(RAD[2])
  *     cdef object R = [[Ca * Cg - Sa * Cb * Sg, Sa * Cg + Ca * Cb * Sg,Sb * Sg ], [-Ca * Sg - Sa * Cb * Cg, -Sa * Sg + Ca * Cb * Cg, Sa * Sb  ], [ Sb * Cg, -Ca * Sb, Cb]]
  *     return R             # <<<<<<<<<<<<<<
@@ -4614,7 +4527,7 @@ static PyObject *__pyx_f_9kinematic_Eul2R(PyObject *__pyx_v_EUL) {
   __pyx_r = __pyx_v_R;
   goto __pyx_L0;
 
-  /* "kinematic.pyx":189
+  /* "kinematic.pyx":187
  * 
  * 
  * cdef object Eul2R(object EUL):             # <<<<<<<<<<<<<<
@@ -4640,7 +4553,7 @@ static PyObject *__pyx_f_9kinematic_Eul2R(PyObject *__pyx_v_EUL) {
   return __pyx_r;
 }
 
-/* "kinematic.pyx":203
+/* "kinematic.pyx":201
  *     return R
  * 
  * cdef R2Eul(object R):             # <<<<<<<<<<<<<<
@@ -4668,102 +4581,102 @@ static PyObject *__pyx_f_9kinematic_R2Eul(PyObject *__pyx_v_R) {
   PyObject *__pyx_t_9 = NULL;
   __Pyx_RefNannySetupContext("R2Eul", 0);
 
-  /* "kinematic.pyx":204
+  /* "kinematic.pyx":202
  * 
  * cdef R2Eul(object R):
  *     cdef np.ndarray RAD = np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 204, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 202, __pyx_L1_error)
   __pyx_v_RAD = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":205
+  /* "kinematic.pyx":203
  * cdef R2Eul(object R):
  *     cdef np.ndarray RAD = np.zeros((3))
  *     cdef np.ndarray U= np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray V= np.zeros((3))
  *     cdef np.ndarray W= np.zeros((3))
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 203, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 205, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 203, __pyx_L1_error)
   __pyx_v_U = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":206
+  /* "kinematic.pyx":204
  *     cdef np.ndarray RAD = np.zeros((3))
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray W= np.zeros((3))
  *     cdef np.ndarray EUL = np.zeros((3))
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 206, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 204, __pyx_L1_error)
   __pyx_v_V = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":207
+  /* "kinematic.pyx":205
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))
  *     cdef np.ndarray W= np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray EUL = np.zeros((3))
  *     for i in range(0, 3):
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 207, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 205, __pyx_L1_error)
   __pyx_v_W = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":208
+  /* "kinematic.pyx":206
  *     cdef np.ndarray V= np.zeros((3))
  *     cdef np.ndarray W= np.zeros((3))
  *     cdef np.ndarray EUL = np.zeros((3))             # <<<<<<<<<<<<<<
  *     for i in range(0, 3):
  *         U[i] = R[i][0]
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 208, __pyx_L1_error)
+  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 206, __pyx_L1_error)
   __pyx_v_EUL = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "kinematic.pyx":209
+  /* "kinematic.pyx":207
  *     cdef np.ndarray W= np.zeros((3))
  *     cdef np.ndarray EUL = np.zeros((3))
  *     for i in range(0, 3):             # <<<<<<<<<<<<<<
@@ -4773,120 +4686,120 @@ static PyObject *__pyx_f_9kinematic_R2Eul(PyObject *__pyx_v_R) {
   for (__pyx_t_3 = 0; __pyx_t_3 < 3; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "kinematic.pyx":210
+    /* "kinematic.pyx":208
  *     cdef np.ndarray EUL = np.zeros((3))
  *     for i in range(0, 3):
  *         U[i] = R[i][0]             # <<<<<<<<<<<<<<
  *         V[i] = R[i][1]
  *         W[i] = R[i][2]
  */
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_R, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_R, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 210, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_U), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 210, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_U), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kinematic.pyx":211
+    /* "kinematic.pyx":209
  *     for i in range(0, 3):
  *         U[i] = R[i][0]
  *         V[i] = R[i][1]             # <<<<<<<<<<<<<<
  *         W[i] = R[i][2]
  * 
  */
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_R, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 211, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_R, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 209, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 211, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_V), __pyx_v_i, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 211, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_V), __pyx_v_i, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 209, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kinematic.pyx":212
+    /* "kinematic.pyx":210
  *         U[i] = R[i][0]
  *         V[i] = R[i][1]
  *         W[i] = R[i][2]             # <<<<<<<<<<<<<<
  * 
  *     RAD[1] = atan2(sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
  */
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_R, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 212, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_R, __pyx_v_i, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 212, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_W), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 212, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_W), __pyx_v_i, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 1, 1) < 0)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
 
-  /* "kinematic.pyx":214
+  /* "kinematic.pyx":212
  *         W[i] = R[i][2]
  * 
  *     RAD[1] = atan2(sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])             # <<<<<<<<<<<<<<
  *     if (fabs(sin(RAD[1])) <= ERRC):
  *         RAD[2] = 0.0
  */
-  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(atan2(sqrt((pow(__pyx_t_4, 2.0) + pow(__pyx_t_5, 2.0))), __pyx_t_6)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(atan2(sqrt((pow(__pyx_t_4, 2.0) + pow(__pyx_t_5, 2.0))), __pyx_t_6)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 1, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 214, __pyx_L1_error)
+  if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 1, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "kinematic.pyx":215
+  /* "kinematic.pyx":213
  * 
  *     RAD[1] = atan2(sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
  *     if (fabs(sin(RAD[1])) <= ERRC):             # <<<<<<<<<<<<<<
  *         RAD[2] = 0.0
  *         RAD[0] = atan2(V[0], U[0])
  */
-  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_7 = ((fabs(sin(__pyx_t_6)) <= __pyx_v_9kinematic_ERRC) != 0);
   if (__pyx_t_7) {
 
-    /* "kinematic.pyx":216
+    /* "kinematic.pyx":214
  *     RAD[1] = atan2(sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
  *     if (fabs(sin(RAD[1])) <= ERRC):
  *         RAD[2] = 0.0             # <<<<<<<<<<<<<<
  *         RAD[0] = atan2(V[0], U[0])
  *     else:
  */
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 2, __pyx_float_0_0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 216, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 2, __pyx_float_0_0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 214, __pyx_L1_error)
 
-    /* "kinematic.pyx":217
+    /* "kinematic.pyx":215
  *     if (fabs(sin(RAD[1])) <= ERRC):
  *         RAD[2] = 0.0
  *         RAD[0] = atan2(V[0], U[0])             # <<<<<<<<<<<<<<
  *     else:
  *         RAD[0] = atan2(W[0], (-W[1]))
  */
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 217, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 217, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 217, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 217, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(atan2(__pyx_t_6, __pyx_t_5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 217, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(atan2(__pyx_t_6, __pyx_t_5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 0, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 217, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 0, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kinematic.pyx":215
+    /* "kinematic.pyx":213
  * 
  *     RAD[1] = atan2(sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
  *     if (fabs(sin(RAD[1])) <= ERRC):             # <<<<<<<<<<<<<<
@@ -4896,7 +4809,7 @@ static PyObject *__pyx_f_9kinematic_R2Eul(PyObject *__pyx_v_R) {
     goto __pyx_L5;
   }
 
-  /* "kinematic.pyx":219
+  /* "kinematic.pyx":217
  *         RAD[0] = atan2(V[0], U[0])
  *     else:
  *         RAD[0] = atan2(W[0], (-W[1]))             # <<<<<<<<<<<<<<
@@ -4904,147 +4817,147 @@ static PyObject *__pyx_f_9kinematic_R2Eul(PyObject *__pyx_v_R) {
  * 
  */
   /*else*/ {
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyFloat_FromDouble(atan2(__pyx_t_5, __pyx_t_6)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_1 = PyFloat_FromDouble(atan2(__pyx_t_5, __pyx_t_6)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 0, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 219, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 0, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 217, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "kinematic.pyx":220
+    /* "kinematic.pyx":218
  *     else:
  *         RAD[0] = atan2(W[0], (-W[1]))
  *         RAD[2] = atan2(U[2], V[2])             # <<<<<<<<<<<<<<
  * 
  *     if fabs(RAD[0]) + fabs(RAD[2]) >= np.pi:
  */
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyFloat_FromDouble(atan2(__pyx_t_6, __pyx_t_5)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_1 = PyFloat_FromDouble(atan2(__pyx_t_6, __pyx_t_5)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 2, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 220, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 2, __pyx_t_1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
   __pyx_L5:;
 
-  /* "kinematic.pyx":222
+  /* "kinematic.pyx":220
  *         RAD[2] = atan2(U[2], V[2])
  * 
  *     if fabs(RAD[0]) + fabs(RAD[2]) >= np.pi:             # <<<<<<<<<<<<<<
  *         RAD[1] = atan2(-sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
  *         RAD[0] = atan2(-W[0], W[1])
  */
-  __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_RAD), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyFloat_FromDouble((fabs(__pyx_t_5) + fabs(__pyx_t_6))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((fabs(__pyx_t_5) + fabs(__pyx_t_6))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_pi); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_pi); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_8, Py_GE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_8, Py_GE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_7) {
 
-    /* "kinematic.pyx":223
+    /* "kinematic.pyx":221
  * 
  *     if fabs(RAD[0]) + fabs(RAD[2]) >= np.pi:
  *         RAD[1] = atan2(-sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])             # <<<<<<<<<<<<<<
  *         RAD[0] = atan2(-W[0], W[1])
  *         RAD[2] = atan2(-U[2], -V[2])
  */
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(atan2((-sqrt((pow(__pyx_t_6, 2.0) + pow(__pyx_t_5, 2.0)))), __pyx_t_4)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(atan2((-sqrt((pow(__pyx_t_6, 2.0) + pow(__pyx_t_5, 2.0)))), __pyx_t_4)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 1, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 223, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 1, __pyx_t_2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "kinematic.pyx":224
+    /* "kinematic.pyx":222
  *     if fabs(RAD[0]) + fabs(RAD[2]) >= np.pi:
  *         RAD[1] = atan2(-sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
  *         RAD[0] = atan2(-W[0], W[1])             # <<<<<<<<<<<<<<
  *         RAD[2] = atan2(-U[2], -V[2])
  *     #for i in range(0, 3):
  */
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __pyx_t_8 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 222, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 224, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_GetItemInt(((PyObject *)__pyx_v_W), 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 222, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 224, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = PyFloat_FromDouble(atan2(__pyx_t_4, __pyx_t_5)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 224, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(atan2(__pyx_t_4, __pyx_t_5)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 222, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 0, __pyx_t_8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 224, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 0, __pyx_t_8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 222, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "kinematic.pyx":225
+    /* "kinematic.pyx":223
  *         RAD[1] = atan2(-sqrt(pow(W[0], 2) + pow(W[1], 2)), W[2])
  *         RAD[0] = atan2(-W[0], W[1])
  *         RAD[2] = atan2(-U[2], -V[2])             # <<<<<<<<<<<<<<
  *     #for i in range(0, 3):
  *     EUL = np.rad2deg( RAD)
  */
-    __pyx_t_8 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_GetItemInt(((PyObject *)__pyx_v_U), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_2 = PyNumber_Negative(__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Negative(__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_V), 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_8 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_8 = PyNumber_Negative(__pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_8); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = PyFloat_FromDouble(atan2(__pyx_t_5, __pyx_t_4)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_8 = PyFloat_FromDouble(atan2(__pyx_t_5, __pyx_t_4)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 2, __pyx_t_8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 225, __pyx_L1_error)
+    if (unlikely(__Pyx_SetItemInt(((PyObject *)__pyx_v_RAD), 2, __pyx_t_8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1) < 0)) __PYX_ERR(0, 223, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "kinematic.pyx":222
+    /* "kinematic.pyx":220
  *         RAD[2] = atan2(U[2], V[2])
  * 
  *     if fabs(RAD[0]) + fabs(RAD[2]) >= np.pi:             # <<<<<<<<<<<<<<
@@ -5053,15 +4966,15 @@ static PyObject *__pyx_f_9kinematic_R2Eul(PyObject *__pyx_v_R) {
  */
   }
 
-  /* "kinematic.pyx":227
+  /* "kinematic.pyx":225
  *         RAD[2] = atan2(-U[2], -V[2])
  *     #for i in range(0, 3):
  *     EUL = np.rad2deg( RAD)             # <<<<<<<<<<<<<<
  *     return EUL
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_rad2deg); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_rad2deg); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -5075,13 +4988,13 @@ static PyObject *__pyx_f_9kinematic_R2Eul(PyObject *__pyx_v_R) {
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_t_1, ((PyObject *)__pyx_v_RAD)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 227, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_t_1, ((PyObject *)__pyx_v_RAD)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 225, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_1)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, ((PyObject *)__pyx_v_RAD)};
-      __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 227, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 225, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_8);
     } else
@@ -5089,29 +5002,29 @@ static PyObject *__pyx_f_9kinematic_R2Eul(PyObject *__pyx_v_R) {
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
       PyObject *__pyx_temp[2] = {__pyx_t_2, ((PyObject *)__pyx_v_RAD)};
-      __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 227, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 225, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_GOTREF(__pyx_t_8);
     } else
     #endif
     {
-      __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 227, __pyx_L1_error)
+      __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 225, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_2); __pyx_t_2 = NULL;
       __Pyx_INCREF(((PyObject *)__pyx_v_RAD));
       __Pyx_GIVEREF(((PyObject *)__pyx_v_RAD));
       PyTuple_SET_ITEM(__pyx_t_9, 0+1, ((PyObject *)__pyx_v_RAD));
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_9, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 227, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_9, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 225, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(((__pyx_t_8) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_8, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 227, __pyx_L1_error)
+  if (!(likely(((__pyx_t_8) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_8, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_DECREF_SET(__pyx_v_EUL, ((PyArrayObject *)__pyx_t_8));
   __pyx_t_8 = 0;
 
-  /* "kinematic.pyx":228
+  /* "kinematic.pyx":226
  *     #for i in range(0, 3):
  *     EUL = np.rad2deg( RAD)
  *     return EUL             # <<<<<<<<<<<<<<
@@ -5121,7 +5034,7 @@ static PyObject *__pyx_f_9kinematic_R2Eul(PyObject *__pyx_v_R) {
   __pyx_r = ((PyObject *)__pyx_v_EUL);
   goto __pyx_L0;
 
-  /* "kinematic.pyx":203
+  /* "kinematic.pyx":201
  *     return R
  * 
  * cdef R2Eul(object R):             # <<<<<<<<<<<<<<
@@ -7779,7 +7692,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_actjoint, __pyx_k_actjoint, sizeof(__pyx_k_actjoint), 0, 0, 1, 1},
   {&__pyx_n_s_append, __pyx_k_append, sizeof(__pyx_k_append), 0, 0, 1, 1},
-  {&__pyx_n_s_array, __pyx_k_array, sizeof(__pyx_k_array), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_degrees, __pyx_k_degrees, sizeof(__pyx_k_degrees), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
@@ -7816,7 +7728,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "kinematic.pyx":32
  * cpdef object forward_kinematic(object angles):
  *     cdef object RAD = []
- *     cdef np.ndarray UVM = np.zeros((3,3))             # <<<<<<<<<<<<<<
+ *     cdef np.ndarray UVW = np.zeros((3,3))             # <<<<<<<<<<<<<<
  *     foo(RAD, angles)
  * 
  */
@@ -7827,152 +7739,152 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "kinematic.pyx":69
+  /* "kinematic.pyx":67
  * 
  * cpdef object Inverse_Kinematic(object TCP,object TOV, object actjoint):
  *     cdef np.ndarray THETA =  np.zeros((4, 6))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray dT = np.zeros((4, 6))
  *     cdef np.ndarray RAD = np.zeros((6))
  */
-  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_int_4, __pyx_int_6); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_int_4, __pyx_int_6); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_tuple__3); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_tuple__3); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "kinematic.pyx":70
+  /* "kinematic.pyx":68
  * cpdef object Inverse_Kinematic(object TCP,object TOV, object actjoint):
  *     cdef np.ndarray THETA =  np.zeros((4, 6))
  *     cdef np.ndarray dT = np.zeros((4, 6))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray RAD = np.zeros((6))
  *     cdef np.ndarray U= np.zeros((3))
  */
-  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_int_4, __pyx_int_6); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_int_4, __pyx_int_6); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_tuple__5); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_tuple__5); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "kinematic.pyx":71
+  /* "kinematic.pyx":69
  *     cdef np.ndarray THETA =  np.zeros((4, 6))
  *     cdef np.ndarray dT = np.zeros((4, 6))
  *     cdef np.ndarray RAD = np.zeros((6))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_int_6); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_int_6); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "kinematic.pyx":72
+  /* "kinematic.pyx":70
  *     cdef np.ndarray dT = np.zeros((4, 6))
  *     cdef np.ndarray RAD = np.zeros((6))
  *     cdef np.ndarray U= np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray V= np.zeros((3))
  *     cdef np.ndarray W= np.zeros((3))
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "kinematic.pyx":73
+  /* "kinematic.pyx":71
  *     cdef np.ndarray RAD = np.zeros((6))
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray W= np.zeros((3))
  *     Joint_Deg = []
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "kinematic.pyx":74
+  /* "kinematic.pyx":72
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))
  *     cdef np.ndarray W= np.zeros((3))             # <<<<<<<<<<<<<<
  *     Joint_Deg = []
  *     cdef np.ndarray dif = np.zeros((4))
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "kinematic.pyx":76
+  /* "kinematic.pyx":74
  *     cdef np.ndarray W= np.zeros((3))
  *     Joint_Deg = []
  *     cdef np.ndarray dif = np.zeros((4))             # <<<<<<<<<<<<<<
  *     UVM =  Eul2R(TOV)
  * 
  */
-  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_int_4); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_int_4); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "kinematic.pyx":106
+  /* "kinematic.pyx":104
  *         if kcnt < 0:
  *             check = False
  *             return (0, 0, 0, 0, 0, 0) , check             # <<<<<<<<<<<<<<
  *             break
  *         else :
  */
-  __pyx_tuple__12 = PyTuple_Pack(6, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(6, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
 
-  /* "kinematic.pyx":204
+  /* "kinematic.pyx":202
  * 
  * cdef R2Eul(object R):
  *     cdef np.ndarray RAD = np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))
  */
-  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "kinematic.pyx":205
+  /* "kinematic.pyx":203
  * cdef R2Eul(object R):
  *     cdef np.ndarray RAD = np.zeros((3))
  *     cdef np.ndarray U= np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray V= np.zeros((3))
  *     cdef np.ndarray W= np.zeros((3))
  */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 203, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
 
-  /* "kinematic.pyx":206
+  /* "kinematic.pyx":204
  *     cdef np.ndarray RAD = np.zeros((3))
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray W= np.zeros((3))
  *     cdef np.ndarray EUL = np.zeros((3))
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 206, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
 
-  /* "kinematic.pyx":207
+  /* "kinematic.pyx":205
  *     cdef np.ndarray U= np.zeros((3))
  *     cdef np.ndarray V= np.zeros((3))
  *     cdef np.ndarray W= np.zeros((3))             # <<<<<<<<<<<<<<
  *     cdef np.ndarray EUL = np.zeros((3))
  *     for i in range(0, 3):
  */
-  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
 
-  /* "kinematic.pyx":208
+  /* "kinematic.pyx":206
  *     cdef np.ndarray V= np.zeros((3))
  *     cdef np.ndarray W= np.zeros((3))
  *     cdef np.ndarray EUL = np.zeros((3))             # <<<<<<<<<<<<<<
  *     for i in range(0, 3):
  *         U[i] = R[i][0]
  */
-  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
 
@@ -8263,15 +8175,15 @@ static int __pyx_pymod_exec_kinematic(PyObject *__pyx_pyinit_module)
   /* "kinematic.pyx":7
  * from libc.math cimport sin,cos,pow,atan2,atan,sqrt,fabs
  * 
- * cdef double d6h = 86.5             # <<<<<<<<<<<<<<
+ * cdef double d6h = 86.5+170             # <<<<<<<<<<<<<<
  * cdef int AXIS1 = 0
  * cdef int AXIS2 = 1
  */
-  __pyx_v_9kinematic_d6h = 86.5;
+  __pyx_v_9kinematic_d6h = (86.5 + 170.0);
 
   /* "kinematic.pyx":8
  * 
- * cdef double d6h = 86.5
+ * cdef double d6h = 86.5+170
  * cdef int AXIS1 = 0             # <<<<<<<<<<<<<<
  * cdef int AXIS2 = 1
  * cdef int AXIS3 = 2
@@ -8279,7 +8191,7 @@ static int __pyx_pymod_exec_kinematic(PyObject *__pyx_pyinit_module)
   __pyx_v_9kinematic_AXIS1 = 0;
 
   /* "kinematic.pyx":9
- * cdef double d6h = 86.5
+ * cdef double d6h = 86.5+170
  * cdef int AXIS1 = 0
  * cdef int AXIS2 = 1             # <<<<<<<<<<<<<<
  * cdef int AXIS3 = 2

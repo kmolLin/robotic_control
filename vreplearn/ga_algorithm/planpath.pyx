@@ -34,11 +34,11 @@ cdef class build_path(object):
         self.posture = mechanismParams['Posture']
         self.POINTS = len(self.targetPoint)
         #upper
-        self.upper = [360]*6*self.POINTS
-        #self.upper = [255, 175, 180, 190, 115, 360]*self.POINTS
+        #self.upper = [360]*6*self.POINTS
+        self.upper = [165, 125, 185, 190, 115, 360]*self.POINTS
         #lower
-        self.lower = [0]*6*self.POINTS
-        #self.lower = [-75, -25, -55, -190, -115, -360]*self.POINTS
+        #self.lower = [0]*6*self.POINTS
+        self.lower = [-165, -85, -55, -190, -115, -360]*self.POINTS
         
     cpdef object get_upper(self):
         return self.upper
@@ -62,15 +62,15 @@ cdef class build_path(object):
         cdef double distance
         cdef np.ndarray posturederror
         cdef double anglefitness = 0
-        
+        cdef np.ndarray posture_old
         for i, angles in enumerate(tmp_array):
             if i != 0:
                 anglefitness = np.sum(np.abs(angles - tmp_array[i-1]))
-            x, y, z,posture = forward_kinematic(angles)
+            x, y, z,posture_old = forward_kinematic(angles)
             x1, y1, z1 = self.targetPoint[i]
             distance = sqrt(pow(x-x1,2)+pow(y-y1,2)+pow(z-z1,2))
-            posturederror = np.abs(self.posture - posture)
-            fitness += 1.5*distance+anglefitness
+            #posturederror = np.abs(self.posture - posture_old)
+            fitness += distance+anglefitness
         
         return fitness
     

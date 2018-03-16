@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project robotic_control -->
-<!-- Saved: 2018-03-03, 20:35:54 -->
+<!-- Saved: 2018-03-10, 19:51:32 -->
 <!-- Copyright (C) 2018 ,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -26,9 +26,15 @@
     <Source>launch.py</Source>
     <Source>mainwindow.py</Source>
     <Source>openglw.py</Source>
+    <Source>ppso.py</Source>
     <Source>testscript.py</Source>
     <Source>vreplearn/armenv.py</Source>
     <Source>vreplearn/constant.py</Source>
+    <Source>vreplearn/ga_algorithm/ga_teset.py</Source>
+    <Source>vreplearn/ga_algorithm/kinematic.pyx</Source>
+    <Source>vreplearn/ga_algorithm/planpath.pyx</Source>
+    <Source>vreplearn/ga_algorithm/rga.pyx</Source>
+    <Source>vreplearn/ga_algorithm/setup.py</Source>
     <Source>vreplearn/invers_kinematic.py</Source>
     <Source>vreplearn/main.py</Source>
     <Source>vreplearn/rl.py</Source>
@@ -39,6 +45,7 @@
   </Forms>
   <Others>
     <Other>README.md</Other>
+    <Other>vreplearn/ga_algorithm/pso.pyx</Other>
   </Others>
   <MainScript>launch.py</MainScript>
   <Vcs>

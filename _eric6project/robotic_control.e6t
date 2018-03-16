@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-6.0.dtd">
 <!-- eric6 tasks file for project robotic_control -->
-<!-- Saved: 2018-03-07, 12:47:55 -->
+<!-- Saved: 2018-03-12, 17:20:11 -->
 <Tasks version="6.0">
   <ProjectScanFilter></ProjectScanFilter>
-  <Task priority="1" completed="False" type="1" uid="{e623800d-fb53-4705-acbf-ad466959feae}">
+  <Task priority="1" completed="False" type="1" uid="{2103e3fb-b131-48a1-b57e-a9ae6cf3e701}">
     <Summary>TODO: need to make gui</Summary>
     <Description></Description>
-    <Created>2018-03-07, 12:47:52</Created>
+    <Created>2018-03-12, 17:20:08</Created>
     <Resource>
       <Filename>core/kinematic/Invers_kinematic/invers_kinematic.py</Filename>
       <Linenumber>37</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{0ca15bb9-58d2-4112-bec9-7cab26e9474d}">
+  <Task priority="1" completed="False" type="1" uid="{42b1e324-2d00-431d-8c38-d31d4b0153f5}">
     <Summary>TODO: need to parser model</Summary>
     <Description></Description>
-    <Created>2018-03-07, 12:47:52</Created>
+    <Created>2018-03-12, 17:20:08</Created>
     <Resource>
       <Filename>core/model/modelparser.py</Filename>
       <Linenumber>3</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{a2e0ec91-f038-40b4-9dc8-6ae2cc00a925}">
+  <Task priority="1" completed="False" type="1" uid="{63dbc80b-c86c-4eb0-8694-aa6fa6ea0519}">
     <Summary>TODO: need to add time to simulation on vrep</Summary>
     <Description></Description>
-    <Created>2018-03-07, 12:47:52</Created>
+    <Created>2018-03-12, 17:20:08</Created>
     <Resource>
       <Filename>mainwindow.py</Filename>
       <Linenumber>79</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{659093c8-8a83-4621-94d9-fd612ae6b607}">
+  <Task priority="1" completed="False" type="1" uid="{06740d05-2aa7-4936-bf66-6df52ac6380f}">
     <Summary>TODO: need to make gui</Summary>
     <Description></Description>
-    <Created>2018-03-07, 12:47:52</Created>
+    <Created>2018-03-12, 17:20:08</Created>
     <Resource>
       <Filename>vreplearn/invers_kinematic.py</Filename>
       <Linenumber>35</Linenumber>

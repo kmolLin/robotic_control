@@ -4,7 +4,7 @@ import numpy as np
 cimport numpy as np
 from libc.math cimport sin,cos,pow,atan2,atan,sqrt,fabs
 
-cdef double d6h = 86.5
+cdef double d6h = 86.5+170
 cdef int AXIS1 = 0
 cdef int AXIS2 = 1
 cdef int AXIS3 = 2
@@ -29,7 +29,7 @@ cdef void foo(object RAD, object angles):
 
 cpdef object forward_kinematic(object angles):
     cdef object RAD = []
-    cdef np.ndarray UVM = np.zeros((3,3))
+    cdef np.ndarray UVW = np.zeros((3,3))
     foo(RAD, angles)
     
     cdef double C1 = cos(RAD[AXIS1])
@@ -47,23 +47,21 @@ cpdef object forward_kinematic(object angles):
     cdef double C23 = cos(RAD[AXIS2] - RAD[AXIS3])
     cdef double S23 = sin(RAD[AXIS2] - RAD[AXIS3])
     
-    cdef double a = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)
-    cdef double b = S1 * S23 * (C4 * C5 * C6 + S4 * S6) - S1 * C23 *S5 * C6 - C1 * (C4 * S6 - S4 * C5 * C6)
-    cdef double c = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6
-    cdef double d = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)
-    cdef double e = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)
-    cdef double f = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6
-    cdef double g = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5
-    cdef double h = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5
-    cdef double i = C23 * C4 * S5 - S23 * C5
-    
-    UVM = np.array([[a, b, c], [d, e, f], [g, h, i]])
+    UVW[0][0] = C1 * S23 * (C4 * C5 * C6 + S4 * S6) - C1 * C23 *S5 * C6 + S1 * (C4 * S6 - S4 * C5 * C6)
+    UVW[1][0] = S1 * S23 * (C4 * C5 * C6 + S4 * S6) - S1 * C23 *S5 * C6 - C1 * (C4 * S6 - S4 * C5 * C6)
+    UVW[2][0] = C23 * (C4 * C5 * C6 + S4 * S6) + S23 * S5 * C6
+    UVW[0][1] = C1 * S23 * (S4 * C6 - C4 * C5 * S6) + C1 * C23 * S5 * S6 + S1 * (S4 * C5 * S6 + C4 * C6)
+    UVW[1][1] = S1 * S23 * (S4 * C6 - C4 * C5 * S6) + S1 * C23 * S5 * S6 - C1 * (S4 * C5 * S6 + C4 * C6)
+    UVW[2][1] = C23 * (S4 * C6 - C4 * C5 * S6) - S23 * S5 * S6
+    UVW[0][2] = C1 * S23 * C4 * S5 + C1 * C23 * C5 - S1 * S4 * S5
+    UVW[1][2] = S1 * S23 * C4 * S5 + S1 * C23 * C5 + C1 * S4 * S5
+    UVW[2][2] = C23 * C4 * S5 - S23 * C5
     
     cdef double X = C1 * (a1 + C23 * (d6h * C5 + d4) + a2 * S2 + S23 * (a3 + d6h * C4 * S5)) - d6h * S1 * S4 * S5
     cdef double Y = S1 * (a1 + C23 * (d6h * C5 + d4) + a2 * S2 + S23 * (a3 + d6h * C4 * S5)) + d6h * C1 * S4 * S5
     cdef double Z = d1 - S23 * (d6h * C5 + d4) + a2 * C2 + C23 * (a3 + d6h * C4 * S5)
      
-    return X, Y, Z,R2Eul(UVM)
+    return X, Y, Z,R2Eul(UVW)
     
 cpdef object Inverse_Kinematic(object TCP,object TOV, object actjoint):
     cdef np.ndarray THETA =  np.zeros((4, 6))
