@@ -8,12 +8,13 @@ from time import time
 import matplotlib.pyplot as plt
 import numpy as np
 from particleSwarmOptimization import ParticleSwarmOptimization
-"""
+
 t0 = time()
 Target= [(450, 0, 150), (455, 0, 150), (455, -10, 150), (450, -10, 150), (450, 0, 150)]
 Posture = np.array([0, 180, 0])
-func = build_path({'Target':Target, 'Posture':Posture})
-GeneticPrams = {'nPop':1500, 'pCross':0.85, 'pMute':0.05, 'pWin':0.95, 'bDelta':5., 'maxGen':10, 'report':0} # 'minFit':0.1,'maxGen':10000 ,
+startstate = np.array([0, 0, -90, 0, -90, 0])
+func = build_path({'Target':Target, 'Posture':Posture, 'startstate':startstate})
+GeneticPrams = {'nPop':1500, 'pCross':0.85, 'pMute':0.05, 'pWin':0.85, 'bDelta':5., 'maxGen':1000, 'report':0} # 'minFit':0.1,'maxGen':10000 ,
 foo = Genetic(func, GeneticPrams)
 angles, time_and_fitness = foo.run()
 print("second:", time()-t0)
@@ -30,14 +31,12 @@ for e in val:
     timee.append(e[2])
 
 plt.plot(gen,chromElite) 
-c = [0.28, -28.08, -32.73, 1.8749, -15.63, 108.357]
-print(forward_kinematic(c))
 for angle in angles:
     print(*forward_kinematic(angle))
 
 plt.show()
 
-
+"""
 Target= [(450, 0, 150)]
 Posture = np.array([0, 180, 0])
 func = build_path({'Target':Target, 'Posture':Posture})
@@ -53,7 +52,7 @@ print("自製pso：{} {}".format(fopt, xopt))
 for angle in xopt:
     print(*forward_kinematic(angle))
 #print(forward_kinematic(xopt))
-"""
+
 opt = ParticleSwarmOptimization()
 Target= [(450, 0, 150), (455, 0, 150)]
 Posture = np.array([0, 180, 0])
@@ -62,3 +61,4 @@ bound =  [(0,360)]*6
 options = [20, 1.5, 1.5, 0.5, 1.0]
 threshold=1e-6
 foo = opt.runOptimizer(func, Target, np.zeros((2, 6)), 1000, options, threshold, True )
+"""

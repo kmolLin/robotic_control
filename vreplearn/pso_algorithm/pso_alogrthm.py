@@ -24,6 +24,6 @@ iterations = 1000
 options = [20, 1.5, 1.5, 0.5, 1.0, 1]
 threshold = 1E-5
 
-final_params, J_hist = opt.runOptimizer(arm.forwardKinematics, target, params, iterations, options, threshold, True)
+final_params, J_hist = opt.runOptimizer(arm.forwardKinematics, target, params, iterations, options, threshold, False)
 print(final_params, J_hist)
 #opt.plotParticles3D()

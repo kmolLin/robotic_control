@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project robotic_control -->
-<!-- Saved: 2018-03-10, 19:51:32 -->
+<!-- Saved: 2018-04-10, 15:38:53 -->
 <!-- Copyright (C) 2018 ,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -39,6 +39,7 @@
     <Source>vreplearn/main.py</Source>
     <Source>vreplearn/rl.py</Source>
     <Source>vreplearn/xyz_path.py</Source>
+    <Source>worker.py</Source>
   </Sources>
   <Forms>
     <Form>mainwindow.ui</Form>
