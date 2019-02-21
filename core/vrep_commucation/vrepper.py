@@ -99,7 +99,7 @@ class vrepper():
             port_num = int(random.random() * 1000 + 19999)
 
         self.port_num = port_num
-        
+
         # "C:\Program Files\V-REP3\V-REP_PRO_EDU\vrep.exe"
         if dir_vrep == '':
             print('(vrepper) trying to find V-REP executable in your PATH')
@@ -173,7 +173,7 @@ class vrepper():
                 commThreadCycleInMs=0)  # Connect to V-REP
 
             if self.cid != -1:
-                print ('(vrepper)Connected to remote API server!')
+                print('(vrepper)Connected to remote API server!')
                 break
             else:
                 retries += 1
