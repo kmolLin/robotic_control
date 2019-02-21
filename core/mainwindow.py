@@ -36,8 +36,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tcptable.setCellWidget(row, 1, spinbox)
 
         self.arm = armrobot()
-        
-        
+
     def dowork(self, venv):
         self.work = Worker(venv, self)
         self.work.update_signal.connect(self.motor_angle)
@@ -54,15 +53,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     @pyqtSlot()
     def on_radioButtonTarget_clicked(self):
-        
         guimode = self.enablegui.isTristate()
         print(guimode)
         self.venv = vrepper(headless=False)
         self.venv.start()
         # load scene
         self.venv.load_scene(os.getcwd() + '/ra605robotV2.ttt')
-        self.venv.start_nonblocking_simulation()
-        self.dowork(self.venv)
+        # self.venv.start_nonblocking_simulation()
+        self.venv.start_blocking_simulation()
+        for i in range(10):
+            self.venv.step_blocking_simulation()
+            self.handles = []
+            for name in (
+                    'A_joint',
+                    'B_joint',
+                    'C_joint',
+                    'D_joint',
+                    'E_joint',
+                    'F_joint',
+            ):
+                self.handles.append(self.venv.get_object_by_name(name))
+            self.motor_angle([handle.get_joint_angle() for handle in self.handles])
+
+
+        # self.dowork(self.venv)
 
     @pyqtSlot()
     def on_move_btn_clicked(self):

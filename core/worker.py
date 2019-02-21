@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import *
 
 
 class Worker(QThread):
-    def __init__(self,vrepper, parent ):
+    def __init__(self, vrepper, parent):
         super(Worker, self).__init__(parent)
         self.stoped = False
         self.venn = vrepper
@@ -29,8 +29,6 @@ class Worker(QThread):
                 for handle in self.handles
             ])
 
-        
     def stop(self):
         self.stoped = True
-        
-    
+
