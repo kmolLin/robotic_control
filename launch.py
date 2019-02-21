@@ -1,4 +1,4 @@
-from mainwindow import MainWindow
+from core.mainwindow import MainWindow
 from PyQt5.QtWidgets import QApplication
 from sys import argv, exit
 if __name__=='__main__':

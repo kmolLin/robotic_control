@@ -3,14 +3,11 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from Ui_mainwindow import Ui_MainWindow
-from openglw import GLWidget
+from .Ui_mainwindow import Ui_MainWindow
 from core.vrep_commucation.vrepper import vrepper
 import os
 from core.kinematic.Invers_kinematic.invers_kinematic import armrobot
-from core.model.model import Model
-from worker import Worker
-from core.Armrobot import Armrobot
+from .worker import Worker
 import time
 
 
@@ -19,10 +16,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.dt = 0.0
-        #self.robot = Armrobot(self)
-        #self.view1 = GLWidget(self)
-        
-        #self.verticalLayout.addWidget(self.view1)
         for row in range(0, 4):
             spinbox = QDoubleSpinBox()
             spinbox.setMaximum(10000)
@@ -41,8 +34,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             spinbox.setMinimum(-10000)
             spinbox.setEnabled(True)
             self.tcptable.setCellWidget(row, 1, spinbox)
-        
-        
+
         self.arm = armrobot()
         
         
@@ -82,4 +74,3 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for i, handle in enumerate(self.work.handles):
             handle.set_position_target(Joint_Deg[i])
 
-        
