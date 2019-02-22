@@ -103,3 +103,5 @@ ENV/
 # eric
 ._eric6projectt
 
+# xml
+.idea/

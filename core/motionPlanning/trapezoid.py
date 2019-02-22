@@ -54,7 +54,7 @@ class Velocity:
 
     __slots__ = ('length', 'c_from', 'c_to', 'angle', 's_base', 't', 's_l')
 
-    t_s = 1e-3
+    t_s = 0.005
     default_a_max = 2500
     default_j_max = default_a_max * 20
 
