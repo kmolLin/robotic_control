@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1ff91820-f0f0-4342-890a-26643347db2a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/core/mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/mainwindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/motionPlanning/line.nc" beforeDir="false" afterPath="$PROJECT_DIR$/core/motionPlanning/line.nc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/motionPlanning/motionplanning_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/motionPlanning/motionplanning_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/motionPlanning/trapezoid.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/motionPlanning/trapezoid.py" afterDir="false" />
-    </list>
+    <list default="true" id="1ff91820-f0f0-4342-890a-26643347db2a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
