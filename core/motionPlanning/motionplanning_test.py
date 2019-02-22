@@ -15,7 +15,7 @@ if __name__ == '__main__':
     vgo = []
     ago = []
     jgo = []
-
+    print(text)
     for tp in graph_chart(text):
         for s, v, a, j in tp.iter(
                 tp.s,

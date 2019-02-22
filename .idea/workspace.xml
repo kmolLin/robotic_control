@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ff91820-f0f0-4342-890a-26643347db2a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/Ui_mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/Ui_mainwindow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/mainwindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/mainwindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/core/mainwindow.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/motionPlanning/line.nc" beforeDir="false" afterPath="$PROJECT_DIR$/core/motionPlanning/line.nc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/motionPlanning/motionplanning_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/motionPlanning/motionplanning_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/motionPlanning/trapezoid.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/motionPlanning/trapezoid.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,8 +15,22 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/robotic_control$testscript.coverage" NAME="testscript Coverage Results" MODIFIED="1550752281071" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/robotic_control$launch.coverage" NAME="launch Coverage Results" MODIFIED="1550807294794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/robotic_control$motionplanning_test.coverage" NAME="motionplanning_test Coverage Results" MODIFIED="1550805547417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/core/motionPlanning" />
+    <SUITE FILE_PATH="coverage/robotic_control$launch.coverage" NAME="launch Coverage Results" MODIFIED="1550820290506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/robotic_control$motionplanning_test.coverage" NAME="motionplanning_test Coverage Results" MODIFIED="1550816872924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/core/motionPlanning" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1070982575">
@@ -30,7 +43,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="nc" value="2" />
-          <entry key="py" value="30" />
+          <entry key="py" value="32" />
           <entry key="pyx" value="3" />
         </counts>
       </usages-collector>
@@ -38,20 +51,20 @@
         <counts>
           <entry key="Cython" value="3" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="30" />
+          <entry key="Python" value="32" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="20" />
+          <entry key="Python Console" value="104" />
           <entry key="nc" value="2" />
-          <entry key="py" value="780" />
+          <entry key="py" value="1270" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="800" />
+          <entry key="Python" value="1374" />
         </counts>
       </usages-collector>
     </session>
@@ -73,11 +86,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/mainwindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="117" column="8" selection-start-line="117" selection-start-column="8" selection-end-line="117" selection-end-column="8" />
+            <state relative-caret-position="272">
+              <caret line="83" column="21" lean-forward="true" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
               <folding>
                 <element signature="e#25#51#0" expanded="true" />
-                <marker date="1550807515405" expanded="true" signature="2698:3882" ph="..." />
+                <marker date="1550821128000" expanded="true" signature="2657:4432" ph="..." />
               </folding>
             </state>
           </provider>
@@ -86,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/worker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="29" column="14" lean-forward="true" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+            <state relative-caret-position="252">
+              <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="28" selection-end-column="42" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -96,19 +109,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/motionPlanning/motionplanning_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/motionPlanning/line.nc">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="10" lean-forward="true" selection-start-column="10" selection-end-column="15" />
+            <state relative-caret-position="42">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -116,8 +120,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/vrep_commucation/vrepper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-239">
-              <caret line="96" column="59" selection-start-line="96" selection-start-column="51" selection-end-line="96" selection-end-column="59" />
+            <state relative-caret-position="139">
+              <caret line="274" column="45" selection-start-line="274" selection-start-column="23" selection-end-line="274" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -149,13 +153,24 @@
       <find>DEFAULT_NC_SYNTAX</find>
       <find>angle</find>
       <find>graph_chart</find>
-      <find>check_ret</find>
       <find>simxStartSimulation</find>
       <find>simxSynchronous</find>
       <find>blocking</find>
-      <find>simx_opmode_</find>
       <find>headless</find>
+      <find>simx_opmode_</find>
+      <find>work</find>
       <find>dowork</find>
+      <find>strategy</find>
+      <find>position</find>
+      <find>check_ret</find>
+      <find>length</find>
+      <find>simxSynchronousTrigger</find>
+      <find>venv</find>
+      <find>step_blocking_simulation</find>
+      <find>nowact</find>
+      <find>motor</find>
+      <find>handles</find>
+      <find>handle</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -166,11 +181,11 @@
       <list>
         <option value="$PROJECT_DIR$/mainwindow.py" />
         <option value="$PROJECT_DIR$/launch.py" />
-        <option value="$PROJECT_DIR$/core/vrep_commucation/vrepper.py" />
         <option value="$PROJECT_DIR$/core/worker.py" />
-        <option value="$PROJECT_DIR$/core/motionPlanning/motionplanning_test.py" />
         <option value="$PROJECT_DIR$/core/motionPlanning/line.nc" />
+        <option value="$PROJECT_DIR$/core/motionPlanning/motionplanning_test.py" />
         <option value="$PROJECT_DIR$/core/motionPlanning/trapezoid.py" />
+        <option value="$PROJECT_DIR$/core/vrep_commucation/vrepper.py" />
         <option value="$PROJECT_DIR$/core/mainwindow.py" />
       </list>
     </option>
@@ -210,6 +225,12 @@
               <item name="robotic_control" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
               <item name="motionPlanning" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="robotic_control" type="b2602c69:ProjectViewProjectNode" />
+              <item name="robotic_control" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="vrep_commucation" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -356,18 +377,18 @@
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" weight="0.32928476" />
-      <window_info anchor="bottom" id="Terminal" weight="0.2968961" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.2968961" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info active="true" anchor="bottom" id="Concurrent Activities Diagram" weight="0.32928476" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32793522" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32793522" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32928476" />
-      <window_info active="true" anchor="right" id="SciView" order="0" visible="true" weight="0.3295129" />
-      <window_info anchor="right" id="Database" order="1" />
+      <window_info anchor="right" id="SciView" order="0" weight="0.3295129" />
+      <window_info anchor="right" id="Database" order="1" weight="0.3295129" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
@@ -482,51 +503,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/worker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="29" column="14" lean-forward="true" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/motionPlanning/line.nc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="10" lean-forward="true" selection-start-column="10" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/vrep_commucation/vrepper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-239">
-          <caret line="96" column="59" selection-start-line="96" selection-start-column="51" selection-end-line="96" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.2/system/python_stubs/-220662696/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="3674" column="8" selection-start-line="3674" selection-start-column="8" selection-end-line="3674" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/motionPlanning/trapezoid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="e#141#239#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/motionPlanning/motionplanning_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -540,13 +520,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/motionPlanning/line.nc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/motionPlanning/trapezoid.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/motionPlanning/motionplanning_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="25" />
+          <folding>
+            <element signature="e#25#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/vrep_commucation/vrepper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="274" column="45" selection-start-line="274" selection-start-column="23" selection-end-line="274" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/worker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="28" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/mainwindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="117" column="8" selection-start-line="117" selection-start-column="8" selection-end-line="117" selection-end-column="8" />
+        <state relative-caret-position="272">
+          <caret line="83" column="21" lean-forward="true" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
           <folding>
             <element signature="e#25#51#0" expanded="true" />
-            <marker date="1550807515405" expanded="true" signature="2698:3882" ph="..." />
+            <marker date="1550821128000" expanded="true" signature="2657:4432" ph="..." />
           </folding>
         </state>
       </provider>

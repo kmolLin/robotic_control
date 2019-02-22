@@ -136,7 +136,6 @@ class Trapezoid(Velocity):
         n_str = ceil(feed_rate / (self.default_a_max * self.t_s))
         t_str = n_str * self.t_s
         l_min = feed_rate * t_str
-
         if self.length <= l_min:
             self.case = 0
             n_str = ceil(sqrt(self.length / (self.default_a_max * self.t_s * self.t_s)))
@@ -376,6 +375,8 @@ def graph_chart(
     bs = 0.
     for ox, _, x, _, of in nc_reader(nc_doc, syntax):
         # X axis: [i * tp.t_s for i in range(len(plot))]
+        if ox == x and ox == 0:
+            continue
         tp = strategy(ox, x, of, s_base=bs)
         yield tp
         bs = tp.s(tp.t[-1])
