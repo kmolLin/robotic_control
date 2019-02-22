@@ -272,7 +272,7 @@ class Ui_MainWindow(object):
         self.move_btn.setObjectName("move_btn")
         self.horizontalLayout_33.addWidget(self.move_btn)
         self.joint_ctr_btn = QtWidgets.QPushButton(self.centralWidget)
-        self.joint_ctr_btn.setEnabled(False)
+        self.joint_ctr_btn.setEnabled(True)
         self.joint_ctr_btn.setObjectName("joint_ctr_btn")
         self.horizontalLayout_33.addWidget(self.joint_ctr_btn)
         self.verticalLayout_14.addLayout(self.horizontalLayout_33)

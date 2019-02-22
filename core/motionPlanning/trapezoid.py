@@ -22,7 +22,7 @@ from math import (
     cos,
     atan2,
 )
-from nc import nc_reader, DEFAULT_NC_SYNTAX
+from .nc import nc_reader, DEFAULT_NC_SYNTAX
 
 
 class StepTimeError(ValueError):

@@ -9,6 +9,9 @@ import os
 from core.kinematic.Invers_kinematic.invers_kinematic import armrobot
 from .worker import Worker
 import time
+from core.motionPlanning.trapezoid import graph_chart
+
+import matplotlib.pyplot as plt
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -26,7 +29,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             spinbox = QDoubleSpinBox()
             spinbox.setMaximum(10000)
             spinbox.setMinimum(-10000)
-            spinbox.setEnabled(False)
+            spinbox.setEnabled(True)
             self.jointtable.setCellWidget(row, 1, spinbox)
         for row in range(0, 6):
             spinbox = QDoubleSpinBox()
@@ -55,7 +58,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def on_radioButtonTarget_clicked(self):
         guimode = self.enablegui.isTristate()
         print(guimode)
-        self.venv = vrepper(headless=False)
+        self.venv = vrepper(headless=True)
         self.venv.start()
         # load scene
         self.venv.load_scene(os.getcwd() + '/ra605robotV2.ttt')
@@ -77,6 +80,45 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
         # self.dowork(self.venv)
+
+    @pyqtSlot()
+    def on_joint_ctr_btn_clicked(self):
+        print("test")
+        inputjoint = [self.jointtable.cellWidget(i, 1).value() for i in range(6)]
+        nowact = [float(self.jointtable.item(i, 0).text()) for i in range(6)]
+        result = list(map(lambda x: x[0] - x[1], zip(inputjoint, nowact)))
+        indexx = result.index(max(result))
+        text = f"G00 X{nowact[indexx]} Y10 F6000\n" + f"G01 X{inputjoint[indexx]} Y20\n"
+        print(text)
+
+        i = 0.0
+        ts = None
+        sgo = []
+        vgo = []
+        ago = []
+        jgo = []
+        for tp in graph_chart(text):
+            for s, v, a, j in tp.iter(
+                    tp.s,
+                    tp.v,
+                    tp.a,
+                    tp.j
+            ):
+                sgo.append((i, s))
+                vgo.append((i, v))
+                ago.append((i, a))
+                jgo.append((i, j))
+                i += tp.t_s
+                if ts is None:
+                    ts = tp.t_s
+        alljoint = []
+        for i in range(6):
+            alljoint.append([float(result[i]) / max(result) * float(s[1]) for s in sgo])
+
+        for i in range(6):
+            plt.plot([s[0] for s in sgo], alljoint[i])
+        plt.show()
+
 
     @pyqtSlot()
     def on_move_btn_clicked(self):
