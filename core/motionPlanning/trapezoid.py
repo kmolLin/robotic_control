@@ -66,9 +66,9 @@ class Velocity:
         t0: float,
         s_base: float
     ):
-        self.c_from = x1
-        self.c_to = x2
-        # self.angle = atan2(y2 - y1, x2 - x1)
+        self.c_from = (x1, 0.)
+        self.c_to = (x2, 0.)
+        self.angle = atan2(0., x2 - x1)
         self.length = abs(x2 - x1)
         self.s_base = s_base
         self.t = [t0]
@@ -357,6 +357,7 @@ class SShape(Velocity):
 
 def graph_chart(
     nc_doc: str,
+    bs: float = 0,
     syntax: str = DEFAULT_NC_SYNTAX,
     strategy: Type[Velocity] = Trapezoid
 ) -> Iterator[Velocity]:
@@ -372,12 +373,10 @@ def graph_chart(
     for tp in graph_chart(nc_doc, syntax, strategy):
         sxy_plot.extend(tp.iter(tp.s_xy))
     """
-    bs = 0.
     for ox, _, x, _, of in nc_reader(nc_doc, syntax):
         # X axis: [i * tp.t_s for i in range(len(plot))]
-        if ox == x and ox == 0:
+        if ox == x:
             continue
         tp = strategy(ox, x, of, s_base=bs)
         yield tp
         bs = tp.s(tp.t[-1])
-

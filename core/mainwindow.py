@@ -10,7 +10,8 @@ import os
 from core.kinematic.Invers_kinematic.invers_kinematic import armrobot
 from .worker import Worker
 import time
-from core.motionPlanning.trapezoid import graph_chart
+from core.motionPlanning.trapezoid import Trapezoid, SShape
+from core.motionPlanning.v_planning import s_shape_interplation
 
 import numpy as np
 from math import radians
@@ -19,6 +20,7 @@ import matplotlib.pyplot as plt
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
+
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.dt = 0.0
@@ -43,6 +45,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.arm = armrobot()
         self.jpos = np.zeros(6)
+        self.joint_pos = [0] * 6
 
     def dowork(self, clientID, handles):
         self.work = Worker(clientID, handles, self)
@@ -52,6 +55,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot(list)
     def motor_angle(self, data):
         for i, value in enumerate(data):
+            self.joint_pos[i] = value
             self.jointtable.setItem(i, 0, QTableWidgetItem(f"{value:.04f}"))
     
     @pyqtSlot()
@@ -73,11 +77,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 time.sleep(0.2)
                 print("Failed connecting to remote API server!")
         print("Connection success!")
-        vrep.simxSetFloatingParameter(self.clientID, vrep.sim_floatparam_simulation_time_step, 0.005,
-                                      vrep.simx_opmode_blocking)
+        # vrep.simxSetFloatingParameter(self.clientID, vrep.sim_floatparam_simulation_time_step, 0.005,
+        #                               vrep.simx_opmode_blocking)
 
         vrep.simxSynchronous(self.clientID, True)
-        vrep.simxStartSimulation(self.clientID, vrep.simx_opmode_blocking)
+        # vrep.simxStartSimulation(self.clientID, vrep.simx_opmode_blocking)
+        # vrep.simxStartSimulation(self.clientID, vrep.simx_opmode_oneshot)
         self.handles = []
         for name in (
                 'A_joint',
@@ -100,51 +105,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot()
     def on_joint_ctr_btn_clicked(self):
         inputjoint = [self.jointtable.cellWidget(i, 1).value() for i in range(6)]
-        nowact = [float(self.jointtable.item(i, 0).text()) for i in range(6)]
-        result = list(map(lambda x: abs(x[0] - x[1]), zip(inputjoint, nowact)))
-        print(result)
-        indexx = result.index(max(result))
-        text = f"G00 X{round(nowact[indexx], 3)} Y10 F6000\n" + \
-               f"G01 X{round(inputjoint[indexx], 3)} Y20\n"
-        # text = f"G01 X{inputjoint[indexx]} Y10 F6000\n"
-        print(text)
-
-        i = 0.0
-        ts = None
-        sgo = []
-        vgo = []
-        ago = []
-        jgo = []
-        for tp in graph_chart(text):
-            for s, v, a, j in tp.iter(
-                    tp.s,
-                    tp.v,
-                    tp.a,
-                    tp.j
-            ):
-                sgo.append((i, s))
-                vgo.append((i, v))
-                ago.append((i, a))
-                jgo.append((i, j))
-                i += tp.t_s
-                if ts is None:
-                    ts = tp.t_s
+        nowact = self.joint_pos
+        length = list(map(lambda x: abs(x[0] - x[1]), zip(inputjoint, nowact)))
+        lengthvec = list(map(lambda x: (x[0] - x[1]), zip(inputjoint, nowact)))
+        indexx = length.index(max(length))
+        s_tmp, _, _, _ = s_shape_interplation(nowact[indexx], 0, inputjoint[indexx], 0, 100)
         alljoint = []
+        # print("sgo", sgo)
+        # print("base", nowact[0])
+        print(f"now postion:{self.joint_pos}")
         for i in range(6):
-            alljoint.append([float(result[i]) / max(result) * float(s[1]) for s in sgo])
-
+            alljoint.append([nowact[i] + (float(s) * lengthvec[i] / length[indexx]) for s in s_tmp])
+            print(f"joint{i}{alljoint[i]}")
         for g in range(len(alljoint[0])):
             vrep.simxPauseCommunication(self.clientID, True)
             for i in range(6):
                 vrep.simxSetJointTargetPosition(self.clientID, self.handles[i], radians(alljoint[i][g]),
-                                                vrep.simx_opmode_oneshot)
+                                                vrep.simx_opmode_streaming)
             vrep.simxPauseCommunication(self.clientID, False)
             vrep.simxSynchronousTrigger(self.clientID)
-            vrep.simxGetPingTime(self.clientID)
-
-        # for i in range(6):
-        #     plt.plot([s[0] for s in sgo], alljoint[i])
-        # plt.show()
 
     @pyqtSlot()
     def on_move_btn_clicked(self):
