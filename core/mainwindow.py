@@ -4,7 +4,6 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 from .Ui_mainwindow import Ui_MainWindow
-# from core.vrep_commucation.vrepper import vrepper
 import core.vrep_commucation.vrep as vrep
 import os
 from core.kinematic.Invers_kinematic.invers_kinematic import armrobot
@@ -16,6 +15,7 @@ from core.motionPlanning.v_planning import s_shape_interplation
 import numpy as np
 from math import radians
 import matplotlib.pyplot as plt
+import cv2
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -44,6 +44,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.tcptable.setCellWidget(row, 1, spinbox)
 
         self.arm = armrobot()
+        self.clientID = None
+        self.camhandle = None
+        self.handles = []
         self.jpos = np.zeros(6)
         self.joint_pos = [0] * 6
 
@@ -77,13 +80,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 time.sleep(0.2)
                 print("Failed connecting to remote API server!")
         print("Connection success!")
-        # vrep.simxSetFloatingParameter(self.clientID, vrep.sim_floatparam_simulation_time_step, 0.005,
-        #                               vrep.simx_opmode_blocking)
-
         vrep.simxSynchronous(self.clientID, True)
-        # vrep.simxStartSimulation(self.clientID, vrep.simx_opmode_blocking)
-        # vrep.simxStartSimulation(self.clientID, vrep.simx_opmode_oneshot)
-        self.handles = []
+
         for name in (
                 'A_joint',
                 'B_joint',
@@ -94,8 +92,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         ):
             _, handle = vrep.simxGetObjectHandle(self.clientID, name, vrep.simx_opmode_blocking)
             self.handles.append(handle)
+        _, self.camhandle = vrep.simxGetObjectHandle(self.clientID, 'Vision_sensor', vrep.simx_opmode_blocking)
         print(self.handles)
-
         for i in range(6):
             _, self.jpos[i] = vrep.simxGetJointPosition(self.clientID, self.handles[i], vrep.simx_opmode_streaming)
         lastCmdTime = vrep.simxGetLastCmdTime(self.clientID)
@@ -111,27 +109,59 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         indexx = length.index(max(length))
         s_tmp, _, _, _ = s_shape_interplation(nowact[indexx], 0, inputjoint[indexx], 0, 100)
         alljoint = []
-        # print("sgo", sgo)
-        # print("base", nowact[0])
-        print(f"now postion:{self.joint_pos}")
         for i in range(6):
             alljoint.append([nowact[i] + (float(s) * lengthvec[i] / length[indexx]) for s in s_tmp])
-            print(f"joint{i}{alljoint[i]}")
+
+        dlg = QProgressDialog("Process", "Cancel", 0, len(alljoint[0]), self)
+        dlg.setWindowModality(Qt.WindowModal)
+        dlg.show()
+
         for g in range(len(alljoint[0])):
             vrep.simxPauseCommunication(self.clientID, True)
             for i in range(6):
                 vrep.simxSetJointTargetPosition(self.clientID, self.handles[i], radians(alljoint[i][g]),
                                                 vrep.simx_opmode_streaming)
             vrep.simxPauseCommunication(self.clientID, False)
+            QCoreApplication.processEvents()
+            dlg.setValue(g)
             vrep.simxSynchronousTrigger(self.clientID)
+
+        dlg.setValue(len(alljoint[0]))
+        dlg.deleteLater()
 
     @pyqtSlot()
     def on_move_btn_clicked(self):
         TCP = [self.tcptable.cellWidget(i, 1).value() for i in range(3)]
         TOV = [self.tcptable.cellWidget(i, 1).value() for i in range(3, 6)]
-        nowact = [float(self.jointtable.item(i, 0).text()) for i in range(6)]
+        nowact = self.joint_pos
         Joint_Deg = self.arm.Inverse_Kinematic(TCP, TOV, nowact)
         
-        for i, handle in enumerate(self.work.handles):
-            handle.set_position_target(Joint_Deg[i])
+        # for i, handle in enumerate(self.work.handles):
+        #     handle.set_position_target(Joint_Deg[i])
+
+    @pyqtSlot()
+    def on_capture_btn_clicked(self):
+        print(self.camhandle)
+        _, resolution, image = vrep.simxGetVisionSensorImage(self.clientID, self.camhandle, 0, vrep.simx_opmode_streaming)
+        time.sleep(1)
+        _, resolution, image = vrep.simxGetVisionSensorImage(self.clientID, self.camhandle, 0, vrep.simx_opmode_buffer)
+        time.sleep(1)
+        img = np.array(image, dtype=np.uint8)
+        img.resize([resolution[0], resolution[1], 3])
+        img = np.rot90(img, 2)
+        img = np.fliplr(img)
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        file = "gear4.png"
+        cv2.imwrite(file, img)
+
+    @pyqtSlot()
+    def on_vaclum_btn_clicked(self):
+        check, jj, _, _, _ = vrep.simxCallScriptFunction(self.clientID, "suctionPad", vrep.sim_scripttype_childscript,
+                                            "enableSuctionCup", [1], [], [], bytearray(), vrep.simx_opmode_oneshot)
+        print(jj)
+
+    def closeEvent(self, event):
+        if self.clientID is not None:
+            vrep.simxStopSimulation(self.clientID, vrep.simx_opmode_oneshot)
+        event.accept()
 

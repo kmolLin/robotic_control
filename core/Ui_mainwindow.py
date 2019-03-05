@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'mainwindow.ui'
+# Form implementation generated from reading ui file 'D:\kmol\robotic_control\core\mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.12
+# Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -283,10 +282,10 @@ class Ui_MainWindow(object):
         self.p2p_ctr_btn.setEnabled(False)
         self.p2p_ctr_btn.setObjectName("p2p_ctr_btn")
         self.horizontalLayout_34.addWidget(self.p2p_ctr_btn)
-        self.cp_ctr_btn = QtWidgets.QPushButton(self.centralWidget)
-        self.cp_ctr_btn.setEnabled(False)
-        self.cp_ctr_btn.setObjectName("cp_ctr_btn")
-        self.horizontalLayout_34.addWidget(self.cp_ctr_btn)
+        self.capture_btn = QtWidgets.QPushButton(self.centralWidget)
+        self.capture_btn.setEnabled(True)
+        self.capture_btn.setObjectName("capture_btn")
+        self.horizontalLayout_34.addWidget(self.capture_btn)
         self.verticalLayout_14.addLayout(self.horizontalLayout_34)
         self.horizontalLayout_35 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_35.setSpacing(6)
@@ -295,10 +294,10 @@ class Ui_MainWindow(object):
         self.enter_btn.setEnabled(False)
         self.enter_btn.setObjectName("enter_btn")
         self.horizontalLayout_35.addWidget(self.enter_btn)
-        self.mode_btn = QtWidgets.QPushButton(self.centralWidget)
-        self.mode_btn.setEnabled(False)
-        self.mode_btn.setObjectName("mode_btn")
-        self.horizontalLayout_35.addWidget(self.mode_btn)
+        self.vaclum_btn = QtWidgets.QPushButton(self.centralWidget)
+        self.vaclum_btn.setEnabled(True)
+        self.vaclum_btn.setObjectName("vaclum_btn")
+        self.horizontalLayout_35.addWidget(self.vaclum_btn)
         self.verticalLayout_14.addLayout(self.horizontalLayout_35)
         self.verticalLayout_13.addLayout(self.verticalLayout_14)
         self.horizontalLayout_36 = QtWidgets.QHBoxLayout()
@@ -427,14 +426,13 @@ class Ui_MainWindow(object):
         self.move_btn.setText(_translate("MainWindow", "Move"))
         self.joint_ctr_btn.setText(_translate("MainWindow", "Joint Control"))
         self.p2p_ctr_btn.setText(_translate("MainWindow", "P2P Control"))
-        self.cp_ctr_btn.setText(_translate("MainWindow", "CP Control"))
+        self.capture_btn.setText(_translate("MainWindow", "capture"))
         self.enter_btn.setText(_translate("MainWindow", "Enter"))
-        self.mode_btn.setText(_translate("MainWindow", "Change Mode"))
+        self.vaclum_btn.setText(_translate("MainWindow", "vaclum"))
         self.readtxt_btn.setText(_translate("MainWindow", "Read TXT"))
         self.home_btn.setText(_translate("MainWindow", "Home"))
         self.label_6.setText(_translate("MainWindow", "Mode"))
         self.enablegui.setText(_translate("MainWindow", "Enable Gui"))
         self.radioButtonSimple.setText(_translate("MainWindow", "Simple steering"))
         self.radioButtonTarget.setText(_translate("MainWindow", "Target steering"))
-
 

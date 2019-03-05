@@ -499,12 +499,12 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="cp_ctr_btn">
+               <widget class="QPushButton" name="capture_btn">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="text">
-                 <string>CP Control</string>
+                 <string>capture</string>
                 </property>
                </widget>
               </item>
@@ -523,12 +523,12 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="mode_btn">
+               <widget class="QPushButton" name="vaclum_btn">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="text">
-                 <string>Change Mode</string>
+                 <string>vaclum</string>
                 </property>
                </widget>
               </item>
