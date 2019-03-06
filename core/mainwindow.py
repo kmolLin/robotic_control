@@ -34,6 +34,7 @@ DEFAULT_NC_SYNTAX = (
 def _match(patten: AnyStr, doc: AnyStr) -> Iterator[Match[AnyStr]]:
     yield from re.compile(patten, re.MULTILINE).finditer(doc)
 
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
 
@@ -189,9 +190,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def on_vaclum_on_btn_clicked(self):
 
         check, self.tmpval, _, _, _ = vrep.simxCallScriptFunction(self.clientID, "suctionPad",
-                                                         vrep.sim_scripttype_childscript,
-                                                         "enableSuctionCup", [1], [], [], b"",
-                                                         vrep.simx_opmode_oneshot)
+                                                                  vrep.sim_scripttype_childscript,
+                                                                  "enableSuctionCup", [1], [], [], b"",
+                                                                  vrep.simx_opmode_oneshot)
 
     @pyqtSlot()
     def on_vaclum_close_btn_clicked(self):
@@ -200,12 +201,48 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                                                   vrep.sim_scripttype_childscript,
                                                                   "enableSuctionCup", [0], [], [], b"",
                                                                   vrep.simx_opmode_oneshot)
+
     @pyqtSlot()
     def on_object_dectec_btn_clicked(self):
         image = cv2.imread("all.png")
         nut, screw = object_dectected(image)
+        # (350, -320, 116, 0, 180, 0) left corner
+        pix2mm = 0.3968
+        orignal_pos = (350, -320, 116)
+        nuttmp = []
+        for i, val in enumerate(nut):
+            if i == 3:
+                break
+            cx = (nut[i + 1][0] - val[0]) * pix2mm
+            cy = (nut[i + 1][1] - val[1]) * pix2mm
+            this_point_pos = (orignal_pos[0] + cx, orignal_pos[1] + cy, orignal_pos[2])
+            nuttmp.append(this_point_pos)
+        print(nuttmp)
+        self.plannig_path(nuttmp)
+
         print(nut)
         print(screw)
+
+    def plannig_path(self, postion_list):
+        command_list = []
+        TOV = (0, 180, 0)
+        # for action in postion_list:
+        #     rise = (action[0], action[1], 200)
+        #     OA = True
+        #     down = (action[0], action[1], action[2])
+        #     rise = (action[0], action[1], 200)
+        #     trans = (action[0], -action[1], 200)
+        #     OA = False
+        text = ''.join(
+            f"P, X {x:.03f}, Y {y:.03f}, Z 200, RA 0, RB 180, RC 0, V 5;\n"
+            f"OA 1;\n"
+            f"P, X {x:.03f}, Y {y:.03f}, Z {z:.03f}, RA 0, RB 180, RC 0, V 5;\n"
+            f"P, X {x:.03f}, Y {y:.03f}, Z 200, RA 0, RB 180, RC 0, V 5;\n"
+            f"P, X {x:.03f}, Y {-y:.03f}, Z 200, RA 0, RB 180, RC 0, V 5;\n"
+            f"OA 0;\n"
+            for x, y, z in postion_list)
+        with open("gcode.txt", 'w') as f:
+            f.write(text)
 
     @pyqtSlot()
     def on_readtxt_btn_clicked(self):
@@ -229,7 +266,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if type(action) is bool:
                 check, self.tmpval, _, _, _ = vrep.simxCallScriptFunction(self.clientID, "suctionPad",
                                                                           vrep.sim_scripttype_childscript,
-                                                                          "enableSuctionCup", [int(action)], [], [], b"",
+                                                                          "enableSuctionCup", [int(action)], [], [],
+                                                                          b"",
                                                                           vrep.simx_opmode_oneshot)
                 continue
             Joint_Deg = self.arm.Inverse_Kinematic(action[0], action[1], self.joint_pos)
