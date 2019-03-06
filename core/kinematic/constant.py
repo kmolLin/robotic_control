@@ -19,7 +19,7 @@ class constant(Enum):
     AXIS6 = 5
     TOTAL_AXES = 6
     
-    #Error Value
+    # Error Value
     ERRC = 1E-6
     
     # D-H Table
@@ -29,4 +29,4 @@ class constant(Enum):
     d1 = 375.0
     d4 = 338.0
     d6 = 86.5
-    
+

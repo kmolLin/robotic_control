@@ -513,22 +513,19 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_35">
               <item>
-               <widget class="QPushButton" name="enter_btn">
-                <property name="enabled">
-                 <bool>false</bool>
-                </property>
-                <property name="text">
-                 <string>Enter</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="vaclum_btn">
+               <widget class="QPushButton" name="vaclum_on_btn">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
                 <property name="text">
-                 <string>vaclum</string>
+                 <string>vaclum_on</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="vaclum_close_btn">
+                <property name="text">
+                 <string>vaclum_close</string>
                 </property>
                </widget>
               </item>

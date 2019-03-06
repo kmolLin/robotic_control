@@ -23,7 +23,7 @@ class foward_kinematic():
         RAD = []
         d6h = self.d6
         for i in range(AXIS1,TOTAL_AXES ):
-            RAD.append( DEG[i] * DEG2RAD)
+            RAD.append(DEG[i] * DEG2RAD)
         C1 = cos(RAD[AXIS1])
         C2 = cos(RAD[AXIS2])
         C3 = cos(RAD[AXIS3])

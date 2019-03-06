@@ -11,17 +11,6 @@ class Worker(QThread):
         self.stoped = False
         self.handles = handles
         self.clientID = clinetID
-        # self.venn = vrepper
-        # self.handles = []
-        # for name in (
-        #     'A_joint',
-        #     'B_joint',
-        #     'C_joint',
-        #     'D_joint',
-        #     'E_joint',
-        #     'F_joint',
-        # ):
-        #     self.handles.append(self.venn.get_object_by_name(name))
     
     update_signal = pyqtSignal(list)
     

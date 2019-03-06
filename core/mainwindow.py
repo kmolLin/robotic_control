@@ -5,18 +5,33 @@ from PyQt5.QtWidgets import *
 
 from .Ui_mainwindow import Ui_MainWindow
 import core.vrep_commucation.vrep as vrep
-import os
+from typing import AnyStr, Iterator, Match
 from core.kinematic.Invers_kinematic.invers_kinematic import armrobot
 from .worker import Worker
 import time
 from core.motionPlanning.trapezoid import Trapezoid, SShape
 from core.motionPlanning.v_planning import s_shape_interplation
+from matplotlib import pyplot as plt
 
 import numpy as np
 from math import radians
-import matplotlib.pyplot as plt
-import cv2
 
+import cv2
+import re
+
+DEFAULT_NC_SYNTAX = (
+    r"([PL]), X ([+-]?\d+\.?\d*),"
+    r" Y ([+-]?\d+\.?\d*),"
+    r" Z ([+-]?\d+\.?\d*),"
+    r" RA ([+-]?\d+\.?\d*),"
+    r" RB ([+-]?\d+\.?\d*),"
+    r" RC ([+-]?\d+\.?\d*),"
+    r" V \d+;|OA ([01]);"
+)
+
+
+def _match(patten: AnyStr, doc: AnyStr) -> Iterator[Match[AnyStr]]:
+    yield from re.compile(patten, re.MULTILINE).finditer(doc)
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
@@ -46,25 +61,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.arm = armrobot()
         self.clientID = None
         self.camhandle = None
+        self.tmpval = 0
         self.handles = []
         self.jpos = np.zeros(6)
         self.joint_pos = [0] * 6
+        self.buffer = []
 
     def dowork(self, clientID, handles):
         self.work = Worker(clientID, handles, self)
         self.work.update_signal.connect(self.motor_angle)
         self.work.start()
-    
+
     @pyqtSlot(list)
     def motor_angle(self, data):
+        form = self.arm.foward_kinematic(data, 0)
         for i, value in enumerate(data):
             self.joint_pos[i] = value
             self.jointtable.setItem(i, 0, QTableWidgetItem(f"{value:.04f}"))
-    
+            self.tcptable.setItem(i, 0, QTableWidgetItem(f"{form[i]:.04f}"))
+
     @pyqtSlot()
     def on_radioButtonSimple_clicked(self):
         print('a')
-    
+
     @pyqtSlot()
     def on_radioButtonTarget_clicked(self):
         guimode = self.enablegui.isTristate()
@@ -103,11 +122,48 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot()
     def on_joint_ctr_btn_clicked(self):
         inputjoint = [self.jointtable.cellWidget(i, 1).value() for i in range(6)]
+        self.__move_robot(inputjoint)
+
+    @pyqtSlot()
+    def on_move_btn_clicked(self):
+        TCP = [self.tcptable.cellWidget(i, 1).value() for i in range(3)]
+        TOV = [self.tcptable.cellWidget(i, 1).value() for i in range(3, 6)]
+        nowact = self.joint_pos
+        Joint_Deg = self.arm.Inverse_Kinematic(TCP, TOV, nowact)
+        print(Joint_Deg)
+        self.__move_robot(Joint_Deg)
+        # for i, handle in enumerate(self.work.handles):
+        #     handle.set_position_target(Joint_Deg[i])
+        # eulat angle 0 180 0
+
+    @pyqtSlot()
+    def on_capture_btn_clicked(self):
+        print(self.camhandle)
+        _, resolution, image = vrep.simxGetVisionSensorImage(self.clientID, self.camhandle, 0,
+                                                             vrep.simx_opmode_streaming)
+        time.sleep(1)
+        _, resolution, image = vrep.simxGetVisionSensorImage(self.clientID, self.camhandle, 0, vrep.simx_opmode_buffer)
+        time.sleep(1)
+        img = np.array(image, dtype=np.uint8)
+        img.resize([resolution[0], resolution[1], 3])
+        img = np.rot90(img, 2)
+        img = np.fliplr(img)
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        file = "all.png"
+        cv2.imwrite(file, img)
+
+    def __move_robot(self, target_move):
+        """
+        target_move = [a1, a2, a3, a4, a5, a6] units degree
+        :param target_move:
+        :return:
+        """
+        inputjoint = target_move
         nowact = self.joint_pos
         length = list(map(lambda x: abs(x[0] - x[1]), zip(inputjoint, nowact)))
         lengthvec = list(map(lambda x: (x[0] - x[1]), zip(inputjoint, nowact)))
         indexx = length.index(max(length))
-        s_tmp, _, _, _ = s_shape_interplation(nowact[indexx], 0, inputjoint[indexx], 0, 100)
+        s_tmp, _, _, _ = s_shape_interplation(nowact[indexx], 0, inputjoint[indexx], 0, 300)
         alljoint = []
         for i in range(6):
             alljoint.append([nowact[i] + (float(s) * lengthvec[i] / length[indexx]) for s in s_tmp])
@@ -130,38 +186,51 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dlg.deleteLater()
 
     @pyqtSlot()
-    def on_move_btn_clicked(self):
-        TCP = [self.tcptable.cellWidget(i, 1).value() for i in range(3)]
-        TOV = [self.tcptable.cellWidget(i, 1).value() for i in range(3, 6)]
-        nowact = self.joint_pos
-        Joint_Deg = self.arm.Inverse_Kinematic(TCP, TOV, nowact)
-        
-        # for i, handle in enumerate(self.work.handles):
-        #     handle.set_position_target(Joint_Deg[i])
+    def on_vaclum_on_btn_clicked(self):
+
+        check, self.tmpval, _, _, _ = vrep.simxCallScriptFunction(self.clientID, "suctionPad",
+                                                         vrep.sim_scripttype_childscript,
+                                                         "enableSuctionCup", [1], [], [], b"",
+                                                         vrep.simx_opmode_oneshot)
 
     @pyqtSlot()
-    def on_capture_btn_clicked(self):
-        print(self.camhandle)
-        _, resolution, image = vrep.simxGetVisionSensorImage(self.clientID, self.camhandle, 0, vrep.simx_opmode_streaming)
-        time.sleep(1)
-        _, resolution, image = vrep.simxGetVisionSensorImage(self.clientID, self.camhandle, 0, vrep.simx_opmode_buffer)
-        time.sleep(1)
-        img = np.array(image, dtype=np.uint8)
-        img.resize([resolution[0], resolution[1], 3])
-        img = np.rot90(img, 2)
-        img = np.fliplr(img)
-        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-        file = "gear4.png"
-        cv2.imwrite(file, img)
+    def on_vaclum_close_btn_clicked(self):
 
+        check, self.tmpval, _, _, _ = vrep.simxCallScriptFunction(self.clientID, "suctionPad",
+                                                                  vrep.sim_scripttype_childscript,
+                                                                  "enableSuctionCup", [0], [], [], b"",
+                                                                  vrep.simx_opmode_oneshot)
     @pyqtSlot()
-    def on_vaclum_btn_clicked(self):
-        check, jj, _, _, _ = vrep.simxCallScriptFunction(self.clientID, "suctionPad", vrep.sim_scripttype_childscript,
-                                            "enableSuctionCup", [1], [], [], bytearray(), vrep.simx_opmode_oneshot)
-        print(jj)
+    def on_readtxt_btn_clicked(self):
+        self.buffer.clear()
+        filename, _ = QFileDialog.getOpenFileName(self, "Read Gcode", ".", "text file(*.txt)")
+        # text = "P, X 407.221, Y -272.560, Z 331.316, RA 0, RB 180, RC 0, V 5;\nOA 1;"
+        if not filename:
+            return
+        with open(filename, 'r', encoding='utf-8') as f:
+            text = f.read()
+        for m in _match(DEFAULT_NC_SYNTAX, text):
+            if m.group(1) == 'P':
+                self.buffer.append((
+                    [float(m.group(i)) for i in range(2, 5)],
+                    [float(m.group(i)) for i in range(5, 8)]
+                ))
+            elif m.group(8) is not None:
+                self.buffer.append(m.group(8) == '1')
+
+        for action in self.buffer:
+            if type(action) is bool:
+                check, self.tmpval, _, _, _ = vrep.simxCallScriptFunction(self.clientID, "suctionPad",
+                                                                          vrep.sim_scripttype_childscript,
+                                                                          "enableSuctionCup", [int(action)], [], [], b"",
+                                                                          vrep.simx_opmode_oneshot)
+                continue
+            Joint_Deg = self.arm.Inverse_Kinematic(action[0], action[1], self.joint_pos)
+            self.__move_robot(Joint_Deg)
+
+        # print(self.buffer)
 
     def closeEvent(self, event):
         if self.clientID is not None:
             vrep.simxStopSimulation(self.clientID, vrep.simx_opmode_oneshot)
         event.accept()
-
