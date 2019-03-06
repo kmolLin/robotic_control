@@ -12,6 +12,7 @@ import time
 from core.motionPlanning.trapezoid import Trapezoid, SShape
 from core.motionPlanning.v_planning import s_shape_interplation
 from matplotlib import pyplot as plt
+from core.findedge.imageprocess import object_dectected
 
 import numpy as np
 from math import radians
@@ -111,7 +112,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         ):
             _, handle = vrep.simxGetObjectHandle(self.clientID, name, vrep.simx_opmode_blocking)
             self.handles.append(handle)
-        _, self.camhandle = vrep.simxGetObjectHandle(self.clientID, 'Vision_sensor', vrep.simx_opmode_blocking)
+        _, self.camhandle = vrep.simxGetObjectHandle(self.clientID, 'Vision_sensor0', vrep.simx_opmode_blocking)
         print(self.handles)
         for i in range(6):
             _, self.jpos[i] = vrep.simxGetJointPosition(self.clientID, self.handles[i], vrep.simx_opmode_streaming)
@@ -138,7 +139,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @pyqtSlot()
     def on_capture_btn_clicked(self):
-        print(self.camhandle)
         _, resolution, image = vrep.simxGetVisionSensorImage(self.clientID, self.camhandle, 0,
                                                              vrep.simx_opmode_streaming)
         time.sleep(1)
@@ -201,6 +201,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                                                   "enableSuctionCup", [0], [], [], b"",
                                                                   vrep.simx_opmode_oneshot)
     @pyqtSlot()
+    def on_object_dectec_btn_clicked(self):
+        image = cv2.imread("all.png")
+        nut, screw = object_dectected(image)
+        print(nut)
+        print(screw)
+
+    @pyqtSlot()
     def on_readtxt_btn_clicked(self):
         self.buffer.clear()
         filename, _ = QFileDialog.getOpenFileName(self, "Read Gcode", ".", "text file(*.txt)")
@@ -227,8 +234,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 continue
             Joint_Deg = self.arm.Inverse_Kinematic(action[0], action[1], self.joint_pos)
             self.__move_robot(Joint_Deg)
-
-        # print(self.buffer)
 
     def closeEvent(self, event):
         if self.clientID is not None:

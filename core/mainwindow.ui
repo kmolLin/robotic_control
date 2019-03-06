@@ -489,12 +489,12 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_34">
               <item>
-               <widget class="QPushButton" name="p2p_ctr_btn">
+               <widget class="QPushButton" name="object_dectec_btn">
                 <property name="enabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                 <property name="text">
-                 <string>P2P Control</string>
+                 <string>Object Dected</string>
                 </property>
                </widget>
               </item>
