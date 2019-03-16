@@ -6,7 +6,7 @@ This project uses a self-made controller to communicate with the virtual six-axi
   - Interpolator
   - Controller Design
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-J5sEAhj4K0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Watch the video](https://img.youtube.com/vi/-J5sEAhj4K0/maxresdefault.jpg)](https://youtu.be/-J5sEAhj4K0)
 
 ## Need to install python module
 
